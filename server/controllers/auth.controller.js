@@ -16,7 +16,7 @@ export const register = async (req, res) => {
             });
 
         // hashing the password
-        const passwordHash = await bcrypt.hash(password, 78);
+        const passwordHash = await bcrypt.hash(password, 8);
 
         // creating the user
         const newUser = new User({
@@ -59,7 +59,10 @@ export const login = async (req, res) => {
                 message: ["The email does not exist"],
             });
 
+        console.log("userFound:", userFound);
+
         const isMatch = await bcrypt.compare(password, userFound.password);
+
         if (!isMatch) {
             return res.status(400).json({
                 message: ["The password is incorrect"],
@@ -83,19 +86,27 @@ export const login = async (req, res) => {
             email: userFound.email,
         });
     } catch (error) {
+        console.log(error);
         return res.status(500).json({ message: error.message });
     }
 };
 
 export const verifyToken = async (req, res) => {
     const { token } = req.cookies;
-    if (!token) return res.send(false);
+
+    if (!token) {
+        return res.send(false);
+    }
 
     jwt.verify(token, TOKEN_SECRET, async (error, user) => {
-        if (error) return res.sendStatus(401);
+        if (error) {
+            return res.sendStatus(401);
+        }
 
         const userFound = await User.findById(user.id);
-        if (!userFound) return res.sendStatus(401);
+        if (!userFound) {
+            return res.sendStatus(401);
+        }
 
         return res.json({
             id: userFound._id,
