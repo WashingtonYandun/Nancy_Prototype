@@ -27,4 +27,4 @@ Follow these steps to get started with Nancy Prototype:
     ```
 
 2. **License**
-   This project is licensed under the MIT License.
+   This project is licensed under the CC0 1.0 Universal (CC0 1.0) License
