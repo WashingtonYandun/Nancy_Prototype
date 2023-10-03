@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+// must be improved
 const cornellNoteSchema = new mongoose.Schema(
     {
         userId: {
