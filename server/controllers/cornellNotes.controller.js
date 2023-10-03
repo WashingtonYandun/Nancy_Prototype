@@ -1,62 +1,74 @@
 import { CornellNote } from "../models/cornellNote.model.js";
 
-export const getNotea = async (req, res) => {
-    try {
-        const allNotes = await CornellNote.find({ user: req.user.id }).populate(
-            "user"
-        );
-        res.json(allNotes);
-    } catch (error) {
-        return res.status(500).json({ message: error.message });
-    }
-};
-
-export const getNote = async (req, res) => {
-    try {
-        const note = await CornellNote.findById(req.params.id).populate("user");
-        res.json(note);
-    } catch (error) {
-        return res.status(500).json({ message: error.message });
-    }
-};
-
-export const createNote = async (req, res) => {
+const createCornellNote = async (req, res) => {
     try {
         const { title, leftColumn, rightColumn, bottomArea } = req.body;
 
-        const newNote = new CornellNote({
-            user: req.user.id,
-            title: title,
-            leftColumn: leftColumn,
-            rightColumn: rightColumn,
-            bottomArea: bottomArea,
+        const newCornellNote = new CornellNote({
+            userId: req.user.id,
+            title,
+            leftColumn,
+            rightColumn,
+            bottomArea,
         });
 
-        const savedNote = await newNote.save();
-        res.json(savedNote);
+        const cornellNoteSaved = await newCornellNote.save();
+        res.json(cornellNoteSaved);
     } catch (error) {
-        return res.status(500).json({ message: error.message });
+        res.status(500).json({ message: error.message });
     }
 };
 
-export const updateNote = async (req, res) => {
+const getCornellNotes = async (req, res) => {
     try {
-        const updatedNote = await CornellNote.findByIdAndUpdate(
+        const cornellNotes = await CornellNote.find({ userId: req.user.id });
+        res.json(cornellNotes);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+const getCornellNoteById = async (req, res) => {
+    try {
+        const cornellNote = await CornellNote.findById(req.params.id);
+        res.json(cornellNote);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+const updateCornellNoteById = async (req, res) => {
+    try {
+        const { title, leftColumn, rightColumn, bottomArea } = req.body;
+        const cornellNoteUpdated = await CornellNote.findByIdAndUpdate(
             req.params.id,
-            req.body,
+            {
+                title,
+                leftColumn,
+                rightColumn,
+                bottomArea,
+            },
             { new: true }
         );
-        res.json(updatedNote);
+        res.json(cornellNoteUpdated);
     } catch (error) {
-        return res.status(500).json({ message: error.message });
+        res.status(500).json({ message: error.message });
     }
 };
 
-export const deleteNote = async (req, res) => {
+const deleteCornellNoteById = async (req, res) => {
     try {
-        const deletedNote = await CornellNote.findByIdAndDelete(req.params.id);
-        res.json(deletedNote);
+        await CornellNote.findByIdAndDelete(req.params.id);
+        res.json({ message: "CornellNote Deleted" });
     } catch (error) {
-        return res.status(500).json({ message: error.message });
+        res.status(500).json({ message: error.message });
     }
+};
+
+export {
+    createCornellNote,
+    getCornellNotes,
+    getCornellNoteById,
+    updateCornellNoteById,
+    deleteCornellNoteById,
 };

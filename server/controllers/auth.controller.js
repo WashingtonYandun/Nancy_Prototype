@@ -1,8 +1,9 @@
-import { User } from "../models/user.model.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
+
 import { TOKEN_SECRET, NODE_ENV } from "../config.js";
 import { createAccessToken } from "../libs/jwt.js";
+import { User } from "../models/user.model.js";
 
 const register = async (req, res) => {
     try {
@@ -10,13 +11,14 @@ const register = async (req, res) => {
 
         const userFound = await User.findOne({ email });
 
-        if (userFound)
+        if (userFound) {
             return res.status(400).json({
                 message: ["The email is already in use"],
             });
+        }
 
         // hashing the password
-        const passwordHash = await bcrypt.hash(password, 10);
+        const passwordHash = await bcrypt.hash(password, 2);
 
         // creating the user
         const newUser = new User({
@@ -33,14 +35,12 @@ const register = async (req, res) => {
             id: userSaved._id,
         });
 
-        // send the token in a HTTP-only cookie
         res.cookie("token", token, {
             httpOnly: NODE_ENV !== "development",
             secure: true,
             sameSite: "none",
         });
 
-        // sending the user info
         res.json({
             id: userSaved._id,
             username: userSaved.username,
@@ -56,11 +56,13 @@ const login = async (req, res) => {
         const { email, password } = req.body;
         const userFound = await User.findOne({ email });
 
-        if (!userFound)
+        if (!userFound) {
             return res.status(400).json({
                 message: ["The email does not exist"],
             });
+        }
 
+        // compare password
         const isMatch = await bcrypt.compare(password, userFound.password);
 
         if (!isMatch) {
@@ -75,7 +77,7 @@ const login = async (req, res) => {
         });
 
         res.cookie("token", token, {
-            httpOnly: process.env.NODE_ENV !== "development",
+            httpOnly: NODE_ENV !== "development",
             secure: true,
             sameSite: "none",
         });
@@ -92,17 +94,15 @@ const login = async (req, res) => {
 
 const verifyToken = async (req, res) => {
     const { token } = req.cookies;
-    if (!token) {
-        return res.send(false);
-    }
+    if (!token) return res.send(false);
 
     jwt.verify(token, TOKEN_SECRET, async (error, user) => {
         if (error) {
             return res.sendStatus(401);
         }
 
+        // check if user exists
         const userFound = await User.findById(user.id);
-
         if (!userFound) {
             return res.sendStatus(401);
         }
@@ -121,8 +121,7 @@ const logout = async (req, res) => {
         secure: true,
         expires: new Date(0),
     });
-
     return res.sendStatus(200);
 };
 
-export { register, login, logout, verifyToken };
+export { register, login, verifyToken, logout };
