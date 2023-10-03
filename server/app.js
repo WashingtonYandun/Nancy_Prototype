@@ -4,9 +4,10 @@ import morgan from "morgan";
 import cookieParser from "cookie-parser";
 
 import { authRouter } from "./routes/auth.routes.js";
-import { cornellNotesRouter } from "./routes/cornellNotes.routes.js";
+import { notesRouter } from "./routes/cornellNotes.routes.js";
 import { FRONTEND_URL, NODE_ENV } from "./config.js";
 
+// express app
 const app = express();
 
 // cors middleware
@@ -24,7 +25,7 @@ app.use(cookieParser());
 
 // routes
 app.use("/api/auth", authRouter);
-app.use("/api/notes", cornellNotesRouter);
+app.use("/api/notes", notesRouter);
 
 // serve static files
 if (NODE_ENV === "production") {

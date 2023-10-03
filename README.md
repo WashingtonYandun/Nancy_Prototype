@@ -1,12 +1,20 @@
 # Nancy Prototype - Learning Management System
 
-![Nancy Prototype Logo](/assets/Nancy_Logo.png)
+<p align="center">
+  <img alt="Nancy Prototype Logo" src="/assets/Nancy_Logo.png"/>
+</p>
 
 ## Overview
 
 Nancy Prototype is a robust Learning Management System (LMS) designed to enhance your learning experience through the integration of cutting-edge technologies. Leveraging Mediapipe, computer vision, and artificial intelligence powered by OpenAI, this system goes beyond traditional approaches to offer a more interactive and personalized learning journey.
 
-## Features
+## Features (Now)
+
+-   **Cornell Notes CRUD:** Implement, read, update, and delete Cornell Notes directly within the system.
+
+-   **Authentication:** Secure user authentication to protect user data and ensure a personalized learning experience.
+
+## Features (Future)
 
 -   **Mediapipe Integration:** Harness the power of Mediapipe for seamless video processing, enabling enhanced interactivity and engagement in learning materials.
 
@@ -26,5 +34,6 @@ Follow these steps to get started with Nancy Prototype:
     git clone https://github.com/WashingtonYandun/Nancy_Prototype.git
     ```
 
-2. **License**
-   This project is licensed under the CC0 1.0 Universal (CC0 1.0) License
+## License
+
+This project is licensed under the CC0 1.0 Universal (CC0 1.0) License
