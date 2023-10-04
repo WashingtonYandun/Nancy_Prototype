@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+// need improvement (images, links, etc)
 const noteSchema = new mongoose.Schema(
     {
         userId: {
@@ -7,12 +8,31 @@ const noteSchema = new mongoose.Schema(
             ref: "User",
             required: true,
         },
-        title: { type: String, required: true, trim: true, unique: true },
-        leftColumn: { type: String, required: true, trim: true }, // cues
-        rightColumn: { type: String, required: true, trim: true }, // details
-        bottomArea: { type: String, trim: true }, // summary
+        title: {
+            type: String,
+            // required: true,
+            trim: true,
+            unique: true,
+        },
+        leftColumn: {
+            type: String,
+            // required: true,
+            trim: true,
+        }, // cues
+        rightColumn: {
+            type: String,
+            // required: true,
+            trim: true,
+        }, // details
+        bottomArea: {
+            type: String,
+            // required: true,
+            trim: true,
+        }, // summary
     },
     { timestamps: true }
 );
 
-export default mongoose.model("Note", noteSchema);
+const Note = mongoose.model("Note", noteSchema);
+
+export { Note };
