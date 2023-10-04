@@ -1,8 +1,8 @@
 # Nancy Prototype - Learning Management System
 
-<p align="center">
+<!-- <p align="center">
   <img alt="Nancy Prototype Logo" src="/assets/Nancy_Logo.png"/>
-</p>
+</p> -->
 
 ## Overview
 
