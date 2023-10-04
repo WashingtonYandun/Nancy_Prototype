@@ -1,8 +1,8 @@
 # Nancy Prototype - Learning Management System
 
-<!-- <p align="center">
+<p align="center">
   <img alt="Nancy Prototype Logo" src="/assets/Nancy_Logo.png"/>
-</p> -->
+</p>
 
 ## Overview
 
@@ -24,6 +24,41 @@ Nancy Prototype is a robust Learning Management System (LMS) designed to enhance
 
 -   **Personalized Learning:** Benefit from AI algorithms that analyze user interactions and adapt content delivery, ensuring a customized learning path for each user.
 
+# Technologies:
+
+## What is the MERN stack?
+
+MERN stands for MongoDB, Express, React, Node, after the four key technologies that make up the stack.
+
+-   MongoDB — document database
+-   Express(.js) — Node.js web framework
+-   React(.js) — a client-side JavaScript framework
+-   Node(.js) — the premier JavaScript web server
+
+Express and Node make up the middle (application) tier. Express.js is a server-side web framework, and Node.js is the popular and powerful JavaScript server platform.
+
+-   **React.js** : React es una biblioteca/libreria (No es un framework) de JavaScript para construir interfaces de usuario interactivas, Utiliza un enfoque basado en componentes para la creación de aplicaciones web.
+
+-   **Mongo** : MongoDB es una base de datos NoSQL orientada a documentos, que almacena datos en formato JSON BSON y se destaca por su escalabilidad y flexibilidad en esquemas.
+
+-   **Node** : Node.js es un entorno de ejecución de JavaScript del lado del servidor que permite desarrollar aplicaciones escalables y de alta concurrencia. Utiliza el motor V8 de Google Chrome para ejecutar código JavaScript.
+
+-   **Express.js**: Express.js es un marco web minimalista para Node.js que simplifica la creación de aplicaciones web y APIs, proporcionando funciones esenciales para el manejo de rutas, middleware y solicitudes HTTP.
+
+## Framework MVC Introduction
+
+Nancy Prototype is built on the Model-View-Controller (MVC) framework, a powerful architectural pattern that separates an application into three interconnected components. The **Model** (Mongo) represents the data and business logic, the **View** (React) handles the user interface, and the **Controller** (Express/Node) manages user input and interaction. This structure promotes modular development, making it easier to maintain and scale the application.
+
+<p align="center">
+  <img alt="Nancy Prototype Logo" src="/assets/mern-stack.png"/>
+</p>
+
+> Explication
+
+In this project, following the MVC architecture with the MERN stack, it's quite evident that we use MongoDB as our database. **MongoDB** stores the models _("User" and "Note")_, currently mapped to code through Mongoose, the library we use as an ORM to connect to MongoDB. The database exclusively interacts with **controllers** _("notesController" and "authController")_, implemented as functions in **Node.js**. These functions are invoked by the **Express** backend framework, which, in turn, is triggered by routes coming from the **client**. The client interacts through a **graphical interface** built with _React_ ("HomePage, "LoginPage", "NoteFormPage", etc.). It's crucial to note that React cannot directly access MongoDB, and MongoDB cannot send data to the client without passing through the controllers, in accordance with the MVC architecture.
+
+For clarity and organizational purposes, in the project, models and controllers have been separated into the "server" folder, while views are located in the "client" folder.
+
 ## Getting Started
 
 Follow these steps to get started with Nancy Prototype:
@@ -32,6 +67,16 @@ Follow these steps to get started with Nancy Prototype:
 
     ```bash
     git clone https://github.com/WashingtonYandun/Nancy_Prototype.git
+    ```
+
+2. **Run the following commands:**
+
+    ```bash
+    npm i
+    npm run dev
+    cd clien/
+    npm i
+    npm run dev
     ```
 
 ## License
