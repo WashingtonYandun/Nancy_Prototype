@@ -3,32 +3,26 @@ import cors from "cors";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
 
-import { authRouter } from "./routes/auth.routes.js";
-import { notesRouter } from "./routes/cornellNotes.routes.js";
-import { FRONTEND_URL, NODE_ENV } from "./config.js";
+import authRoutes from "./routes/auth.routes.js";
+import notesRoutes from "./routes/notes.routes.js";
+import { FRONTEND_URL } from "./config.js";
 
-// express app
 const app = express();
 
-// cors middleware
 app.use(
     cors({
         credentials: true,
         origin: FRONTEND_URL,
     })
 );
-
-// middlewares
 app.use(express.json());
 app.use(morgan("dev"));
 app.use(cookieParser());
 
-// routes
-app.use("/api/auth", authRouter);
-app.use("/api/notes", notesRouter);
+app.use("/api/auth", authRoutes);
+app.use("/api", notesRoutes);
 
-// serve static files
-if (NODE_ENV === "production") {
+if (process.env.NODE_ENV === "production") {
     const path = await import("path");
     app.use(express.static("client/dist"));
 
@@ -38,4 +32,4 @@ if (NODE_ENV === "production") {
     });
 }
 
-export { app };
+export default app;

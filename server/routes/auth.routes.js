@@ -1,19 +1,18 @@
 import { Router } from "express";
-
 import {
-    login,
-    logout,
-    register,
-    verifyToken,
+  login,
+  logout,
+  register,
+  verifyToken,
 } from "../controllers/auth.controller.js";
 import { validateSchema } from "../middlewares/validator.middleware.js";
 import { loginSchema, registerSchema } from "../schemas/auth.schema.js";
 
-const authRouter = Router();
+const router = Router();
 
-authRouter.post("/register", validateSchema(registerSchema), register);
-authRouter.post("/login", validateSchema(loginSchema), login);
-authRouter.post("/logout", verifyToken, logout);
-authRouter.get("/verify", verifyToken);
+router.post("/register", validateSchema(registerSchema), register);
+router.post("/login", validateSchema(loginSchema), login);
+router.get("/verify", verifyToken);
+router.post("/logout", verifyToken, logout);
 
-export { authRouter };
+export default router;

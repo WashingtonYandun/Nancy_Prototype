@@ -1,3 +1,5 @@
 /node_modules
 .env
 .env.template
+/client/node_modules
+/client

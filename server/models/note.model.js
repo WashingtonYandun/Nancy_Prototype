@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 
-// must be improved
-const cornellNoteSchema = new mongoose.Schema(
+const noteSchema = new mongoose.Schema(
     {
         userId: {
             type: mongoose.Schema.Types.ObjectId,
@@ -16,6 +15,4 @@ const cornellNoteSchema = new mongoose.Schema(
     { timestamps: true }
 );
 
-const CornellNote = mongoose.model("CornellNote", cornellNoteSchema);
-
-export { CornellNote };
+export default mongoose.model("Note", noteSchema);
