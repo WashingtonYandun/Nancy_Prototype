@@ -1,4 +1,4 @@
-import User from "../models/user.model.js";
+import { User } from "../models/user.model.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import { TOKEN_SECRET, NODE_ENV } from "../config.js";
@@ -60,6 +60,7 @@ export const login = async (req, res) => {
             });
 
         const isMatch = await bcrypt.compare(password, userFound.password);
+
         if (!isMatch) {
             return res.status(400).json({
                 message: ["The password is incorrect"],

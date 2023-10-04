@@ -1,16 +1,18 @@
-import app from "./app.js";
+import { app } from "./app.js";
 import { PORT, NODE_ENV } from "./config.js";
-import { connectDB } from "./db.js";
+import { connectDb } from "./db.js";
 
-async function main() {
+async function init() {
     try {
-        await connectDB();
+        await connectDb();
         app.listen(PORT);
+        console.log("Init");
         console.log(`Listening on port http://localhost:${PORT}`);
         console.log(`Environment: ${NODE_ENV}`);
     } catch (error) {
+        console.log("Error");
         console.error(error);
     }
 }
 
-main();
+init();

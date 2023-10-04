@@ -1,10 +1,13 @@
-import Note from "../models/note.model.js";
+import { Note } from "../models/note.model.js";
 
 export const getNotes = async (req, res) => {
     try {
-        const notes = await Note.find({ user: req.user.id }).populate("user");
+        const notes = await Note.find({ userId: req.user.id }).populate(
+            "userId"
+        );
         res.json(notes);
     } catch (error) {
+        console.log(error);
         return res.status(500).json({ message: error.message });
     }
 };
@@ -12,16 +15,18 @@ export const getNotes = async (req, res) => {
 export const createNote = async (req, res) => {
     try {
         const { title, leftColumn, rightColumn, bottomArea } = req.body;
+        const userId = req.user.id;
         const newNote = new Note({
             title,
             leftColumn,
             rightColumn,
             bottomArea,
-            user: req.user.id,
+            userId: userId,
         });
         await newNote.save();
         res.json(newNote);
     } catch (error) {
+        console.log(error, req.body, req.user.id);
         return res.status(500).json({ message: error.message });
     }
 };
@@ -29,6 +34,7 @@ export const createNote = async (req, res) => {
 export const deleteNote = async (req, res) => {
     try {
         const deletedNote = await Note.findByIdAndDelete(req.params.id);
+
         if (!deletedNote) {
             return res.status(404).json({ message: "Task not found" });
         }
@@ -42,8 +48,9 @@ export const deleteNote = async (req, res) => {
 export const updateNote = async (req, res) => {
     try {
         const { title, leftColumn, rightColumn, bottomArea } = req.body;
-        const noteUpdated = await Note.findByIdAndUpdate(
-            req.params.id,
+
+        const noteUpdated = await Note.findOneAndUpdate(
+            { _id: req.params.id },
             {
                 title,
                 leftColumn,
@@ -52,12 +59,11 @@ export const updateNote = async (req, res) => {
             },
             { new: true }
         );
-
-        if (!noteUpdated) {
-            return res.status(404).json({ message: "Task not found" });
-        }
         return res.json(noteUpdated);
     } catch (error) {
+        console.log("error", error);
+        console.log("req.body", req.body);
+        console.log("req.params.id", req.params.id);
         return res.status(500).json({ message: error.message });
     }
 };
@@ -66,6 +72,7 @@ export const getNote = async (req, res) => {
     try {
         const note = await Note.findById(req.params.id);
         if (!note) {
+            console.log("not found get");
             return res.status(404).json({ message: "Task not found" });
         }
         return res.json(note);

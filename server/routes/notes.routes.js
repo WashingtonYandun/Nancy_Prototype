@@ -10,16 +10,13 @@ import {
     getNote,
 } from "../controllers/notes.controller.js";
 
-const router = Router();
+const notesRoutes = Router();
 
-router.get("/notes", auth, getNotes);
+notesRoutes.get("/notes", auth, getNotes);
+notesRoutes.get("/notes/:id", auth, getNote);
 
-router.post("/notes", auth, validateSchema(createNoteSchema), createNote);
+notesRoutes.post("/notes", auth, validateSchema(createNoteSchema), createNote);
+notesRoutes.put("/notes/:id", auth, updateNote);
+notesRoutes.delete("/notes/:id", auth, deleteNote);
 
-router.get("/notes/:id", auth, getNote);
-
-router.put("/notes/:id", auth, updateNote);
-
-router.delete("/notes/:id", auth, deleteNote);
-
-export default router;
+export { notesRoutes };
