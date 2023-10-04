@@ -37,13 +37,13 @@ MERN stands for MongoDB, Express, React, Node, after the four key technologies t
 
 Express and Node make up the middle (application) tier. Express.js is a server-side web framework, and Node.js is the popular and powerful JavaScript server platform.
 
--   **React.js** : React es una biblioteca/libreria (No es un framework) de JavaScript para construir interfaces de usuario interactivas, Utiliza un enfoque basado en componentes para la creación de aplicaciones web.
+-   **React.js**: React is a JavaScript library (not a framework) for building interactive user interfaces. It utilizes a component-based approach for creating web applications.
 
--   **Mongo** : MongoDB es una base de datos NoSQL orientada a documentos, que almacena datos en formato JSON BSON y se destaca por su escalabilidad y flexibilidad en esquemas.
+-   **Mongo**: MongoDB is a document-oriented NoSQL database that stores data in JSON BSON format and is known for its scalability and schema flexibility.
 
--   **Node** : Node.js es un entorno de ejecución de JavaScript del lado del servidor que permite desarrollar aplicaciones escalables y de alta concurrencia. Utiliza el motor V8 de Google Chrome para ejecutar código JavaScript.
+-   **Node**: Node.js is a server-side JavaScript execution environment that allows the development of scalable and highly concurrent applications. It uses the Google Chrome V8 engine to run JavaScript code.
 
--   **Express.js**: Express.js es un marco web minimalista para Node.js que simplifica la creación de aplicaciones web y APIs, proporcionando funciones esenciales para el manejo de rutas, middleware y solicitudes HTTP.
+-   **Express.js**: Express.js is a minimalist web framework for Node.js that simplifies the creation of web applications and APIs. It provides essential features for handling routes, middleware, and HTTP requests.
 
 ## Framework MVC Introduction
 
@@ -74,7 +74,7 @@ Follow these steps to get started with Nancy Prototype:
     ```bash
     npm i
     npm run dev
-    cd clien/
+    cd client/
     npm i
     npm run dev
     ```

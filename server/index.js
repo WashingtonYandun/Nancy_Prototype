@@ -6,6 +6,7 @@ async function init() {
     try {
         await connectDb();
         app.listen(PORT);
+
         console.log("Init");
         console.log(`Listening on port http://localhost:${PORT}`);
         console.log(`Environment: ${NODE_ENV}`);
