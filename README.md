@@ -1,7 +1,7 @@
 # Nancy Prototype - Learning Management System
 
 <p align="center">
-  <img alt="Nancy Prototype Logo" src="/assets/Nancy_Logo.png"/>
+  <img alt="Nancy Prototype Logo" src="/assets/Nancy_Logo.png"  width="300" height="300"/>
 </p>
 
 ## Overview
@@ -50,20 +50,24 @@ Express and Node make up the middle (application) tier. Express.js is a server-s
 Nancy Prototype is built on the Model-View-Controller (MVC) framework, a powerful architectural pattern that separates an application into three interconnected components. The **Model** (Mongo) represents the data and business logic, the **View** (React) handles the user interface, and the **Controller** (Express/Node) manages user input and interaction. This structure promotes modular development, making it easier to maintain and scale the application.
 
 <p align="center">
-  <img alt="Nancy Prototype Logo" src="/assets/mern-stack.png"/>
+  <img alt="Nancy Prototype Logo" src="/assets/mern-stack.png"  width="300" height="300"/>
 </p>
 
 > Explication
 
-In this project, following the MVC architecture with the MERN stack, it's quite evident that we use MongoDB as our database. **MongoDB** stores the models _("User" and "Note")_, currently mapped to code through Mongoose, the library we use as an ORM to connect to MongoDB. The database exclusively interacts with **controllers** _("notesController" and "authController")_, implemented as functions in **Node.js**. These functions are invoked by the **Express** backend framework, which, in turn, is triggered by routes coming from the **client**. The client interacts through a **graphical interface** built with _React_ ("HomePage, "LoginPage", "NoteFormPage", etc.). It's crucial to note that React cannot directly access MongoDB, and MongoDB cannot send data to the client without passing through the controllers, in accordance with the MVC architecture.
+-   In this project, following the MVC architecture with the MERN stack, it's quite evident that we use MongoDB as our database. **MongoDB** stores the models _("User" and "Note")_, currently mapped to code through Mongoose, the library we use as an ORM to connect to MongoDB.
 
-For clarity and organizational purposes, in the project, models and controllers have been separated into the "server" folder, while views are located in the "client" folder.
+-   The database exclusively interacts with **controllers** _("notesController" and "authController")_, implemented as functions in **Node.js**. These functions are invoked by the **Express** backend framework, which, in turn, is triggered by routes coming from the **client**.
+
+-   The client interacts through a **graphical interface** built with **React.js** _("HomePage, "LoginPage", "NoteFormPage", etc.)_. It's crucial to note that React cannot directly access MongoDB, and MongoDB cannot send data to the client without passing through the controllers, in accordance with the MVC architecture.
+
+-   For clarity and organizational purposes, in the project, models and controllers have been separated into the **"server"** folder, while views are located in the **"client"** folder.
 
 ## Getting Started
 
 Follow these steps to get started with Nancy Prototype:
 
-1. **Clone the Repository:**
+1. **Clone the Repository and go to the destination folder:**
 
     ```bash
     git clone https://github.com/WashingtonYandun/Nancy_Prototype.git
