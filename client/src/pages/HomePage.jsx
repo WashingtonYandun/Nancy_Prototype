@@ -1,28 +1,36 @@
 import { Link } from "react-router-dom";
+import nancyLogo from "../assets/nancy_logo.png";
+import Footer from "../components/Footer";
 
 function HomePage() {
     return (
-        <section className=" flex justify-around h-full flex-col">
-            <header className="flex justify-around items-center h-full p-10 flex-col">
-                <h1 className="text-5xl py-2 font-bold">Nancy</h1>
-                <p className="text-md text-slate-400">
-                    Nancy Prototype is a robust Learning Management System (LMS)
-                    designed to enhance your learning experience through the
-                    integration of cutting-edge technologies. Leveraging
-                    Mediapipe, computer vision, and artificial intelligence
-                    powered by OpenAI, this system goes beyond traditional
-                    approaches to offer a more interactive and personalized
-                    learning journey.
-                </p>
+        <>
+            <div className="flex flex-col md:flex-row justify-center items-center bg-bright min-h-screen">
+                <section className="text-center md:text-left md:w-1/2 p-8">
+                    <h1 className="text-4xl font-bold text-text mb-4">Nancy</h1>
+                    <p className="text-lg text-text mb-8">
+                        Nancy Prototype is a robust Learning Management System
+                        (LMS) powered with AI
+                    </p>
 
-                <Link
-                    className="bg-[#386641] px-4 py-2 rounded-md mt-4 inline-block"
-                    to="/register"
-                >
-                    Go lo learn
-                </Link>
-            </header>
-        </section>
+                    <Link
+                        className="px-6 py-3 bg-accent text-white rounded-full hover:bg-joy transition duration-300"
+                        to="/register"
+                    >
+                        Go to Learn
+                    </Link>
+                </section>
+
+                <section className="md:w-1/2 p-8">
+                    <img
+                        src={nancyLogo}
+                        alt="Nancy Logo"
+                        className="mx-auto rounded-full"
+                    />
+                </section>
+            </div>
+            <Footer />
+        </>
     );
 }
 
