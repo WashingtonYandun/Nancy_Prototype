@@ -4,6 +4,8 @@ import { Button, Card, Input, Label } from "../components/ui";
 import { useNotes } from "../context/notesContext";
 import { Textarea } from "../components/ui/Textarea";
 import { useForm } from "react-hook-form";
+import { Navbar } from "../components/Navbar";
+import Footer from "../components/Footer";
 
 export function NoteFormPage() {
     const { createNote, getNote, updateNote } = useNotes();
@@ -52,51 +54,58 @@ export function NoteFormPage() {
     }, []);
 
     return (
-        <Card>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <Label htmlFor="title">Title</Label>
-                <Input
-                    type="text"
-                    name="title"
-                    placeholder="Title"
-                    {...register("title")}
-                    autoFocus
-                />
-                {errors.title && (
-                    <p className="text-red-500 text-xs italic">
-                        Please enter a title.
-                    </p>
-                )}
+        <>
+            <Navbar />
+            <div className="max-w-lg mx-auto mt-8 min-h-screen">
+                <Card className="p-6 bg-secondary rounded-md shadow-md">
+                    <form
+                        onSubmit={handleSubmit(onSubmit)}
+                        className="space-y-4"
+                    >
+                        <Label htmlFor="title">Title</Label>
+                        <Input
+                            type="text"
+                            name="title"
+                            placeholder="Title"
+                            {...register("title")}
+                            autoFocus
+                        />
+                        {errors.title && (
+                            <p className="text-error">Please enter a title.</p>
+                        )}
 
-                <Label htmlFor="leftColumn">Left Column</Label>
-                <Textarea
-                    name="leftColumn"
-                    id="leftColumn"
-                    rows="3"
-                    placeholder="leftColumn"
-                    {...register("leftColumn")}
-                ></Textarea>
+                        <Label htmlFor="leftColumn">Left Column</Label>
+                        <Textarea
+                            name="leftColumn"
+                            id="leftColumn"
+                            rows="3"
+                            placeholder="Left Column"
+                            {...register("leftColumn")}
+                        />
 
-                <Label htmlFor="rightColumn">Right Column</Label>
-                <Textarea
-                    name="rightColumn"
-                    id="rightColumn"
-                    rows="3"
-                    placeholder="rightColumn"
-                    {...register("rightColumn")}
-                ></Textarea>
+                        <Label htmlFor="rightColumn">Right Column</Label>
+                        <Textarea
+                            name="rightColumn"
+                            id="rightColumn"
+                            rows="3"
+                            placeholder="Right Column"
+                            {...register("rightColumn")}
+                        />
 
-                <Label htmlFor="bottomArea">Bottom Area</Label>
-                <Textarea
-                    name="bottomArea"
-                    id="bottomArea"
-                    rows="3"
-                    placeholder="bottomArea"
-                    {...register("bottomArea")}
-                ></Textarea>
+                        <Label htmlFor="bottomArea">Bottom Area</Label>
+                        <Textarea
+                            name="bottomArea"
+                            id="bottomArea"
+                            rows="3"
+                            placeholder="Bottom Area"
+                            {...register("bottomArea")}
+                        />
 
-                <Button>Save</Button>
-            </form>
-        </Card>
+                        <Button>Save</Button>
+                    </form>
+                </Card>
+            </div>
+            <Footer />
+        </>
     );
 }

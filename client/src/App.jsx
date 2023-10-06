@@ -18,35 +18,29 @@ function App() {
             <AuthProvider>
                 <NoteProvider>
                     <BrowserRouter>
-                        <main className=" mx-auto px-10 md:px-0">
-                            <Navbar />
-                            <Routes>
-                                <Route path="/" element={<HomePage />} />
-                                <Route path="/login" element={<LoginPage />} />
+                        <Routes>
+                            <Route path="/" element={<HomePage />} />
+                            <Route path="/login" element={<LoginPage />} />
+                            <Route
+                                path="/register"
+                                element={<RegisterPage />}
+                            />
+                            <Route element={<ProtectedRoute />}>
+                                <Route path="/notes" element={<NotesPage />} />
                                 <Route
-                                    path="/register"
-                                    element={<RegisterPage />}
+                                    path="/add-note"
+                                    element={<NoteFormPage />}
                                 />
-                                <Route element={<ProtectedRoute />}>
-                                    <Route
-                                        path="/notes"
-                                        element={<NotesPage />}
-                                    />
-                                    <Route
-                                        path="/add-note"
-                                        element={<NoteFormPage />}
-                                    />
-                                    <Route
-                                        path="/notes/:id"
-                                        element={<NoteFormPage />}
-                                    />
-                                    <Route
-                                        path="/profile"
-                                        element={<h1>Profile</h1>}
-                                    />
-                                </Route>
-                            </Routes>
-                        </main>
+                                <Route
+                                    path="/notes/:id"
+                                    element={<NoteFormPage />}
+                                />
+                                <Route
+                                    path="/profile"
+                                    element={<h1>Profile</h1>}
+                                />
+                            </Route>
+                        </Routes>
                     </BrowserRouter>
                 </NoteProvider>
             </AuthProvider>

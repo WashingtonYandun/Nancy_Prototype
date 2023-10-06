@@ -1,7 +1,7 @@
 export function Button({ onClick, children }) {
     return (
         <button
-            className=" flex justify-center w-full border-2 px-4 py-1 rounded-md my-2 "
+            className="bg-accent hover:bg-joy text-white font-bold py-2 px-4 rounded-full w-full transition duration-300"
             onClick={onClick}
         >
             {children}
