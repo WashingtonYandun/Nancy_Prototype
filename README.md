@@ -1,7 +1,7 @@
 # Nancy Prototype - Learning Management System
 
 <p align="center">
-  <img alt="Nancy Prototype Logo" src="/assets/Nancy_Logo.png"/>
+  <img alt="Nancy Prototype Logo" src="/assets/Nancy_Logo.png"  width="300" height="300"/>
 </p>
 
 ## Overview
@@ -37,33 +37,37 @@ MERN stands for MongoDB, Express, React, Node, after the four key technologies t
 
 Express and Node make up the middle (application) tier. Express.js is a server-side web framework, and Node.js is the popular and powerful JavaScript server platform.
 
--   **React.js**: React is a JavaScript library (not a framework) for building interactive user interfaces. It utilizes a component-based approach for creating web applications.
+-   [**React.js**](https://reactjs.org/): React es una biblioteca de JavaScript (no un marco) para construir interfaces de usuario interactivas. Utiliza un enfoque basado en componentes para crear aplicaciones web.
 
--   **Mongo**: MongoDB is a document-oriented NoSQL database that stores data in JSON BSON format and is known for its scalability and schema flexibility.
+-   [**Mongo**](https://www.mongodb.com): MongoDB es una base de datos NoSQL orientada a documentos que almacena datos en formato JSON BSON y es conocida por su escalabilidad y flexibilidad de esquema.
 
--   **Node**: Node.js is a server-side JavaScript execution environment that allows the development of scalable and highly concurrent applications. It uses the Google Chrome V8 engine to run JavaScript code.
+-   [**Node**](https://nodejs.org/en): Node.js es un entorno de ejecución de JavaScript en el lado del servidor que permite el desarrollo de aplicaciones escalables y altamente concurrentes. Utiliza el motor V8 de Google Chrome para ejecutar código JavaScript.
 
--   **Express.js**: Express.js is a minimalist web framework for Node.js that simplifies the creation of web applications and APIs. It provides essential features for handling routes, middleware, and HTTP requests.
+-   [**Express.js**](https://expressjs.com): Express.js es un marco web minimalista para Node.js que simplifica la creación de aplicaciones web y APIs. Proporciona funciones esenciales para manejar rutas, middleware y solicitudes HTTP.
 
 ## Framework MVC Introduction
 
-Nancy Prototype is built on the Model-View-Controller (MVC) framework, a powerful architectural pattern that separates an application into three interconnected components. The **Model** (Mongo) represents the data and business logic, the **View** (React) handles the user interface, and the **Controller** (Express/Node) manages user input and interaction. This structure promotes modular development, making it easier to maintain and scale the application.
+Nancy Prototype is built on the Model-View-Controller (MVC) framework, a powerful architectural pattern that separates an application into three interconnected components. The **Model** (Mongo) represents the data and business logic, the **View** (React.js) handles the user interface, and the **Controller** (Express.js/Node.js) manages user input and interaction. This structure promotes modular development, making it easier to maintain and scale the application.
 
 <p align="center">
-  <img alt="Nancy Prototype Logo" src="/assets/mern-stack.png"/>
+  <img alt="Nancy Prototype Logo" src="/assets/mern-stack.png" />
 </p>
 
-> Explication
+## Explication
 
-In this project, following the MVC architecture with the MERN stack, it's quite evident that we use MongoDB as our database. **MongoDB** stores the models _("User" and "Note")_, currently mapped to code through Mongoose, the library we use as an ORM to connect to MongoDB. The database exclusively interacts with **controllers** _("notesController" and "authController")_, implemented as functions in **Node.js**. These functions are invoked by the **Express** backend framework, which, in turn, is triggered by routes coming from the **client**. The client interacts through a **graphical interface** built with _React_ ("HomePage, "LoginPage", "NoteFormPage", etc.). It's crucial to note that React cannot directly access MongoDB, and MongoDB cannot send data to the client without passing through the controllers, in accordance with the MVC architecture.
+-   In this project, following the MVC architecture with the MERN stack, it's quite evident that we use MongoDB as our database. **MongoDB** stores the models _("User" and "Note")_, currently mapped to code through Mongoose, the library we use as an ORM to connect to MongoDB.
 
-For clarity and organizational purposes, in the project, models and controllers have been separated into the "server" folder, while views are located in the "client" folder.
+-   The database exclusively interacts with **controllers** _("notesController" and "authController")_, implemented as functions in **Node.js**. These functions are invoked by the **Express** backend framework, which, in turn, is triggered by routes coming from the **client**.
+
+-   The client interacts through a **graphical interface** built with **React.js** _("HomePage, "LoginPage", "NoteFormPage", etc.)_. It's crucial to note that React cannot directly access MongoDB, and MongoDB cannot send data to the client without passing through the controllers, in accordance with the MVC architecture.
+
+-   For clarity and organizational purposes, in the project, models and controllers have been separated into the **"server"** folder, while views are located in the **"client"** folder.
 
 ## Getting Started
 
 Follow these steps to get started with Nancy Prototype:
 
-1. **Clone the Repository:**
+1. **Clone the Repository and go to the destination folder:**
 
     ```bash
     git clone https://github.com/WashingtonYandun/Nancy_Prototype.git
