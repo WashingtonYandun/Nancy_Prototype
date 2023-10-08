@@ -1,7 +1,7 @@
 # Nancy Prototype - Learning Management System
 
 <p align="center">
-  <img alt="Nancy Prototype Logo" src="/assets/Nancy_Logo.png"  width="300" height="300"/>
+  <img alt="Nancy Prototype Logo" src="/assets/Nancy_Logo.png"  width="350" height="350"/>
 </p>
 
 ## Overview
@@ -30,20 +30,20 @@ Nancy Prototype is a robust Learning Management System (LMS) designed to enhance
 
 MERN stands for MongoDB, Express, React, Node, after the four key technologies that make up the stack.
 
--   MongoDB — document database
--   Express(.js) — Node.js web framework
--   React(.js) — a client-side JavaScript framework
--   Node(.js) — the premier JavaScript web server
+-   MongoDB - document database
+-   Express(.js) - Node.js web framework
+-   React(.js) - a client-side JavaScript framework
+-   Node(.js) - the premier JavaScript web server
 
 Express and Node make up the middle (application) tier. Express.js is a server-side web framework, and Node.js is the popular and powerful JavaScript server platform.
 
--   [**React.js**](https://reactjs.org/): React es una biblioteca de JavaScript (no un marco) para construir interfaces de usuario interactivas. Utiliza un enfoque basado en componentes para crear aplicaciones web.
+-   [**React.js**](https://reactjs.org/): React is a JavaScript library (not a framework) for building interactive user interfaces. It employs a component-based approach to create web applications.
 
--   [**Mongo**](https://www.mongodb.com): MongoDB es una base de datos NoSQL orientada a documentos que almacena datos en formato JSON BSON y es conocida por su escalabilidad y flexibilidad de esquema.
+-   [**Mongo**](https://www.mongodb.com): MongoDB is a document-oriented NoSQL database that stores data in JSON BSON format and is known for its scalability and schema flexibility.
 
--   [**Node**](https://nodejs.org/en): Node.js es un entorno de ejecución de JavaScript en el lado del servidor que permite el desarrollo de aplicaciones escalables y altamente concurrentes. Utiliza el motor V8 de Google Chrome para ejecutar código JavaScript.
+-   [**Node**](https://nodejs.org/en): Node.js is a server-side JavaScript execution environment that enables the development of scalable and highly concurrent applications. It uses the Google Chrome V8 engine to run JavaScript code.
 
--   [**Express.js**](https://expressjs.com): Express.js es un marco web minimalista para Node.js que simplifica la creación de aplicaciones web y APIs. Proporciona funciones esenciales para manejar rutas, middleware y solicitudes HTTP.
+-   [**Express.js**](https://expressjs.com): Express.js is a minimalist web framework for Node.js that simplifies the creation of web applications and APIs. It provides essential functions for handling routes, middleware, and HTTP requests.
 
 ## Framework MVC Introduction
 
@@ -73,7 +73,7 @@ Follow these steps to get started with Nancy Prototype:
     git clone https://github.com/WashingtonYandun/Nancy_Prototype.git
     ```
 
-2. **Run the following commands:**
+2. **Run the following commands in the corresponding folder:**
 
     ```bash
     npm i
