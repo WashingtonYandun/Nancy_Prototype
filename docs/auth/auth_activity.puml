@@ -1,0 +1,63 @@
+@startuml
+title Authentication Activity Diagram
+
+caption
+Washington Yandun Morales
+end caption
+
+center header
+Nancy (LMS)
+endheader
+
+center footer Last Update: 2023/10/10
+
+(*) --> "User visits Registration Page"
+--> "User fills out registration form"
+--> "User submits registration form"
+
+if "Form data is valid" then
+  --> "Send registration request to server"
+  --> "Server registers user"
+  --> "User is registered"
+else
+  --> "Display validation errors"
+  --> (*)
+endif
+
+--> "User visits Login Page"
+--> "User fills out login form"
+--> "User submits login form"
+
+if "Form data is valid" then
+  --> "Send login request to server"
+  --> "Server authenticates user"
+  --> if "Authentication successful" then
+    --> "User is authenticated"
+    --> "User receives authentication token"
+  else
+    --> "Display authentication error"
+    --> (*)
+  endif
+else
+  --> "Display validation errors"
+  --> (*)
+endif
+
+--> "User visits Protected Page"
+--> "Check if authentication token exists"
+
+if "Authentication token exists" then
+  --> "Send token verification request to server"
+  --> "Server verifies token"
+  --> if "Token is valid" then
+    --> "User accesses Protected Page"
+  else
+    --> "User is redirected to Login Page"
+  endif
+else
+  --> "User is redirected to Login Page"
+endif
+
+--> "User logs out"
+--> "Clear authentication token"
+@enduml
