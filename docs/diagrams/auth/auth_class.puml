@@ -1,0 +1,39 @@
+@startuml
+
+title Authentication Class Diagram
+
+caption
+Washington Yandun Morales
+end caption
+
+center header
+Nancy (LMS)
+endheader
+
+center footer Last Update: 2023/10/10
+
+class User {
+  - username: String
+  - email: String
+  - password: String
+}
+
+class AuthController {
+  + register(req, res): void
+  + login(req, res): void
+  + verifyToken(req, res): void
+  + logout(req, res): void
+}
+
+class JwtUtils {
+  + createAccessToken(payload): String
+}
+
+class AuthMiddleware {
+  + auth(req, res, next): void
+}
+
+AuthController --> User: Uses
+AuthController --> JwtUtils: Uses
+AuthController --> AuthMiddleware: Uses
+@enduml
