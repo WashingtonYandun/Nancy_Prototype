@@ -58,7 +58,9 @@
 
 ### Activity Diagram
 
-![Activity Diagram](/docs/diagrams/auth/img/auth_activity.png)
+<p align="center">
+  <img alt="Auth activity diagram" src="/docs/auth/img/auth_activity.png" />
+</p>
 
 #### Activity Diagram Explanation
 
@@ -94,7 +96,9 @@ This flow ensures a secure and efficient process for registration, login, and ro
 
 ### Class Diagram explanation
 
-![Activity Diagram](/docs/diagrams/auth/img/auth_class.png)
+<p align="center">
+  <img alt="Auth class diagram" src="/docs//auth/img/auth_class.png" />
+</p>
 
 #### Activity Diagram Explanation
 
