@@ -24,11 +24,15 @@ const userSchema = new mongoose.Schema(
             required: [true, "Password is required"],
             minlength: [4, "Password must be at least 6 characters long"],
         },
-        role: {
-            type: String,
-            enum: ["user", "admin", "root"],
-            default: "user",
-        },
+        /*
+        roles: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "Role",
+                //default: ,
+            },
+        ],
+        */
     },
     { timestamps: true }
 );
