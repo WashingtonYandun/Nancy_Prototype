@@ -1,8 +1,10 @@
-### Authentication System - Explanation
+# Authentication System - Explanation
 
-#### Backend (Node.js, Express, MongoDB)
+The system authentication is based on JWT. When a user authenticates, a token is generated and stored in cookies. When the user logs out, the token is deleted, thereby revoking access to protected views in the system.
 
-##### Controllers (auth.controller.js)
+## Backend (Node.js, Express, MongoDB)
+
+### Controllers (auth.controller.js)
 
 -   **Registration (`register`):**
 
@@ -25,97 +27,93 @@
 -   **Logout (`logout`):**
     -   Deletes the cookie containing the token.
 
-##### Middleware (auth.middleware.js)
+### Middleware (auth.middleware.js)
 
 -   **Authentication Middleware (`auth`):**
     -   Checks if there is a token in the cookie.
     -   If the token is valid, allows access to protected routes.
 
----
+## Frontend (React)
 
-#### Frontend (React)
+-   **Registration (`Register.js`)**
 
-##### Registration (Register.js)
+    -   Uses the authentication context (`useAuth`) to manage registration.
+    -   Utilizes `react-hook-form` for form validation.
+    -   Redirects the user to the notes page after registration.
 
--   Uses the authentication context (`useAuth`) to manage registration.
--   Utilizes `react-hook-form` for form validation.
--   Redirects the user to the notes page after registration.
+-   **Login (`LoginPage.js`)**
 
-##### Login (LoginPage.js)
+    -   Uses the authentication context (`useAuth`) to manage login.
+    -   Utilizes `react-hook-form` for form validation.
+    -   Redirects the user to the notes page after login.
 
--   Uses the authentication context (`useAuth`) to manage login.
--   Utilizes `react-hook-form` for form validation.
--   Redirects the user to the notes page after login.
+-   **Authentication Context (`AuthContext.js`)**
 
-##### Authentication Context (AuthContext.js)
+    -   Defines a React context to manage authentication state.
+    -   Provides functions for signup, signin, signout, and checking authentication status.
 
--   Defines a React context to manage authentication state.
--   Provides functions for signup, signin, signout, and checking authentication status.
-
-##### API Requests
+### API Requests
 
 -   Uses functions (`registerRequest`, `loginRequest`, `verifyTokenRequest`) to make HTTP requests to the backend.
 
-### Activity Diagram
+## Activity Diagram
 
 <p align="center">
   <img alt="Auth activity diagram" src="/docs/auth/img/auth_activity.png" />
 </p>
 
-#### Activity Diagram Explanation
+### Activity Diagram Explanation
 
-1. **Registration:**
+-   **Registration:**
 
-    - The user visits the registration page.
-    - Completes the registration form.
-    - Client-side validation ensures email uniqueness.
-    - If data is valid, a registration request is sent to the server.
-    - The server validates the data and registers the user in the database.
+    -   The user visits the registration page.
+    -   Completes the registration form.
+    -   Client-side validation ensures email uniqueness.
+    -   If data is valid, a registration request is sent to the server.
+    -   The server validates the data and registers the user in the database.
 
-2. **Login:**
+-   **Login:**
 
-    - The user visits the login page.
-    - Completes the login form.
-    - If data is valid, a login request is sent to the server.
-    - The server authenticates the user and generates an access token.
+    -   The user visits the login page.
+    -   Completes the login form.
+    -   If data is valid, a login request is sent to the server.
+    -   The server authenticates the user and generates an access token.
 
-3. **Token Verification:**
+-   **Token Verification:**
 
-    - The user visits a protected page.
-    - Checks for the existence of the authentication token.
-    - If the token exists, a verification request is sent to the server.
-    - The server verifies the token and allows access if it is valid.
+    -   The user visits a protected page.
+    -   Checks for the existence of the authentication token.
+    -   If the token exists, a verification request is sent to the server.
+    -   The server verifies the token and allows access if it is valid.
 
-4. **Logout:**
-    - The user performs a logout action.
-    - The authentication token stored in the cookie is removed.
+-   **Logout:**
+    -   The user performs a logout action.
+    -   The authentication token stored in the cookie is removed.
 
 This flow ensures a secure and efficient process for registration, login, and route protection in the application.
 
----
-
-### Class Diagram explanation
+## Class Diagram explanation
 
 <p align="center">
   <img alt="Auth class diagram" src="/docs//auth/img/auth_class.png" />
 </p>
 
-#### Activity Diagram Explanation
+### Activity Diagram Explanation
 
-> I have to change to functions to a class. Perhaps this diagram folloes the current and future behavior of the authentication
+> I have to change to functions to a class. Perhaps this diagram folloWs the current and future behavior of the authentication
 
-1. **User Model (user.model.js)**
+-   **User Model (`user.model.js`)**
 
--   Defines the user data schema for MongoDB.
+    -   Defines the user data schema for MongoDB.
 
-2. **JWT (jwt.js)**
+-   **JWT (`jwt.js`)**
 
--   Contains functions for creating JWT tokens.
+    -   Contains functions for creating JWT tokens.
 
-3. **AuthMiddleware (auth.middleware.js)**
+-   **AuthMiddleware (`auth.middleware.js`)**
 
--   Verify the token.
+    -   Verify the token.
 
-4. **AuthController (auth.controller.js)**
+-   **AuthController (`auth.controller.js`)**
 
--   Logic of the authentication system.
+    -   Logic of the authentication system.

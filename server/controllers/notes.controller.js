@@ -7,7 +7,6 @@ export const getNotes = async (req, res) => {
         );
         res.json(notes);
     } catch (error) {
-        console.log(error);
         return res.status(500).json({ message: error.message });
     }
 };
@@ -26,7 +25,6 @@ export const createNote = async (req, res) => {
         await newNote.save();
         res.json(newNote);
     } catch (error) {
-        console.log(error, req.body, req.user.id);
         return res.status(500).json({ message: error.message });
     }
 };
@@ -61,9 +59,6 @@ export const updateNote = async (req, res) => {
         );
         return res.json(noteUpdated);
     } catch (error) {
-        console.log("error", error);
-        console.log("req.body", req.body);
-        console.log("req.params.id", req.params.id);
         return res.status(500).json({ message: error.message });
     }
 };
