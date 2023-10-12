@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Navbar } from "./components/Navbar";
 import { AuthProvider } from "./context/authContext";
 import { ProtectedRoute } from "./routes";
 
@@ -9,8 +8,6 @@ import { NoteFormPage } from "./pages/NoteFormPage";
 import { LoginPage } from "./pages/LoginPage";
 import { NotesPage } from "./pages/NotesPage";
 import { NoteProvider } from "./context/notesContext";
-
-import "./App.css";
 
 function App() {
     return (

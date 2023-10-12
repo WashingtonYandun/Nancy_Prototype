@@ -63,6 +63,13 @@ Nancy Prototype is built on the Model-View-Controller (MVC) framework, a powerfu
 
 -   For clarity and organizational purposes, in the project, models and controllers have been separated into the **"server"** folder, while views are located in the **"client"** folder.
 
+## Requirements
+
+Before setting up and running Nancy Prototype, ensure that your system meets the following requirements:
+
+-   **Node.js**: Nancy Prototype uses Node.js for `server-side scripting`. Ensure that you have Node.js installed.
+-   **MongoDB**: MongoDB is used as the `database` for Nancy Prototype. Install MongoDB on your system.
+
 ## Getting Started
 
 Follow these steps to get started with Nancy Prototype:
