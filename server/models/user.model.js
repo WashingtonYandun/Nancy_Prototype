@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { Role } from "./role.model.js";
 
 const userSchema = new mongoose.Schema(
     {
@@ -24,15 +25,13 @@ const userSchema = new mongoose.Schema(
             required: [true, "Password is required"],
             minlength: [4, "Password must be at least 6 characters long"],
         },
-        /*
         roles: [
             {
                 type: mongoose.Schema.Types.ObjectId,
                 ref: "Role",
-                //default: ,
+                default: Role.findOne({ name: "user" }),
             },
         ],
-        */
     },
     { timestamps: true }
 );
