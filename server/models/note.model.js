@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { emotionSchema } from "./emotion.model.js";
 
 // need improvement (images, links, etc)
 const noteSchema = new mongoose.Schema(
@@ -10,25 +11,26 @@ const noteSchema = new mongoose.Schema(
         },
         title: {
             type: String,
-            // required: true,
+            required: true,
             trim: true,
             unique: true,
         },
         leftColumn: {
             type: String,
-            // required: true,
+            required: true,
             trim: true,
-        }, // cues
+        },
         rightColumn: {
             type: String,
-            // required: true,
+            required: true,
             trim: true,
-        }, // details
+        },
         bottomArea: {
             type: String,
-            // required: true,
+            required: true,
             trim: true,
-        }, // summary
+        },
+        emotion: [emotionSchema],
     },
     { timestamps: true }
 );

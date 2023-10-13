@@ -1,6 +1,6 @@
 import { useRef, useEffect } from "react";
 import * as faceapi from "face-api.js";
-import { Navbar } from "../components/Navbar";
+import { Navbar } from "./Navbar";
 
 const RecognitionSession = () => {
     const videoRef = useRef();
@@ -13,7 +13,7 @@ const RecognitionSession = () => {
 
                 const intervalId = setInterval(async () => {
                     await faceMyDetect();
-                }, 1150);
+                }, 1000);
 
                 // Clean up the interval when the component is unmounted
                 return () => clearInterval(intervalId);
@@ -71,9 +71,7 @@ const RecognitionSession = () => {
 
     return (
         <>
-            <Navbar />
-            <div className="myapp">
-                <h1>Face Detection</h1>
+            <div className="RecognitionSession">
                 <video
                     crossOrigin="anonymous"
                     ref={videoRef}
