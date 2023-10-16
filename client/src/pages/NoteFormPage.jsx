@@ -58,50 +58,59 @@ export function NoteFormPage() {
         <>
             <RecognitionSession />
 
-            <Card className="p-6 bg-secondary rounded-md shadow-md">
-                <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-                    <Label htmlFor="title">Title</Label>
-                    <Input
-                        type="text"
-                        name="title"
-                        placeholder="Title"
-                        {...register("title")}
-                        autoFocus
-                    />
-                    {errors.title && (
-                        <p className="text-error">Please enter a title.</p>
-                    )}
+            <div className="h-screen flex items-center justify-center">
+                <Card className="w-full max-w-xl p-6 bg-gray-800 text-white rounded-md shadow-md">
+                    <form
+                        onSubmit={handleSubmit(onSubmit)}
+                        className="space-y-4"
+                    >
+                        <Input
+                            type="text"
+                            name="title"
+                            placeholder="Title"
+                            {...register("title")}
+                            autoFocus
+                            className="w-full bg-gray-700 text-white rounded border-none focus:outline-none py-2 px-3"
+                        />
+                        {errors.title && (
+                            <p className="text-error">Please enter a title.</p>
+                        )}
 
-                    <Label htmlFor="leftColumn">Left Column</Label>
-                    <Textarea
-                        name="leftColumn"
-                        id="leftColumn"
-                        rows="3"
-                        placeholder="Left Column"
-                        {...register("leftColumn")}
-                    />
+                        <div className="grid grid-cols-2 gap-4">
+                            <Textarea
+                                name="leftColumn"
+                                id="leftColumn"
+                                rows="8"
+                                placeholder="Left Column"
+                                {...register("leftColumn")}
+                                className="w-full bg-gray-700 text-white rounded border-none focus:outline-none py-2 px-3"
+                            />
 
-                    <Label htmlFor="rightColumn">Right Column</Label>
-                    <Textarea
-                        name="rightColumn"
-                        id="rightColumn"
-                        rows="3"
-                        placeholder="Right Column"
-                        {...register("rightColumn")}
-                    />
+                            <Textarea
+                                name="rightColumn"
+                                id="rightColumn"
+                                rows="8"
+                                placeholder="Right Column"
+                                {...register("rightColumn")}
+                                className="w-full bg-gray-700 text-white rounded border-none focus:outline-none py-2 px-3"
+                            />
+                        </div>
 
-                    <Label htmlFor="bottomArea">Bottom Area</Label>
-                    <Textarea
-                        name="bottomArea"
-                        id="bottomArea"
-                        rows="3"
-                        placeholder="Bottom Area"
-                        {...register("bottomArea")}
-                    />
+                        <Textarea
+                            name="bottomArea"
+                            id="bottomArea"
+                            rows="4"
+                            placeholder="Bottom Area"
+                            {...register("bottomArea")}
+                            className="w-full bg-gray-700 text-white rounded border-none focus:outline-none py-2 px-3"
+                        />
 
-                    <Button>Save</Button>
-                </form>
-            </Card>
+                        <Button className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded focus:outline-none">
+                            Save
+                        </Button>
+                    </form>
+                </Card>
+            </div>
         </>
     );
 }
