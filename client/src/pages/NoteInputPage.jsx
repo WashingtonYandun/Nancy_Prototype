@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { Navbar } from "../components/Navbar";
 import Footer from "../components/Footer";
 
-export function NoteFormPage() {
+export function NoteInputPage() {
     const { createNote, getNote, updateNote } = useNotes();
     const navigate = useNavigate();
     const params = useParams();

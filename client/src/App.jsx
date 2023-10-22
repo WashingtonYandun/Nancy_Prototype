@@ -8,7 +8,6 @@ import { NoteFormPage } from "./pages/NoteFormPage";
 import { LoginPage } from "./pages/LoginPage";
 import { NotesPage } from "./pages/NotesPage";
 import { NoteProvider } from "./context/notesContext";
-import { RecognitionSession } from "./components/RecognitionSession";
 
 function App() {
     return (
@@ -36,10 +35,6 @@ function App() {
                                 <Route
                                     path="/profile"
                                     element={<h1>Profile</h1>}
-                                />
-                                <Route
-                                    path="/recognition"
-                                    element={<RecognitionSession />}
                                 />
                             </Route>
                         </Routes>
