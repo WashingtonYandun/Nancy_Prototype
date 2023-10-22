@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
-import { emotionSchema } from "./emotion.model.js";
+import { expressionSchema } from "./expression.model.js";
+import { classificationSchema } from "./classification.model.js";
 
 // need improvement (images, links, etc)
 const noteSchema = new mongoose.Schema(
@@ -14,23 +15,36 @@ const noteSchema = new mongoose.Schema(
             required: true,
             trim: true,
             unique: true,
+            minlength: [1, "title must be at least 1 character long"],
+            maxlength: [64, "Name must be at most 60 characters long"],
         },
         leftColumn: {
             type: String,
             required: true,
             trim: true,
+            minlength: [1, "Cues must be at least 1 character long"],
         },
         rightColumn: {
             type: String,
             required: true,
             trim: true,
+            minlength: [1, "Key thoughts must be at least 1 character long"],
         },
         bottomArea: {
             type: String,
             required: true,
             trim: true,
+            minlength: [1, "Summary must be at least 1 character long"],
         },
-        emotion: [emotionSchema],
+        classification: {
+            type: classificationSchema,
+        },
+        expressions: [
+            {
+                type: expressionSchema,
+                required: true,
+            },
+        ],
     },
     { timestamps: true }
 );

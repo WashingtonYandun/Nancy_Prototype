@@ -1,3 +1,4 @@
+import e from "express";
 import { Note } from "../models/note.model.js";
 
 export const getNotes = async (req, res) => {
@@ -13,7 +14,15 @@ export const getNotes = async (req, res) => {
 
 export const createNote = async (req, res) => {
     try {
-        const { title, leftColumn, rightColumn, bottomArea } = req.body;
+        const {
+            title,
+            leftColumn,
+            rightColumn,
+            bottomArea,
+            expressions,
+            classification,
+        } = req.body;
+
         const userId = req.user.id;
         const newNote = new Note({
             title,
@@ -21,7 +30,10 @@ export const createNote = async (req, res) => {
             rightColumn,
             bottomArea,
             userId: userId,
+            classification,
+            expressions,
         });
+
         await newNote.save();
         res.json(newNote);
     } catch (error) {
