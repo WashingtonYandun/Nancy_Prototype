@@ -7,10 +7,8 @@ import { useForm } from "react-hook-form";
 import * as faceapi from "face-api.js";
 
 export function NoteFormPage() {
-    // array for collecting expressions
     const expressions = [];
 
-    // note
     const { createNote, getNote, updateNote } = useNotes();
     const navigate = useNavigate();
     const params = useParams();
@@ -24,77 +22,7 @@ export function NoteFormPage() {
 
     const [isRecognitionActive, setIsRecognitionActive] = useState(false);
 
-    const onSubmit = async (data) => {
-        try {
-            if (
-                !data.title ||
-                !data.leftColumn ||
-                !data.rightColumn ||
-                !data.bottomArea
-            ) {
-                return;
-            }
-
-            data.expressions = expressions;
-
-            if (params.id) {
-                updateNote(params.id, {
-                    ...data,
-                });
-                console.log(data);
-            } else {
-                createNote({
-                    ...data,
-                });
-                console.log(data);
-            }
-            setIsRecognitionActive(false); // Detener la recolección al guardar
-            navigate("/notes");
-        } catch (error) {
-            console.log("error", error, data);
-            console.log(error);
-        }
-    };
-
-    useEffect(() => {
-        const loadNote = async () => {
-            console.log(params);
-            if (params.id) {
-                const note = await getNote(params.id);
-
-                setValue("title", note.title);
-                setValue("leftColumn", note.leftColumn);
-                setValue("rightColumn", note.rightColumn);
-                setValue("bottomArea", note.bottomArea);
-            }
-        };
-        loadNote();
-    }, []);
-
-    // recognition
     const videoRef = useRef();
-
-    useEffect(() => {
-        const startRecognition = async () => {
-            try {
-                await startVideo();
-                await loadModels();
-
-                const intervalId = setInterval(async () => {
-                    if (isRecognitionActive) {
-                        await faceMyDetect();
-                    }
-                }, 1000);
-
-                // Limpia el intervalo cuando el componente se desmonta
-                return () => clearInterval(intervalId);
-            } catch (error) {
-                console.error("Error during recognition setup:", error);
-            }
-        };
-
-        startRecognition();
-    }, [isRecognitionActive]); // Agregar isRecognitionActive como dependencia
 
     const startVideo = async () => {
         try {
@@ -102,9 +30,12 @@ export function NoteFormPage() {
                 video: true,
             });
             videoRef.current.srcObject = stream;
+            videoRef.current.onloadedmetadata = () => {
+                // Video loaded and ready for use
+            };
         } catch (error) {
             console.error("Error starting video:", error);
-            throw error; // Propagate the error for better handling
+            throw error;
         }
     };
 
@@ -118,12 +49,16 @@ export function NoteFormPage() {
             ]);
         } catch (error) {
             console.error("Error loading models:", error);
-            throw error; // Propagate the error for better handling
+            throw error;
         }
     };
 
     const faceMyDetect = async () => {
         try {
+            if (!videoRef.current) {
+                return;
+            }
+
             const detections = await faceapi
                 .detectAllFaces(
                     videoRef.current,
@@ -158,6 +93,69 @@ export function NoteFormPage() {
         setIsRecognitionActive(false);
     };
 
+    const onSubmit = async (data) => {
+        try {
+            handleStopRecognition();
+            if (
+                !data.title ||
+                !data.leftColumn ||
+                !data.rightColumn ||
+                !data.bottomArea
+            ) {
+                return;
+            }
+
+            data.expressions = expressions;
+
+            if (params.id) {
+                updateNote(params.id, {
+                    ...data,
+                });
+                console.log(data);
+            } else {
+                createNote({
+                    ...data,
+                });
+                console.log(data);
+            }
+            setIsRecognitionActive(false);
+            navigate("/notes");
+        } catch (error) {
+            console.log("error", error, data);
+            console.log(error);
+        }
+    };
+
+    useEffect(() => {
+        const loadNote = async () => {
+            console.log(params);
+            if (params.id) {
+                const note = await getNote(params.id);
+
+                setValue("title", note.title);
+                setValue("leftColumn", note.leftColumn);
+                setValue("rightColumn", note.rightColumn);
+                setValue("bottomArea", note.bottomArea);
+            }
+        };
+        loadNote();
+    }, []);
+
+    useEffect(() => {
+        startVideo();
+        loadModels();
+    }, []); // Run this effect only once on component mount
+
+    useEffect(() => {
+        const intervalId = setInterval(async () => {
+            if (isRecognitionActive) {
+                faceMyDetect();
+            }
+        }, 1000);
+
+        return () => clearInterval(intervalId); // Clean up the interval on unmount
+    }, [isRecognitionActive]);
+
     return (
         <>
             <div id="recognition">
@@ -168,15 +166,14 @@ export function NoteFormPage() {
                     style={{ display: "none" }}
                 ></video>
             </div>
+            <Button
+                className="bg-blue-500 hover-bg-blue-600 text-white py-2 px-4 rounded focus-outline-none"
+                onClick={handleStartRecognition}
+            >
+                Set a title and Start Recognition
+            </Button>
 
             <div className="h-screen flex items-center justify-center">
-                <Button
-                    className="bg-blue-500 hover-bg-blue-600 text-white py-2 px-4 rounded focus-outline-none"
-                    onClick={handleStartRecognition}
-                >
-                    Set a title and Start Recognition
-                </Button>
-
                 <Card className="w-full max-w-xl p-6 bg-gray-800 text-white rounded-md shadow-md">
                     <form
                         onSubmit={handleSubmit(onSubmit)}
