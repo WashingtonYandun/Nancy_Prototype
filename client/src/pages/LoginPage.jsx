@@ -28,24 +28,26 @@ export function LoginPage() {
 
     return (
         <>
-            <div className="flex justify-center items-center h-screen bg-bright">
-                <Card className="w-full max-w-md p-8">
-                    {loginErrors.map((error, i) => (
-                        <Message message={error} key={i} />
-                    ))}
-                    <h1 className="text-3xl font-bold mb-6">Login</h1>
+            <div className="flex justify-center items-center h-screen bg-gradient-to-r from-purple-500 to-indigo-600">
+                <Card className="w-full max-w-md p-8 rounded-lg shadow-lg bg-white">
+                    <h1 className="text-3xl font-semibold text-center mb-6 text-darkAccent">
+                        Login
+                    </h1>
 
                     <form
                         onSubmit={handleSubmit(onSubmit)}
                         className="space-y-4"
                     >
                         <div>
-                            <Label htmlFor="email">Email</Label>
+                            <Label htmlFor="email" className="text-darkAccent">
+                                Email
+                            </Label>
                             <Input
                                 type="email"
                                 name="email"
                                 placeholder="example@youremail.com"
                                 {...register("email", { required: true })}
+                                className="w-full px-4 py-2 border rounded-lg"
                             />
                             <p className="text-error text-xs">
                                 {errors.email?.message}
@@ -53,7 +55,12 @@ export function LoginPage() {
                         </div>
 
                         <div>
-                            <Label htmlFor="password">Password:</Label>
+                            <Label
+                                htmlFor="password"
+                                className="text-darkAccent"
+                            >
+                                Password:
+                            </Label>
                             <Input
                                 type="password"
                                 name="password"
@@ -62,17 +69,22 @@ export function LoginPage() {
                                     required: true,
                                     minLength: 6,
                                 })}
+                                className="w-full px-4 py-2 border rounded-lg"
                             />
                             <p className="text-error text-xs">
                                 {errors.password?.message}
                             </p>
                         </div>
 
-                        <Button className="w-full">Login</Button>
+                        <Button className="w-full bg-darkAccent hover:bg-darkAccentHover text-white hover:text-darkAccent">
+                            Login
+                        </Button>
                     </form>
 
                     <p className="text-center mt-4">
-                        <span className="block">Don't have an account? </span>
+                        <span className="block text-darkAccent">
+                            Don't have an account?{" "}
+                        </span>
                         <Link to="/register" className="text-darkAccent">
                             Sign up
                         </Link>
