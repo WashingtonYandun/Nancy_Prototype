@@ -8,10 +8,6 @@ const classificationSchema = new mongoose.Schema({
             probability: Number,
         },
     ],
-    timestamp: {
-        type: Date,
-        default: Date.now,
-    },
     _id: false,
 });
 
