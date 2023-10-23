@@ -210,49 +210,58 @@ export function NoteFormPage() {
                     style={{ display: "none" }}
                 ></video>
             </div>
-            <Button
-                className="bg-blue-500 hover-bg-blue-600 text-white py-2 px-4 rounded focus-outline-none"
-                onClick={handleStartRecognition}
-            >
-                Set a title and Start Recognition
-            </Button>
 
-            <div className="h-screen flex items-center justify-center">
-                <Card className="w-full max-w-xl p-6 bg-gray-800 text-white rounded-md shadow-md">
+            <div className="grid grid-cols-2 h-screen">
+                {/* Read section */}
+                <div className="read-section bg-gray-200 h-[10vh]"></div>
+
+                {/* Summary section */}
+                <Card className="w-full max-w-xl p-6 bg-gray-800 text-white rounded-md shadow-md h-[10vh]">
                     <form
                         onSubmit={handleSubmit(onSubmit)}
-                        className="space-y-4"
+                        className="space-y-3"
                     >
-                        <Input
-                            type="text"
-                            name="title"
-                            placeholder="Title"
-                            {...register("title")}
-                            autoFocus
-                            className="w-full bg-gray-700 text-white rounded border-none focus-outline-none py-2 px-3"
-                            onChange={handleTitleChange}
-                        />
-                        {errors.title && (
-                            <p className="text-error">Please enter a title.</p>
-                        )}
+                        <div className="flex flex-column">
+                            <Input
+                                type="text"
+                                name="title"
+                                placeholder="Title"
+                                {...register("title")}
+                                autoFocus
+                                className="w-full bg-gray-700 text-white rounded border-none focus-outline-none py-2 px-3"
+                                onChange={handleTitleChange}
+                            />
+                            {errors.title && (
+                                <p className="text-error">
+                                    Please enter a title.
+                                </p>
+                            )}
 
-                        <div className="grid grid-cols-2 gap-4">
+                            <Button
+                                className="bg-blue-500 hover-bg-blue-600 text-white py-2 px-4 focus-outline-none"
+                                onClick={handleStartRecognition}
+                            >
+                                Click this to start recognition
+                            </Button>
+                        </div>
+
+                        <div className="grid grid-cols-2 gap-4 h-[65vh]">
                             <Textarea
                                 name="leftColumn"
                                 id="leftColumn"
-                                rows="8"
+                                rows="auto"
                                 placeholder="Left Column"
                                 {...register("leftColumn")}
-                                className="w-full bg-gray-700 text-white rounded border-none focus-outline-none py-2 px-3"
+                                className="w-full h-full bg-gray-700 text-white rounded border-none focus-outline-none px-3"
                             />
 
                             <Textarea
                                 name="rightColumn"
                                 id="rightColumn"
-                                rows="8"
+                                rows="auto"
                                 placeholder="Right Column"
                                 {...register("rightColumn")}
-                                className="w-full bg-gray-700 text-white rounded border-none focus-outline-none py-2 px-3"
+                                className="w-full h-full bg-gray-700 text-white rounded border-none focus-outline-none px-3"
                             />
                         </div>
 
@@ -262,12 +271,12 @@ export function NoteFormPage() {
                             rows="4"
                             placeholder="Bottom Area"
                             {...register("bottomArea")}
-                            className="w-full bg-gray-700 text-white rounded border-none focus-outline-none py-2 px-3"
+                            className="w-full bg-gray-700 text-white rounded border-none focus-outline-none py-2 px-3 h-[35vh]"
                         />
 
                         <Button
                             type="submit"
-                            className="bg-blue-500 hover-bg-blue-600 text-white py-2 px-4 rounded focus-outline-none"
+                            className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-3 rounded focus-outline-none"
                             onClick={handleStopRecognition}
                         >
                             Save
