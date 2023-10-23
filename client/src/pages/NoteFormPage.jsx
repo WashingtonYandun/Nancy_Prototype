@@ -1,17 +1,20 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Button, Card, Input, Label } from "../components/ui";
+import { Button, Card, Input } from "../components/ui";
 import { useNotes } from "../context/notesContext";
 import { Textarea } from "../components/ui/Textarea";
 import { useForm } from "react-hook-form";
 import * as faceapi from "face-api.js";
+import axios from "axios";
 
 export function NoteFormPage() {
-    const expressions = [];
-
     const { createNote, getNote, updateNote } = useNotes();
     const navigate = useNavigate();
     const params = useParams();
+    const [classification, setClassification] = useState(null);
+    const [isRecognitionActive, setIsRecognitionActive] = useState(false);
+    const [expressions, setExpressions] = useState([]);
+    const videoRef = useRef();
 
     const {
         register,
@@ -20,19 +23,13 @@ export function NoteFormPage() {
         formState: { errors },
     } = useForm();
 
-    const [isRecognitionActive, setIsRecognitionActive] = useState(false);
-
-    const videoRef = useRef();
-
     const startVideo = async () => {
         try {
             const stream = await navigator.mediaDevices.getUserMedia({
                 video: true,
             });
             videoRef.current.srcObject = stream;
-            videoRef.current.onloadedmetadata = () => {
-                // Video loaded and ready for use
-            };
+            videoRef.current.onloadedmetadata = () => {};
         } catch (error) {
             console.error("Error starting video:", error);
             throw error;
@@ -77,8 +74,11 @@ export function NoteFormPage() {
                     sad: detections[0].expressions.sad,
                     surprised: detections[0].expressions.surprised,
                 };
-                expressions.push(expression);
-                console.log(expressions);
+
+                setExpressions((prevExpressions) => [
+                    ...prevExpressions,
+                    expression,
+                ]);
             }
         } catch (error) {
             console.error("Error during face detection:", error);
@@ -95,34 +95,78 @@ export function NoteFormPage() {
 
     const onSubmit = async (data) => {
         try {
-            handleStopRecognition();
+            data.expressions = expressions;
             if (
                 !data.title ||
                 !data.leftColumn ||
                 !data.rightColumn ||
-                !data.bottomArea
+                !data.bottomArea ||
+                !expressions.length ||
+                !classification
             ) {
-                return;
+                return alert(
+                    "Please fill all the fields and start recognition"
+                );
             }
 
-            data.expressions = expressions;
+            handleStopRecognition();
 
             if (params.id) {
                 updateNote(params.id, {
                     ...data,
+                    expressions,
+                    classification,
                 });
-                console.log(data);
             } else {
                 createNote({
                     ...data,
+                    expressions,
+                    classification,
                 });
-                console.log(data);
             }
-            setIsRecognitionActive(false);
+            console.log(data);
             navigate("/notes");
         } catch (error) {
-            console.log("error", error, data);
-            console.log(error);
+            console.error("Error submiting", error, data);
+        }
+    };
+
+    const fetchCategory = async (title) => {
+        if (title) {
+            const response = await axios.post(
+                "https://nancy-classifier-wy.vercel.app/class",
+                { title }
+            );
+
+            if (response.status === 200) {
+                let mydata = {
+                    category: response.data.category,
+                    matches: response.data.matches,
+                };
+                setClassification(mydata);
+            } else {
+                console.error("Error using Classifier api", response);
+            }
+        }
+    };
+
+    const handleTitleChange = async (event) => {
+        try {
+            const title = event.target.value;
+            if (title) {
+                try {
+                    const result = await fetchCategory(title);
+                    if (result) {
+                        setClassification(result.classification);
+                    }
+                } catch (error) {
+                    console.error("Error getting classification:", error);
+                }
+            } else {
+                setClassification(null);
+            }
+        } catch (error) {
+            console.error("Error with text classification:", error);
         }
     };
 
@@ -186,6 +230,7 @@ export function NoteFormPage() {
                             {...register("title")}
                             autoFocus
                             className="w-full bg-gray-700 text-white rounded border-none focus-outline-none py-2 px-3"
+                            onChange={handleTitleChange}
                         />
                         {errors.title && (
                             <p className="text-error">Please enter a title.</p>
