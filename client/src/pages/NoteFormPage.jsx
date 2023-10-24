@@ -210,6 +210,12 @@ export function NoteFormPage() {
                     style={{ display: "none" }}
                 ></video>
             </div>
+            <Button
+                className="bg-blue-500 hover-bg-blue-600 text-white py-2 px-4 focus-outline-none"
+                onClick={handleStartRecognition}
+            >
+                Click this to start recognition
+            </Button>
 
             <div className="grid grid-cols-2 h-screen">
                 {/* Read section */}
@@ -236,13 +242,6 @@ export function NoteFormPage() {
                                     Please enter a title.
                                 </p>
                             )}
-
-                            <Button
-                                className="bg-blue-500 hover-bg-blue-600 text-white py-2 px-4 focus-outline-none"
-                                onClick={handleStartRecognition}
-                            >
-                                Click this to start recognition
-                            </Button>
                         </div>
 
                         <div className="grid grid-cols-2 gap-4 h-[65vh]">

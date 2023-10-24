@@ -11,7 +11,7 @@ export function Navbar() {
                 <Link to={isAuthenticated ? "/notes" : "/"}>Nancy</Link>
             </h1>
 
-            <ul className="flex items-center space-x-4">
+            <div className="flex items-center space-x-4">
                 {isAuthenticated ? (
                     <>
                         <li className="text-bright">Hi! {user.username}</li>
@@ -33,12 +33,13 @@ export function Navbar() {
                         <li>
                             <ButtonLink to="/login">Login</ButtonLink>
                         </li>
+
                         <li>
                             <ButtonLink to="/register">Register</ButtonLink>
                         </li>
                     </>
                 )}
-            </ul>
+            </div>
         </nav>
     );
 }
