@@ -1,0 +1,61 @@
+@startuml
+!define RECTANGLE class
+
+!define CONTAINER {
+  !define END_CONTAINER }
+  
+
+cloud "Vercel Front" {
+  folder "client"{
+      [./bin (React.js)]
+  } 
+}
+
+cloud "Vercel Back"{
+package "server" {
+  [authController]
+  [notesController]
+  [dataController]
+  [Express Server]
+}
+}
+
+cloud "MongoDB (Atlas)" {
+database "NancyDb"{
+  [User]
+  [Note]
+  [Category]
+  [Subcategory]
+}
+}
+
+
+
+cloud "Vercel WY APIs" {
+  [Wy API]
+}
+
+cloud "OpenAI"{
+  [OpenAI Integration]
+}
+
+
+[Express Server] -down-> [authController]
+[Express Server] -down-> [notesController]
+[Express Server] -down-> [dataController]
+
+[authController] -down-> [User]
+[notesController] -down-> [Note]
+
+[dataController] --up---> [Category]
+[dataController] --up---> [Subcategory]
+[dataController] --up---> [User]
+[dataController] --up---> [Note]
+
+
+[Express Server] -down-> [Wy API]
+[Express Server] -down-> [OpenAI Integration]
+
+
+[./bin (React.js)] -down-> [Express Server]
+@enduml

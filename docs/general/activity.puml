@@ -1,0 +1,56 @@
+@startuml
+title Activity Diagram
+
+caption
+Washington Yandun Morales
+end caption
+
+center header
+Nancy (LMS)
+endheader
+
+skinparam activity {
+    BorderColor #333333
+    BackgroundColor #FFFFFF
+    FontColor #333333
+}
+
+start
+:Study and Interact;
+if (Emotion Data Available?) then (yes)
+    :Collect Emotion Data;
+    :Analyze Emotion Data;
+else (no)
+    :Analyze Study Data;
+endif
+:Generate Study Recommendations;
+:Present Recommendations to User;
+if (User Provides Feedback) then (yes)
+    :Incorporate Feedback into Analysis;
+    :Update Study Recommendations;
+else (no)
+    :User Follows Recommendations;
+    :Continue Studying;
+endif
+
+repeat
+    :Study and Interact;
+    if (Emotion Data Available?) then (yes)
+        :Collect Emotion Data;
+        :Analyze Emotion Data;
+    else (no)
+        :Analyze Study Data;
+    endif
+    :Generate Study Recommendations;
+    :Present Recommendations to User;
+    if (User Provides Feedback) then (yes)
+        :Incorporate Feedback into Analysis;
+        :Update Study Recommendations;
+    else (no)
+        :User Follows Recommendations;
+        :Continue Studying;
+    endif
+repeat while (Learning Continues?)
+
+stop
+@enduml
