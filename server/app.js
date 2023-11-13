@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 
 import { authRoutes } from "./routes/auth.routes.js";
 import { notesRoutes } from "./routes/notes.routes.js";
+import { userManagmentRoutes } from "./routes/users.admin.routes.js";
 import { FRONTEND_URL } from "./config.js";
 
 // Create express app
@@ -32,5 +33,6 @@ app.use(cookieParser());
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api", notesRoutes);
+app.use("/api/admin", userManagmentRoutes);
 
 export { app };
