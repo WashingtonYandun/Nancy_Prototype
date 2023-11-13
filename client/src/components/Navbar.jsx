@@ -1,9 +1,38 @@
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/authContext";
 import { ButtonLink } from "./ui/ButtonLink";
 
 export function Navbar() {
     const { isAuthenticated, logout, user } = useAuth();
+    const [showMenu, setShowMenu] = useState(false);
+    const menuRef = useRef(null);
+
+    const toggleMenu = () => {
+        setShowMenu(!showMenu);
+    };
+
+    const closeMenu = () => {
+        setShowMenu(false);
+    };
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (menuRef.current && !menuRef.current.contains(event.target)) {
+                closeMenu();
+            }
+        };
+
+        if (showMenu) {
+            document.addEventListener("mousedown", handleClickOutside);
+        } else {
+            document.removeEventListener("mousedown", handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [showMenu]);
 
     return (
         <nav className="flex items-center justify-between bg-dark p-4">
@@ -11,14 +40,14 @@ export function Navbar() {
                 <Link to={isAuthenticated ? "/notes" : "/"}>Nancy</Link>
             </h1>
 
-            <div className="flex items-center space-x-4">
+            <div className="hidden md:flex items-center space-x-4">
                 {isAuthenticated ? (
                     <>
-                        <li className="text-bright">Hi! {user.username}</li>
-                        <li>
+                        <div className="text-bright">Hi! {user.username}</div>
+                        <div>
                             <ButtonLink to="/add-note">Add Session</ButtonLink>
-                        </li>
-                        <li>
+                        </div>
+                        <div>
                             <Link
                                 to="/"
                                 onClick={() => logout()}
@@ -26,20 +55,70 @@ export function Navbar() {
                             >
                                 Logout
                             </Link>
-                        </li>
+                        </div>
                     </>
                 ) : (
                     <>
-                        <li>
+                        <div>
                             <ButtonLink to="/login">Login</ButtonLink>
-                        </li>
-
-                        <li>
+                        </div>
+                        <div>
                             <ButtonLink to="/register">Register</ButtonLink>
-                        </li>
+                        </div>
                     </>
                 )}
             </div>
+
+            <div className="md:hidden">
+                <button onClick={toggleMenu} className="text-bright">
+                    ☰
+                </button>
+            </div>
+
+            {showMenu && (
+                <div
+                    ref={menuRef}
+                    className="md:hidden absolute right-0 top-16 bg-dark p-4 space-y-4"
+                >
+                    {isAuthenticated ? (
+                        <>
+                            <div className="text-bright">
+                                Hi! {user.username}
+                            </div>
+                            <div>
+                                <ButtonLink to="/add-note" onClick={closeMenu}>
+                                    Add Session
+                                </ButtonLink>
+                            </div>
+                            <div>
+                                <Link
+                                    to="/"
+                                    onClick={() => {
+                                        logout();
+                                        closeMenu();
+                                    }}
+                                    className="text-accent hover:underline"
+                                >
+                                    Logout
+                                </Link>
+                            </div>
+                        </>
+                    ) : (
+                        <>
+                            <div>
+                                <ButtonLink to="/login" onClick={closeMenu}>
+                                    Login
+                                </ButtonLink>
+                            </div>
+                            <div>
+                                <ButtonLink to="/register" onClick={closeMenu}>
+                                    Register
+                                </ButtonLink>
+                            </div>
+                        </>
+                    )}
+                </div>
+            )}
         </nav>
     );
 }
