@@ -1,0 +1,33 @@
+@startuml
+title Use Case Diagram
+
+caption
+Washington Yandun Morales
+end caption
+
+center header
+Nancy (LMS)
+endheader
+
+!define ADMIN <<(A,#FF7700) Admin>>
+!define USER <<(U,#0077FF) User>>
+
+actor User as user
+actor Admin as admin
+
+rectangle "Nancy (LMS)"{
+    user --> (Study and Interact)
+    user --> (Provide Feedback)
+    user --> (Follow Recommendations)
+    admin --> (Manage Users)
+    admin --> (Analyze Data)
+
+    (Study and Interact) --> (Collect Emotion Data)
+    (Study and Interact) --> (Analyze Study Data)
+    (Study and Interact) --> (Generate Recommendations)
+    (Study and Interact) --> (Present Recommendations)
+
+    (Generate Recommendations) --> (Incorporate Feedback)
+    (Generate Recommendations) --> (Update Recommendations)
+}
+@enduml

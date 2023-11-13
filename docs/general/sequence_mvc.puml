@@ -1,0 +1,39 @@
+@startuml SequenceDiagram
+
+title Sequence Diagram
+
+caption
+Washington Yandun Morales
+end caption
+
+center header
+Nancy (LMS)
+endheader
+
+actor User
+participant "Application" as App
+participant "Data Collection" as DataCollector
+participant "Data Analysis" as DataAnalyzer
+participant "Recommendation Engine" as Recommender
+participant "User Feedback" as Feedback
+
+User -> App: Use Application
+User --> App: Study Data
+App -> DataCollector: Collect Data
+DataCollector -> DataAnalyzer: Analyze Data
+DataAnalyzer --> DataCollector: Analysis Results
+DataCollector -> Recommender: Generate Recommendations
+Recommender --> DataCollector: Recommendations
+DataCollector -> User: Display Recommendations
+User -> App: Provide Feedback
+User -> App: Continue Studying
+
+Feedback -> App: User Feedback
+App -> DataCollector: Collect Feedback
+DataCollector --> App: Feedback Data
+App -> DataAnalyzer: Refine Recommendations
+DataAnalyzer --> App: Updated Recommendations
+App -> DataCollector: Updated Recommendations
+DataCollector --> App: Feedback Incorporation
+
+@enduml
