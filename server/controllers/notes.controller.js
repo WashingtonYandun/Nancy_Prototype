@@ -1,4 +1,3 @@
-import e from "express";
 import { Note } from "../models/note.model.js";
 
 export const getNotes = async (req, res) => {

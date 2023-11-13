@@ -1,10 +1,10 @@
 import { useEffect } from "react";
-import { useNotes } from "../context/notesContext";
-import { NoteCard } from "../components/notes/NoteCard";
-import { Navbar } from "../components/Navbar";
-import Footer from "../components/Footer";
+import { useNotes } from "../../context/notesContext";
+import { NoteCard } from "../../components/notes/NoteCard";
+import { Navbar } from "../../components/Navbar";
+import Footer from "../../components/Footer";
 
-export function NotesPage() {
+export function VideosPage() {
     const { notes, getNotes } = useNotes();
 
     useEffect(() => {

@@ -1,9 +1,31 @@
 import mongoose from "mongoose";
-import { expressionSchema } from "./expression.model.js";
-import { classificationSchema } from "./classification.model.js";
+
+export const classificationSchema = new mongoose.Schema({
+    category: String,
+    matches: [
+        {
+            category: String,
+            probability: Number,
+        },
+    ],
+    _id: false,
+});
+
+export const expressionSchema = new mongoose.Schema(
+    {
+        angry: Number,
+        disgusted: Number,
+        fearful: Number,
+        happy: Number,
+        neutral: Number,
+        sad: Number,
+        surprised: Number,
+    },
+    { _id: false }
+);
 
 // need improvement (images, links, etc)
-const noteSchema = new mongoose.Schema(
+export const noteSchema = new mongoose.Schema(
     {
         userId: {
             type: mongoose.Schema.Types.ObjectId,
@@ -49,6 +71,4 @@ const noteSchema = new mongoose.Schema(
     { timestamps: true }
 );
 
-const Note = mongoose.model("Note", noteSchema);
-
-export { Note };
+export const Note = mongoose.model("Note", noteSchema);

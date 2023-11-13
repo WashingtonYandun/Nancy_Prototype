@@ -1,28 +1,35 @@
 import mongoose from "mongoose";
 
-const videoSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: true,
-        trim: true,
-        unique: true,
-        minlength: [1, "name must be at least 1 character long"],
+export const videoSchema = new mongoose.Schema(
+    {
+        uploaderId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User",
+            required: true,
+        },
+        title: {
+            type: String,
+            required: true,
+            trim: true,
+            unique: true,
+            minlength: [1, "title must be at least 1 character long"],
+            maxlength: [64, "Name must be at most 60 characters long"],
+        },
+        description: {
+            type: String,
+            required: true,
+            trim: true,
+            minlength: [1, "description must be at least 1 character long"],
+        },
+        url: {
+            type: String,
+            required: true,
+            trim: true,
+            minlength: [1, "url must be at least 1 character long"],
+        },
+        classification: {
+            type: classificationSchema,
+        },
     },
-    url: {
-        type: String,
-        required: true,
-        trim: true,
-        minlength: [1, "Url must be at least 1 character long"],
-    },
-    description: {
-        type: String,
-        required: true,
-        trim: true,
-        minlength: [1, "Description must be at least 1 character long"],
-        maxlength: [1024, "Description must be at most 1024 characters long"],
-    },
-});
-
-const Video = mongoose.model("Video", videoSchema);
-
-export { Video, videoSchema };
+    { timestamps: true }
+);
