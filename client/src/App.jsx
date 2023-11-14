@@ -8,37 +8,60 @@ import { NoteFormPage } from "./pages/NoteFormPage";
 import { LoginPage } from "./pages/LoginPage";
 import { NotesPage } from "./pages/NotesPage";
 import { NoteProvider } from "./context/notesContext";
+import { UsersPage } from "./pages/admin/UsersPage";
+import { VideosPage } from "./pages/admin/VideosPage";
+import { VideoFormPage } from "./pages/admin/VideoFormPage";
+import { UsersProvider } from "./context/usersContext";
 
 function App() {
     return (
         <div className="mycontainer">
             <AuthProvider>
                 <NoteProvider>
-                    <BrowserRouter>
-                        <Routes>
-                            <Route path="/" element={<HomePage />} />
-                            <Route path="/login" element={<LoginPage />} />
-                            <Route
-                                path="/register"
-                                element={<RegisterPage />}
-                            />
-                            <Route element={<ProtectedRoute />}>
-                                <Route path="/notes" element={<NotesPage />} />
+                    <UsersProvider>
+                        <BrowserRouter>
+                            <Routes>
+                                <Route path="/" element={<HomePage />} />
+                                <Route path="/login" element={<LoginPage />} />
                                 <Route
-                                    path="/add-note"
-                                    element={<NoteFormPage />}
+                                    path="/register"
+                                    element={<RegisterPage />}
                                 />
-                                <Route
-                                    path="/notes/:id"
-                                    element={<NoteFormPage />}
-                                />
-                                <Route
-                                    path="/profile"
-                                    element={<h1>Profile</h1>}
-                                />
-                            </Route>
-                        </Routes>
-                    </BrowserRouter>
+
+                                <Route element={<ProtectedRoute />}>
+                                    <Route
+                                        path="/notes"
+                                        element={<NotesPage />}
+                                    />
+                                    <Route
+                                        path="/add-note"
+                                        element={<NoteFormPage />}
+                                    />
+                                    <Route
+                                        path="/notes/:id"
+                                        element={<NoteFormPage />}
+                                    />
+                                    <Route
+                                        path="/profile"
+                                        element={<h1>Profile</h1>}
+                                    />
+                                    <Route
+                                        path="/admin/users"
+                                        element={<UsersPage />}
+                                    />
+                                    {/* Agrega otras rutas de admin si es necesario */}
+                                    <Route
+                                        path="/admin/videos"
+                                        element={<VideosPage />}
+                                    />
+                                    <Route
+                                        path="/admin/add-video"
+                                        element={<VideoFormPage />}
+                                    />
+                                </Route>
+                            </Routes>
+                        </BrowserRouter>
+                    </UsersProvider>
                 </NoteProvider>
             </AuthProvider>
         </div>

@@ -3,9 +3,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Card, Message, Button, Input, Label } from "../components/ui";
+import { Card, Button, Input, Label } from "../components/ui";
 import { loginSchema } from "../schemas/auth";
-import Footer from "../components/Footer";
+import { Footer } from "../components/Footer";
 
 export function LoginPage() {
     const {
@@ -15,16 +15,23 @@ export function LoginPage() {
     } = useForm({
         resolver: zodResolver(loginSchema),
     });
-    const { signin, errors: loginErrors, isAuthenticated } = useAuth();
+    const { signin, errors: loginErrors, isAuthenticated, user } = useAuth();
     const navigate = useNavigate();
 
-    const onSubmit = (data) => signin(data);
+    const onSubmit = async (data) => {
+        await signin(data);
+    };
 
     useEffect(() => {
         if (isAuthenticated) {
-            navigate("/notes");
+            // If the user is already authenticated, redirect based on the role
+            if (user && user.role === "admin") {
+                navigate("/admin/users");
+            } else {
+                navigate("/notes");
+            }
         }
-    }, [isAuthenticated]);
+    }, [isAuthenticated, user, navigate]);
 
     return (
         <>

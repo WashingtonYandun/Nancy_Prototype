@@ -1,0 +1,101 @@
+@startuml
+
+title Class Diagram
+
+caption
+Washington Yandun Morales
+end caption
+
+center header
+Nancy (LMS)
+endheader
+
+class User {
+  - userId: int
+  - username: string
+  - email: string
+  - password: string
+  - role: string
+  + register()
+  + login()
+  + receiveRecommendations()
+  + provideFeedback()
+}
+
+class StudyData {
+  - studyHabits: string
+  - studiedTopics: string[]
+  - emotions: string
+}
+
+class Recommendation {
+  - recommendationId: int
+  - text: string
+  - source: string
+  + generateRecommendation()
+}
+
+class Note {
+  - noteId: int
+  - title: string
+  - content: string
+  - classification: string
+  + createNote()
+  + updateNote()
+  + deleteNote()
+  + analyzeEmotions()
+}
+
+class Category {
+  - categoryId: int
+  - name: string
+  - description: string
+  - data: string
+  + createCategory()
+  + updateCategory()
+  + deleteCategory()
+}
+
+class Expression {
+  - expressionId: int
+  - angry: int
+  - disgusted: int
+  - fearful: int
+  - happy: int
+  - neutral: int
+  - sad: int
+  - surprised: int
+}
+
+class AuthController {
+  + register()
+  + login()
+  + verifyToken()
+  + logout()
+}
+
+class NotesController {
+  + getNotes()
+  + createNote()
+  + updateNote()
+  + deleteNote()
+  + getNote()
+  + getNoteAnalysis()
+}
+
+User --> StudyData : has
+User --> Recommendation : receives
+User --> Note : creates, updates, deletes
+User --> Category : creates, updates, deletes
+User --> Expression : manages
+
+StudyData --> Recommendation : generates
+
+Note --> Expression : contains
+Note --> Category : belongs to
+
+AuthController --> User
+NotesController --> User
+NotesController --> Note
+
+@enduml

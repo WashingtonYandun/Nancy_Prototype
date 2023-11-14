@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import nancyLogo from "../assets/nancy_logo.png";
-import Footer from "../components/Footer";
+import { Footer } from "../components/Footer";
 
 function HomePage() {
     return (

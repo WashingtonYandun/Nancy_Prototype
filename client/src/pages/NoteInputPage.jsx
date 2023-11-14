@@ -5,7 +5,7 @@ import { useNotes } from "../context/notesContext";
 import { Textarea } from "../components/ui/Textarea";
 import { useForm } from "react-hook-form";
 import { Navbar } from "../components/Navbar";
-import Footer from "../components/Footer";
+import { Footer } from "../components/Footer";
 
 export function NoteInputPage() {
     const { createNote, getNote, updateNote } = useNotes();
