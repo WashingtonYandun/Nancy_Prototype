@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useNotes } from "../context/notesContext";
 import { NoteCard } from "../components/notes/NoteCard";
 import { Navbar } from "../components/Navbar";
-import Footer from "../components/Footer";
+import { Footer } from "../components/Footer";
 
 export function NotesPage() {
     const { notes, getNotes } = useNotes();

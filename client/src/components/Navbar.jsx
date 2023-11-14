@@ -37,7 +37,17 @@ export function Navbar() {
     return (
         <nav className="flex items-center justify-between bg-dark p-4">
             <h1 className="text-2xl text-bright">
-                <Link to={isAuthenticated ? "/notes" : "/"}>Nancy</Link>
+                <Link
+                    to={
+                        isAuthenticated
+                            ? user.role === "admin"
+                                ? "/admin/users"
+                                : "/notes"
+                            : "/"
+                    }
+                >
+                    Nancy
+                </Link>
             </h1>
 
             <div className="hidden md:flex items-center space-x-4">
@@ -45,7 +55,19 @@ export function Navbar() {
                     <>
                         <div className="text-bright">Hi! {user.username}</div>
                         <div>
-                            <ButtonLink to="/add-note">Add Session</ButtonLink>
+                            <ButtonLink
+                                to={
+                                    isAuthenticated
+                                        ? user.role === "admin"
+                                            ? "/admin/users"
+                                            : "/notes"
+                                        : "/"
+                                }
+                            >
+                                {user.role === "admin"
+                                    ? "User Managment"
+                                    : "New Session"}
+                            </ButtonLink>
                         </div>
                         <div>
                             <Link
@@ -86,8 +108,19 @@ export function Navbar() {
                                 Hi! {user.username}
                             </div>
                             <div>
-                                <ButtonLink to="/add-note" onClick={closeMenu}>
-                                    Add Session
+                                <ButtonLink
+                                    to={
+                                        isAuthenticated
+                                            ? user.role === "admin"
+                                                ? "/admin/users"
+                                                : "/notes"
+                                            : "/"
+                                    }
+                                    onClick={closeMenu}
+                                >
+                                    {user.role === "admin"
+                                        ? "User Managment"
+                                        : "New Session"}
                                 </ButtonLink>
                             </div>
                             <div>

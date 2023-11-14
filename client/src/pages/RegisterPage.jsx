@@ -5,10 +5,10 @@ import { Card, Message, Button, Input, Label } from "../components/ui";
 import { useForm } from "react-hook-form";
 import { registerSchema } from "../schemas/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
-import Footer from "../components/Footer";
+import { Footer } from "../components/Footer";
 
 function Register() {
-    const { signup, errors: registerErrors, isAuthenticated } = useAuth();
+    const { signup, errors: registerErrors, isAuthenticated, user } = useAuth();
     const {
         register,
         handleSubmit,
@@ -18,12 +18,25 @@ function Register() {
     });
     const navigate = useNavigate();
 
-    const onSubmit = async (value) => {
-        await signup(value);
+    const onSubmit = async (data) => {
+        await signup(data);
     };
 
     useEffect(() => {
-        if (isAuthenticated) navigate("/notes");
+        if (isAuthenticated) {
+            console.log(user, user.role);
+
+            // Check if the user is authenticated
+            if (isAuthenticated) {
+                // If the user has the "admin" role, redirect to /admin/users
+                if (user && user.role === "admin") {
+                    navigate("/admin/users");
+                } else {
+                    // If the user doesn't have the "admin" role, redirect to /notes
+                    navigate("/notes");
+                }
+            }
+        }
     }, [isAuthenticated]);
 
     return (
@@ -98,6 +111,37 @@ function Register() {
                             {errors.confirmPassword?.message && (
                                 <p className="text-error text-xs">
                                     {errors.confirmPassword?.message}
+                                </p>
+                            )}
+                        </div>
+
+                        <div>
+                            <Label>Role</Label>
+                            <div>
+                                <input
+                                    type="radio"
+                                    id="user"
+                                    value="user"
+                                    {...register("role")}
+                                />
+                                <label htmlFor="user" className="ml-2">
+                                    User
+                                </label>
+                            </div>
+                            <div>
+                                <input
+                                    type="radio"
+                                    id="admin"
+                                    value="admin"
+                                    {...register("role")}
+                                />
+                                <label htmlFor="admin" className="ml-2">
+                                    Admin
+                                </label>
+                            </div>
+                            {errors.role?.message && (
+                                <p className="text-error text-xs">
+                                    {errors.role?.message}
                                 </p>
                             )}
                         </div>

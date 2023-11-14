@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Card, Button, Input, Label } from "../components/ui";
 import { loginSchema } from "../schemas/auth";
-import Footer from "../components/Footer";
+import { Footer } from "../components/Footer";
 
 export function LoginPage() {
     const {
@@ -20,13 +20,6 @@ export function LoginPage() {
 
     const onSubmit = async (data) => {
         await signin(data);
-
-        // Check if the user is authenticated and has the "admin" role
-        if (isAuthenticated && user && user.role === "admin") {
-            navigate("/admin/users");
-        } else {
-            navigate("/notes");
-        }
     };
 
     useEffect(() => {

@@ -27,6 +27,7 @@ function App() {
                                     path="/register"
                                     element={<RegisterPage />}
                                 />
+
                                 <Route element={<ProtectedRoute />}>
                                     <Route
                                         path="/notes"
@@ -41,9 +42,14 @@ function App() {
                                         element={<NoteFormPage />}
                                     />
                                     <Route
+                                        path="/profile"
+                                        element={<h1>Profile</h1>}
+                                    />
+                                    <Route
                                         path="/admin/users"
                                         element={<UsersPage />}
                                     />
+                                    {/* Agrega otras rutas de admin si es necesario */}
                                     <Route
                                         path="/admin/videos"
                                         element={<VideosPage />}

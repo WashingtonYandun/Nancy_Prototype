@@ -2,7 +2,7 @@ import axios from "./axios";
 
 export const getUsersRequest = async () => axios.get("/admin/users");
 
-export const updateUserRequest = async (id, note) =>
+export const updateUserRequest = async (id, user) =>
     axios.put(`/admin/users/${id}`, user);
 
 export const deleteUserRequest = async (id) =>
