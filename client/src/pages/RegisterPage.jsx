@@ -7,7 +7,7 @@ import { registerSchema } from "../schemas/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Footer } from "../components/Footer";
 
-function Register() {
+export const RegisterPage = () => {
     const { signup, errors: registerErrors, isAuthenticated, user } = useAuth();
     const {
         register,
@@ -160,6 +160,4 @@ function Register() {
             <Footer />
         </>
     );
-}
-
-export default Register;
+};

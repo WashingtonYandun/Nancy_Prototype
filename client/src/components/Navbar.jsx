@@ -68,7 +68,22 @@ export function Navbar() {
                                     ? "User Managment"
                                     : "New Session"}
                             </ButtonLink>
+
+                            <ButtonLink
+                                to={
+                                    isAuthenticated
+                                        ? user.role === "admin"
+                                            ? "/admin/videos"
+                                            : "/dashboard"
+                                        : "/"
+                                }
+                            >
+                                {user.role === "admin"
+                                    ? "Videos Managment"
+                                    : "Dashboard"}
+                            </ButtonLink>
                         </div>
+
                         <div>
                             <Link
                                 to="/"
@@ -121,6 +136,20 @@ export function Navbar() {
                                     {user.role === "admin"
                                         ? "User Managment"
                                         : "New Session"}
+                                </ButtonLink>
+
+                                <ButtonLink
+                                    to={
+                                        isAuthenticated
+                                            ? user.role === "admin"
+                                                ? "/admin/videos"
+                                                : "/dashboard"
+                                            : "/"
+                                    }
+                                >
+                                    {user.role === "admin"
+                                        ? "Videos Managment"
+                                        : "Dashboard"}
                                 </ButtonLink>
                             </div>
                             <div>
