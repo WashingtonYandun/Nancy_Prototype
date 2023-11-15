@@ -21,8 +21,6 @@ export function UsersPage() {
         deleteUser(userId);
     };
 
-    const nonAdminUsers = users.filter((user) => user.role !== "admin");
-
     return (
         <>
             <Navbar />

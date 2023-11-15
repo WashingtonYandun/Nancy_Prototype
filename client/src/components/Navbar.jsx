@@ -55,20 +55,27 @@ export function Navbar() {
                     <>
                         <div className="text-bright">Hi! {user.username}</div>
                         <div>
-                            <ButtonLink
-                                to={
-                                    isAuthenticated
-                                        ? user.role === "admin"
-                                            ? "/admin/users"
-                                            : "/notes"
-                                        : "/"
-                                }
-                            >
-                                {user.role === "admin"
-                                    ? "User Managment"
-                                    : "New Session"}
-                            </ButtonLink>
+                            {isAuthenticated ? (
+                                user.role === "admin" ? (
+                                    <>
+                                        <ButtonLink to={"/admin/users"}>
+                                            User Managment
+                                        </ButtonLink>
+
+                                        <ButtonLink to={"/admin/add-video"}>
+                                            Add Video
+                                        </ButtonLink>
+                                    </>
+                                ) : (
+                                    <ButtonLink to="/notes/add-note">
+                                        Notes
+                                    </ButtonLink>
+                                )
+                            ) : (
+                                "/"
+                            )}
                         </div>
+
                         <div>
                             <Link
                                 to="/"
@@ -108,20 +115,30 @@ export function Navbar() {
                                 Hi! {user.username}
                             </div>
                             <div>
-                                <ButtonLink
-                                    to={
-                                        isAuthenticated
-                                            ? user.role === "admin"
-                                                ? "/admin/users"
-                                                : "/notes"
-                                            : "/"
-                                    }
-                                    onClick={closeMenu}
-                                >
-                                    {user.role === "admin"
-                                        ? "User Managment"
-                                        : "New Session"}
-                                </ButtonLink>
+                                {isAuthenticated ? (
+                                    user.role === "admin" ? (
+                                        <>
+                                            <ButtonLink to={"/admin/users"}>
+                                                User Managment
+                                            </ButtonLink>
+
+                                            <ButtonLink to={"/admin/add-video"}>
+                                                Add Video
+                                            </ButtonLink>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <ButtonLink to="/notes/add-note">
+                                                Notes
+                                            </ButtonLink>
+                                            <ButtonLink to="/dashboard">
+                                                Notes
+                                            </ButtonLink>
+                                        </>
+                                    )
+                                ) : (
+                                    "/"
+                                )}
                             </div>
                             <div>
                                 <Link

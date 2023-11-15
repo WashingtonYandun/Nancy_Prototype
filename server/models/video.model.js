@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { classificationSchema } from "../models/note.model.js";
 
 export const videoSchema = new mongoose.Schema(
     {
@@ -12,20 +13,20 @@ export const videoSchema = new mongoose.Schema(
             required: true,
             trim: true,
             unique: true,
-            minlength: [1, "title must be at least 1 character long"],
+            minlength: [3, "title must be at least 1 character long"],
             maxlength: [64, "Name must be at most 60 characters long"],
         },
         description: {
             type: String,
             required: true,
             trim: true,
-            minlength: [1, "description must be at least 1 character long"],
+            minlength: [3, "description must be at least 1 character long"],
         },
         url: {
             type: String,
             required: true,
             trim: true,
-            minlength: [1, "url must be at least 1 character long"],
+            minlength: [3, "url must be at least 1 character long"],
         },
         classification: {
             type: classificationSchema,
@@ -33,3 +34,7 @@ export const videoSchema = new mongoose.Schema(
     },
     { timestamps: true }
 );
+
+const Video = mongoose.model("Video", videoSchema);
+
+export { Video };

@@ -47,9 +47,9 @@ export function UsersProvider({ children }) {
         }
     };
 
-    const updateUser = async (id, note) => {
+    const updateUser = async (id, user) => {
         try {
-            await updateUserRequest(id, note);
+            await updateUserRequest(id, user);
         } catch (error) {
             console.error(error);
         }
