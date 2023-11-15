@@ -1,4 +1,5 @@
 import { Video } from "../models/video.model.js";
+import { User } from "../models/user.model.js";
 
 export const getVideos = async (req, res) => {
     try {
@@ -33,6 +34,11 @@ export const getVideoByCategory = async (req, res) => {
 
 export const createVideo = async (req, res) => {
     try {
+        const requester = await User.findById(req.user.id);
+        if (requester.role !== "admin") {
+            return res.status(401).json({ message: "Unauthorized" });
+        }
+
         const { title, description, url, classification } = req.body;
 
         const uploaderId = req.user.id;
@@ -53,6 +59,11 @@ export const createVideo = async (req, res) => {
 
 export const deleteVideo = async (req, res) => {
     try {
+        const requester = await User.findById(req.user.id);
+        if (requester.role !== "admin") {
+            return res.status(401).json({ message: "Unauthorized" });
+        }
+
         const deletedVideo = await Video.findByIdAndDelete(req.params.id);
 
         if (!deletedVideo) {
@@ -67,6 +78,11 @@ export const deleteVideo = async (req, res) => {
 
 export const updateVideo = async (req, res) => {
     try {
+        const requester = await User.findById(req.user.id);
+        if (requester.role !== "admin") {
+            return res.status(401).json({ message: "Unauthorized" });
+        }
+
         const { title, description, url } = req.body;
 
         const videoUpdated = await Video.findOneAndUpdate(

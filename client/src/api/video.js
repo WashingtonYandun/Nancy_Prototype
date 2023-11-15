@@ -1,6 +1,13 @@
 import axios from "./axios";
 
-export const getVideosRequest = async () => axios.get("/videos");
+export const getAllVideosRequest = async () => axios.get("/videos/all");
+
+export const getVideoByUserRequest = async (id) =>
+    axios.get(`/videos/user/${id}`);
+
+export const getVideoByCategoryRequest = async (category) => {
+    axios.get(`/videos/category/${category}`);
+};
 
 export const createVideoRequest = async (video) => axios.post("/videos", video);
 

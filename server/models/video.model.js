@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { classificationSchema } from "../models/note.model.js";
 
 export const videoSchema = new mongoose.Schema(
     {

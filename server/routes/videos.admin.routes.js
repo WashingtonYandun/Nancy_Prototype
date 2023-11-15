@@ -8,7 +8,6 @@ import {
     deleteVideo,
     updateVideo,
     getVideos,
-    getVideo,
 } from "../controllers/videos.controller.js";
 
 const videosManagementRoutes = Router();

@@ -1,10 +1,12 @@
 import { createContext, useContext, useState } from "react";
 import {
-    getVideosRequest,
+    getAllVideosRequest,
     deleteVideoRequest,
     getVideoRequest,
     updateVideoRequest,
     createVideoRequest,
+    getVideoByCategoryRequest,
+    getVideoByUserRequest,
 } from "../api/video";
 
 const VideoContext = createContext();
@@ -22,7 +24,17 @@ export function VideoProvider({ children }) {
     const [videos, setVideos] = useState([]);
 
     const getVideos = async () => {
-        const res = await getVideosRequest();
+        const res = await getAllVideosRequest();
+        setVideos(res.data);
+    };
+
+    const getVideoByCategory = async (category) => {
+        const res = await getVideoByCategoryRequest(category);
+        setVideos(res.data);
+    };
+
+    const getVideoByUser = async (id) => {
+        const res = await getVideoByUserRequest(id);
         setVideos(res.data);
     };
 
@@ -71,6 +83,8 @@ export function VideoProvider({ children }) {
                 getVideo: getVideo,
                 updateVideo: updateVideo,
                 createVideo: createVideo,
+                getVideoByCategory: getVideoByCategory,
+                getVideoByUser: getVideoByUser,
             }}
         >
             {children}
