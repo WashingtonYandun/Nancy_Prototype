@@ -7,11 +7,11 @@ import {
     deleteUser,
 } from "../controllers/users.controller.js";
 
-const userManagmentRoutes = Router();
+const userManagementRoutes = Router();
 
-userManagmentRoutes.get("/users", auth, getUsers);
-userManagmentRoutes.get("/users/:id", auth, getUser);
-userManagmentRoutes.put("/users/:id", auth, updateUser);
-userManagmentRoutes.delete("/users/:id", auth, deleteUser);
+userManagementRoutes.get("/users", auth, getUsers);
+userManagementRoutes.get("/users/:id", auth, getUser);
+userManagementRoutes.put("/users/:id", auth, updateUser);
+userManagementRoutes.delete("/users/:id", auth, deleteUser);
 
-export { userManagmentRoutes };
+export { userManagementRoutes };
