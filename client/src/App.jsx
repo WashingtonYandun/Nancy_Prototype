@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/authContext";
-import { ProtectedRoute } from "./routes";
+import { ProtectedRoute, RoleProtectedRoute } from "./routes";
 
 import { HomePage } from "./pages/HomePage";
 import { RegisterPage } from "./pages/RegisterPage";
@@ -32,6 +32,7 @@ function App() {
                                         path="/register"
                                         element={<RegisterPage />}
                                     />
+
                                     <Route element={<ProtectedRoute />}>
                                         <Route
                                             path="/notes"
@@ -45,6 +46,9 @@ function App() {
                                             path="/notes/:id"
                                             element={<NoteFormPage />}
                                         />
+                                    </Route>
+
+                                    <Route element={<RoleProtectedRoute />}>
                                         <Route
                                             path="/admin/users"
                                             element={<UsersPage />}

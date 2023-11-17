@@ -10,6 +10,7 @@ export function UserCard({ user }) {
                 <h1 className="text-2xl font-bold text-text truncate">
                     {user.username}
                 </h1>
+                <h3>{user.role}</h3>
             </header>
 
             <div className="mb-4">
