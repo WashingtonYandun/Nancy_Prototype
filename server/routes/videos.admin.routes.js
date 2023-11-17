@@ -12,16 +12,17 @@ import {
 
 const videosManagementRoutes = Router();
 
-videosManagementRoutes.get("/videos/all", auth, getAllVideos);
-videosManagementRoutes.get("/videos/user/:id", auth, getVideos);
+videosManagementRoutes.get("/videos/all", auth, verifyRole, getAllVideos);
+videosManagementRoutes.get("/videos/user/:id", auth, verifyRole, getVideos);
 videosManagementRoutes.get(
     "/videos/category/:category",
     auth,
+    verifyRole,
     getVideoByCategory
 );
-videosManagementRoutes.get("/videos/:id", auth, getVideo);
-videosManagementRoutes.post("/videos", auth, createVideo);
-videosManagementRoutes.put("/videos/:id", auth, updateVideo);
-videosManagementRoutes.delete("/videos/:id", auth, deleteVideo);
+videosManagementRoutes.get("/videos/:id", auth, verifyRole, getVideo);
+videosManagementRoutes.post("/videos", auth, verifyRole, createVideo);
+videosManagementRoutes.put("/videos/:id", auth, verifyRole, updateVideo);
+videosManagementRoutes.delete("/videos/:id", auth, verifyRole, deleteVideo);
 
 export { videosManagementRoutes };

@@ -4,10 +4,10 @@ import { Button, Card, Input } from "../../components/ui";
 import { Textarea } from "../../components/ui/Textarea";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { useVideo } from "../../context/videoContext"; // Asegúrate de importar el contexto correcto
+import { useVideo } from "../../context/videoContext";
 
-export function VideoFormPage() {
-    const { videos, createVideo, getVideo, updateVideo } = useVideo(); // Asegúrate de usar las funciones correctas del contexto
+export const VideoFormPage = () => {
+    const { videos, createVideo, getVideo, updateVideo } = useVideo();
     const navigate = useNavigate();
     const params = useParams();
     const [classification, setClassification] = useState(null);
@@ -161,4 +161,4 @@ export function VideoFormPage() {
             </div>
         </>
     );
-}
+};

@@ -2,7 +2,7 @@ import { useUsers } from "../../../context/usersContext";
 import { Button, Card } from "../../ui";
 
 export function UserCard({ user }) {
-    const { deleteUser } = useUsers();
+    const { deleteUser, makeAdmin } = useUsers();
 
     return (
         <Card className="p-6 bg-secondary rounded-md shadow-md">
@@ -22,6 +22,13 @@ export function UserCard({ user }) {
                     className="bg-error hover:bg-joy"
                 >
                     Delete
+                </Button>
+
+                <Button
+                    onClick={() => makeAdmin(user._id)}
+                    className="bg-error hover:bg-joy"
+                >
+                    Make Admin
                 </Button>
             </div>
         </Card>

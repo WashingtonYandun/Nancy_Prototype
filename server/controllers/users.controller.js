@@ -70,3 +70,22 @@ export const deleteUser = async (req, res) => {
         return res.status(500).json({ message: error.message });
     }
 };
+
+export const makeAdmin = async (req, res) => {
+    // make user admin by id
+    try {
+        const requester = await User.findById(req.user.id);
+
+        if (requester.role !== "admin") {
+            return res.status(401).json({ message: "Unauthorized" });
+        }
+
+        const user = await User.findById(req.params.id);
+        user.role = "admin";
+
+        await user.save();
+        return res.json(user);
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
+};
