@@ -1,5 +1,9 @@
 # Admin Role Functionality - README
 
+## Video:
+
+<a href="https://www.loom.com/share/2e5e0843985e41b2aa8e1bea47d12fcf?sid=f6ee4790-4f4e-4b1d-8e67-91824385d8bd">Video Loom</a>
+
 ## Overview
 
 This README provides an explanation of the admin role functionalities in the authentication and video management system. The system is built using Node.js, Express, MongoDB, and React, incorporating JWT for authentication.
