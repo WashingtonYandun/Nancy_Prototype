@@ -5,21 +5,11 @@ import { Footer } from "../../components/Footer";
 import { UserCard } from "../../components/admin/users/UserCard";
 
 export function UsersPage() {
-    const { users, getUsers, deleteUser } = useUsers();
+    const { users, getUsers } = useUsers();
 
     useEffect(() => {
         getUsers();
     }, []);
-
-    const handleViewUser = (userId) => {
-        // Implementar la lógica para dirigirse al usuario específico
-        console.log(`View user with ID: ${userId}`);
-    };
-
-    const handleDeleteUser = (userId) => {
-        // Implementar la lógica para eliminar al usuario
-        deleteUser(userId);
-    };
 
     return (
         <>
@@ -28,7 +18,7 @@ export function UsersPage() {
                 {users.length === 0 ? (
                     <div className="flex flex-col items-center justify-center p-10 bg-dark text-white rounded-md">
                         <h2 className="font-bold text-xl text-center mt-4">
-                            No users yet, please start session
+                            No users yet
                         </h2>
                     </div>
                 ) : (
