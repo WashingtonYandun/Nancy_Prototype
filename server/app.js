@@ -39,4 +39,8 @@ app.use("/api", notesRoutes);
 app.use("/api/admin", userManagementRoutes);
 app.use("/api/admin", videosManagementRoutes);
 
+app.use("/test", (req, res) => {
+    res.send("Hello from test!");
+});
+
 export { app };
