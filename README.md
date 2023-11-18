@@ -4,6 +4,11 @@
   <img alt="Nancy Prototype Logo" src="/docs/images/Nancy_Logo.png"  width="300" height="300"/>
 </p>
 
+## More documentation
+
+-   [Authentication](/docs/auth/README.md)
+-   [Admin](/docs/admin/README.md)
+
 ## Overview
 
 Nancy Prototype is a robust Learning Management System (LMS) designed to enhance your learning experience through the integration of cutting-edge technologies. Leveraging Mediapipe, computer vision, and artificial intelligence powered by OpenAI, this system goes beyond traditional approaches to offer a more interactive and personalized learning journey.
@@ -93,7 +98,3 @@ Follow these steps to get started with Nancy Prototype:
 ## License
 
 This project is licensed under the CC0 1.0 Universal (CC0 1.0) License
-
-## More documentation
-
--   [Authentication](/docs/auth/README.md)
