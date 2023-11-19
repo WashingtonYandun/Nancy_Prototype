@@ -39,8 +39,9 @@ app.use("/api", notesRoutes);
 app.use("/api/admin", userManagementRoutes);
 app.use("/api/admin", videosManagementRoutes);
 
-app.use("/test", (req, res) => {
-    res.send("Hello from test!");
+//get test route
+app.get("/test", (req, res) => {
+    res.json({ message: "Hello from server!" });
 });
 
 export { app };

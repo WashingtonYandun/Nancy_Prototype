@@ -1,7 +1,5 @@
 const PORT = process.env.PORT || 3000;
-const MONGODB_URI =
-    process.env.MONGODB_URI ||
-    "mongodb+srv://wmym:wmym@nancydb.cbmurct.mongodb.net/?retryWrites=true&w=majority";
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://127.0.0.1/nancydb";
 const TOKEN_SECRET = process.env.TOKEN_SECRET || "Spiderman";
 const TOKEN_EXPIRATION = process.env.TOKEN_EXPIRATION || "5d";
 
