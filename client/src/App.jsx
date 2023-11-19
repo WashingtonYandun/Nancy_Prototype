@@ -2,11 +2,11 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/authContext";
 import { ProtectedRoute, RoleProtectedRoute } from "./routes";
 
-import { HomePage } from "./pages/HomePage";
-import { RegisterPage } from "./pages/RegisterPage";
-import { NoteFormPage } from "./pages/NoteFormPage";
-import { LoginPage } from "./pages/LoginPage";
-import { NotesPage } from "./pages/NotesPage";
+import { HomePage } from "./pages/home/HomePage";
+import { RegisterPage } from "./pages/auth/RegisterPage";
+import { NoteFormPage } from "./pages/notes/NoteFormPage";
+import { LoginPage } from "./pages/auth/LoginPage";
+import { NotesPage } from "./pages/notes/NotesPage";
 import { NoteProvider } from "./context/notesContext";
 import { VideoProvider } from "./context/videoContext";
 import { UsersPage } from "./pages/admin/UsersPage";
