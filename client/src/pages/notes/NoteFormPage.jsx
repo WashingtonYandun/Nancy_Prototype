@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Button, Card, Input } from "../components/ui";
-import { useNotes } from "../context/notesContext";
-import { Textarea } from "../components/ui/Textarea";
+import { Button, Card, Input } from "../../components/ui";
+import { useNotes } from "../../context/notesContext";
+import { Textarea } from "../../components/ui/Textarea";
 import { useForm } from "react-hook-form";
 import * as faceapi from "face-api.js";
 import axios from "axios";

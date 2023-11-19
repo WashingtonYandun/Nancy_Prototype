@@ -32,6 +32,9 @@ export const register = async (req, res) => {
         // create access token
         const token = await createAccessToken({
             id: userSaved._id,
+            username: userSaved.username,
+            email: userSaved.email,
+            role: userSaved.role,
         });
 
         res.cookie("token", token, {
@@ -72,6 +75,7 @@ export const login = async (req, res) => {
         const token = await createAccessToken({
             id: userFound._id,
             username: userFound.username,
+            email: userFound.email,
             role: userFound.role,
         });
 
@@ -109,26 +113,6 @@ export const verifyToken = async (req, res) => {
             role: userFound.role,
         });
     });
-};
-
-export const verifyRole = async (req, res) => {
-    try {
-        const { token } = req.cookies;
-        if (!token) return res.send(false);
-
-        jwt.verify(token, TOKEN_SECRET, async (error, user) => {
-            if (error) return res.sendStatus(401);
-
-            const userFound = await User.findById(user.id);
-            if (!userFound) return res.sendStatus(401);
-
-            if (userFound.role === "admin") return res.send(true);
-
-            return res.send(false);
-        });
-    } catch (error) {
-        return res.status(500).json({ message: error.message });
-    }
 };
 
 export const logout = async (req, res) => {
