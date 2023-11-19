@@ -48,6 +48,13 @@ function App() {
                                         />
                                     </Route>
 
+                                    <Route element={<ProtectedRoute />}>
+                                        <Route
+                                            path="/videos"
+                                            element={<VideosPage />}
+                                        />
+                                    </Route>
+
                                     <Route element={<RoleProtectedRoute />}>
                                         <Route
                                             path="/admin/users"

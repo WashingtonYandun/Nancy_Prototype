@@ -37,7 +37,7 @@ app.use("/api", notesRoutes);
 
 // Routes admin
 app.use("/api/admin", userManagementRoutes);
-app.use("/api/admin", videosManagementRoutes);
+app.use("/api", videosManagementRoutes);
 
 //get test route
 app.get("/test", (req, res) => {
