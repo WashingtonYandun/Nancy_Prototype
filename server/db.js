@@ -1,12 +1,12 @@
 import mongoose from "mongoose";
 import { MONGODB_URI } from "./config.js";
 
-if (!MONGODB_URI) {
-    throw new Error("MONGODB_URI must be defined");
-}
-
 const connectDb = async () => {
     try {
+        if (!MONGODB_URI) {
+            throw new Error("MONGODB_URI must be defined");
+        }
+
         const { connection } = await mongoose.connect(MONGODB_URI);
 
         if (connection.readyState === 1) {

@@ -10,7 +10,7 @@ import {
     getNote,
 } from "../controllers/notes.controller.js";
 
-const notesRoutes = Router();
+export const notesRoutes = Router();
 
 notesRoutes.get("/notes", auth, getNotes);
 notesRoutes.get("/notes/:id", auth, getNote);
@@ -18,5 +18,3 @@ notesRoutes.get("/notes/:id", auth, getNote);
 notesRoutes.post("/notes", auth, validateSchema(createNoteSchema), createNote);
 notesRoutes.put("/notes/:id", auth, updateNote);
 notesRoutes.delete("/notes/:id", auth, deleteNote);
-
-export { notesRoutes };

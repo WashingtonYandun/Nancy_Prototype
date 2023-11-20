@@ -17,14 +17,25 @@ export const VideoCard = ({ video }) => {
         <Card className="p-6 bg-secondary rounded-md shadow-md">
             <header className="flex justify-between mb-4 truncate">
                 <h1 className="text-2xl font-bold text-text truncate">
-                    {video.url}
+                    {video.title}
                 </h1>
+
+                <p className="text-sm font-bold text-text">
+                    {video.description}
+                </p>
+
+                <span className="text-sm font-bold text-text"></span>
             </header>
 
-            <YouTube
-                videoId={getYouTubeVideoId(video.url)}
-                opts={{ height: "315", width: "100%" }}
-            />
+            <div className=" w-100 flex justify-center itemscenter">
+                <YouTube
+                    className="px-2 py-2"
+                    videoId={getYouTubeVideoId(video.url)}
+                    opts={{
+                        width: "100%",
+                    }}
+                />
+            </div>
 
             <div className="flex items-center space-x-2">
                 <Button
