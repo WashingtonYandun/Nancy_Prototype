@@ -1,8 +1,10 @@
 import { Button, Card } from "../../ui";
 import { useVideo } from "../../../context/videoContext";
+import { useAuth } from "../../../context/authContext";
 import YouTube from "react-youtube";
 
 export const VideoCard = ({ video }) => {
+    const { user, isAuthenticated } = useAuth();
     const { deleteVideo } = useVideo();
 
     const getYouTubeVideoId = (url) => {
@@ -33,17 +35,35 @@ export const VideoCard = ({ video }) => {
                     videoId={getYouTubeVideoId(video.url)}
                     opts={{
                         width: "100%",
+                        height: "200px",
                     }}
                 />
             </div>
 
             <div className="flex items-center space-x-2">
-                <Button
-                    onClick={() => deleteVideo(video._id)}
-                    className="bg-error hover:bg-joy"
-                >
-                    Delete
-                </Button>
+                {isAuthenticated && user.role === "admin" ? (
+                    <>
+                        <Button
+                            to="/admin/edit-video"
+                            className="bg-error hover:bg-joy"
+                        >
+                            Edit
+                        </Button>
+
+                        <Button
+                            onClick={() => deleteVideo(video._id)}
+                            className="bg-error hover:bg-joy"
+                        >
+                            Delete
+                        </Button>
+                    </>
+                ) : (
+                    <>
+                        <Button className="bg-error hover:bg-joy">
+                            Go to Video
+                        </Button>
+                    </>
+                )}
             </div>
         </Card>
     );

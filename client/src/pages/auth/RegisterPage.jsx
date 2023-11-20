@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { registerSchema } from "../../schemas/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Footer } from "../../components/Footer";
+import nancyLogo from "../../assets/nancy_logo.png";
 
 export const RegisterPage = () => {
     const { signup, errors: registerErrors, isAuthenticated, user } = useAuth();
@@ -41,8 +42,16 @@ export const RegisterPage = () => {
 
     return (
         <>
-            <div className="flex justify-center items-center h-screen bg-bright">
-                <Card className="w-full max-w-md p-8">
+            <div className="min-h-screen flex flex-col md:flex-row p-8 justify-evenly items-center bg-bright min-h-screen ">
+                <section className="w-1/3 md:w-1/4 p-2">
+                    <img
+                        src={nancyLogo}
+                        alt="Nancy Logo"
+                        className="mx-auto rounded-full"
+                    />
+                </section>
+
+                <Card className="md:w-2/3 p-8 w-full max-w-md p-8">
                     {registerErrors.map((error, i) => (
                         <Message message={error} key={i} />
                     ))}
