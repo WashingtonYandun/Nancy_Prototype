@@ -13,7 +13,7 @@ const AuthenticatedLinks = ({ user, logout }) => (
             </>
         ) : (
             <>
-                <ButtonLink to="/notes">Notes</ButtonLink>
+                <ButtonLink to="/add-note">Notes</ButtonLink>
                 <ButtonLink to="/videos">Explore</ButtonLink>
                 <ButtonLink to="/dashboard">Dashboard</ButtonLink>
             </>

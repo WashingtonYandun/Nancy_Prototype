@@ -10,10 +10,10 @@ export const ProtectedRoute = () => {
 };
 
 export const RoleProtectedRoute = () => {
-    const { user, loading } = useAuth();
+    const { user, isAuthenticated, loading } = useAuth();
 
     if (loading) return <h1>Loading...</h1>;
-    if (!loading && user.role !== "admin")
+    if (isAuthenticated && !loading && user.role !== "admin")
         return <Navigate to="/notes" replace />;
     return <Outlet />;
 };
