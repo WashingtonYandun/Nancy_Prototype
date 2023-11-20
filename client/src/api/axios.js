@@ -1,9 +1,12 @@
 import axios from "axios";
 import { API_URL, WY_APIS } from "../config";
 
-const instance = axios.create({
+export const nancy_apis = axios.create({
     baseURL: API_URL,
     withCredentials: true,
 });
 
-export default instance;
+export const wy_apis = axios.create({
+    baseURL: WY_APIS,
+    withCredentials: true,
+});

@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/authContext";
 import { ProtectedRoute, RoleProtectedRoute } from "./routes";
-
 import { HomePage } from "./pages/home/HomePage";
 import { RegisterPage } from "./pages/auth/RegisterPage";
 import { NoteFormPage } from "./pages/notes/NoteFormPage";
@@ -45,6 +44,11 @@ function App() {
                                         <Route
                                             path="/notes/:id"
                                             element={<NoteFormPage />}
+                                        />
+
+                                        <Route
+                                            path="/videos"
+                                            element={<VideosPage />}
                                         />
                                     </Route>
 

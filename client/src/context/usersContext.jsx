@@ -23,9 +23,6 @@ export function UsersProvider({ children }) {
 
     const getUsers = async () => {
         const res = await getUsersRequest();
-
-        const nonAdminUsers = res.data.filter((user) => user.role !== "admin");
-
         setUsers(nonAdminUsers);
     };
 
