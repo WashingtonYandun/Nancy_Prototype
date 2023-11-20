@@ -1,13 +1,8 @@
-function sigmoid(x) {
-    return 1 / (1 + Math.exp(-x));
-}
-
-function sigmoidDerivative(x) {
-    return sigmoid(x) * (1 - sigmoid(x));
-}
+import { Matrix } from "./matrix.ai.js";
+import { sigmoid, sigmoidDerivative } from "./activationFunctions.ai.js";
 
 // Define the NeuralNetwork class
-class NeuralNetwork {
+export class NeuralNetwork {
     constructor(inputSize, hiddenSize, outputSize) {
         // Initialize weights and biases for input to hidden layer
         this.weightsInputHidden = new Matrix(hiddenSize, inputSize);
@@ -90,98 +85,3 @@ class NeuralNetwork {
         this.biasHidden.add(hiddenGradients);
     }
 }
-
-// Matrix class for matrix operations
-class Matrix {
-    constructor(rows, cols) {
-        this.rows = rows;
-        this.cols = cols;
-        this.data = Array.from({ length: rows }, () => Array(cols).fill(0));
-    }
-
-    static fromArray(arr) {
-        return new Matrix(arr.length, 1).map((elm, i, j) => arr[i]);
-    }
-
-    toArray() {
-        return this.data.flat();
-    }
-
-    randomize() {
-        this.map(() => Math.random() * 2 - 1);
-    }
-
-    static subtract(a, b) {
-        return new Matrix(a.rows, a.cols).map(
-            (_, i, j) => a.data[i][j] - b.data[i][j]
-        );
-    }
-
-    static transpose(matrix) {
-        return new Matrix(matrix.cols, matrix.rows).map(
-            (_, i, j) => matrix.data[j][i]
-        );
-    }
-
-    static dot(a, b) {
-        return new Matrix(a.rows, b.cols).map((_, i, j) => {
-            let sum = 0;
-            for (let k = 0; k < a.cols; k++) {
-                sum += a.data[i][k] * b.data[k][j];
-            }
-            return sum;
-        });
-    }
-
-    map(func) {
-        this.data = this.data.map((row, i) =>
-            row.map((val, j) => func(val, i, j))
-        );
-        return this;
-    }
-
-    static map(matrix, func) {
-        return new Matrix(matrix.rows, matrix.cols).map((val, i, j) =>
-            func(matrix.data[i][j], i, j)
-        );
-    }
-
-    multiply(n) {
-        if (typeof n === "number") {
-            this.map((val) => val * n);
-        } else {
-            this.map((val, i, j) => val * n.data[i][j]);
-        }
-        return this;
-    }
-
-    add(matrix) {
-        this.map((val, i, j) => val + matrix.data[i][j]);
-        return this;
-    }
-}
-
-// Example usage
-const nn = new NeuralNetwork(2, 2, 1);
-
-// Training data
-const trainingData = [
-    { inputs: [0, 0, 0], targets: [0] },
-    { inputs: [0, 1, 1], targets: [1] },
-    { inputs: [1, 1, 0], targets: [1] },
-    { inputs: [1, 1, 1], targets: [1] },
-    { inputs: [0, 0, 1], targets: [0] },
-];
-
-// Train the neural network
-for (let i = 0; i < 100000; i++) {
-    for (const data of trainingData) {
-        nn.train(data.inputs, data.targets);
-    }
-}
-
-// Test the neural network
-console.log(nn.feedforward([1, 0.2, 0.2])); // Expected output: close to 0
-console.log(nn.feedforward([0.4, 0, 0.9])); // Expected output: close to 1
-console.log(nn.feedforward([1, 1, 0])); // Expected output: close to 1
-console.log(nn.feedforward([1, 1, 1])); // Expected output: close to 1
