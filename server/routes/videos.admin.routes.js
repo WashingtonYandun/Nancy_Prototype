@@ -22,12 +22,11 @@ videosManagementRoutes.get(
     getVideoByCategory
 );
 videosManagementRoutes.get("/videos/:id", auth, getVideo);
-videosManagementRoutes.post(
-    "/videos",
+videosManagementRoutes.post("/admin/videos", auth, verifyRole, createVideo);
+videosManagementRoutes.put("/admin/videos/:id", auth, verifyRole, updateVideo);
+videosManagementRoutes.delete(
+    "/admin/videos/:id",
     auth,
     verifyRole,
-    validateSchema(createVideoSchema),
-    createVideo
+    deleteVideo
 );
-videosManagementRoutes.put("/videos/:id", auth, verifyRole, updateVideo);
-videosManagementRoutes.delete("/videos/:id", auth, verifyRole, deleteVideo);
