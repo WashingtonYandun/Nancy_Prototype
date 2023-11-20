@@ -2,15 +2,15 @@ import express from "express";
 import cors from "cors";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
-import { FRONTEND_URL } from "./config.js";
 
+import { FRONTEND_URL } from "./config.js";
 import { authRoutes } from "./routes/auth.routes.js";
 import { notesRoutes } from "./routes/notes.routes.js";
 import { userManagementRoutes } from "./routes/users.admin.routes.js";
 import { videosManagementRoutes } from "./routes/videos.admin.routes.js";
 
 // Create express app
-const app = express();
+export const app = express();
 
 // Enable CORS
 app.use(
@@ -38,10 +38,3 @@ app.use("/api", notesRoutes);
 // Routes admin
 app.use("/api/admin", userManagementRoutes);
 app.use("/api", videosManagementRoutes);
-
-//get test route
-app.get("/test", (req, res) => {
-    res.json({ message: "Hello from server!" });
-});
-
-export { app };

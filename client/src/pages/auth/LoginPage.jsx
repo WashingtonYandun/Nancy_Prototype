@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Card, Button, Input, Label } from "../../components/ui";
 import { loginSchema } from "../../schemas/auth";
 import { Footer } from "../../components/Footer";
+import nancyLogo from "../../assets/nancy_logo.png";
 
 export function LoginPage() {
     const {
@@ -35,7 +36,15 @@ export function LoginPage() {
 
     return (
         <>
-            <div className="flex justify-center items-center h-screen bg-gradient-to-r from-purple-500 to-indigo-600">
+            <div className="min-h-screen flex flex-col md:flex-row p-8 justify-evenly items-center bg-bright min-h-screen ">
+                <section className="w-1/3 md:w-1/4 p-2">
+                    <img
+                        src={nancyLogo}
+                        alt="Nancy Logo"
+                        className="mx-auto rounded-full"
+                    />
+                </section>
+
                 <Card className="w-full max-w-md p-8 rounded-lg shadow-lg bg-white">
                     <h1 className="text-3xl font-semibold text-center mb-6 text-darkAccent">
                         Login

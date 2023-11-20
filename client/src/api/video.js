@@ -10,12 +10,12 @@ export const getVideoByCategoryRequest = async (category) => {
 };
 
 export const createVideoRequest = async (video) =>
-    nancy_apis.post("/videos", video);
+    nancy_apis.post("/admin/videos", video);
 
 export const updateVideoRequest = async (id, video) =>
-    nancy_apis.put(`/videos/${id}`, video);
+    nancy_apis.put(`/admin/videos/${id}`, video);
 
 export const deleteVideoRequest = async (id) =>
-    nancy_apis.delete(`/videos/${id}`);
+    nancy_apis.delete(`/admin/videos/${id}`);
 
 export const getVideoRequest = async (id) => nancy_apis.get(`/videos/${id}`);

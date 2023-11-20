@@ -5,39 +5,9 @@ import { Navbar } from "../../components/Navbar";
 import { Footer } from "../../components/Footer";
 import { getWyCategories } from "../../api/categories";
 import { ButtonLink } from "../../components/ui";
+import { Dropdown } from "../../components/Dropdown";
 
-const ComboBox = ({ categories, onSelectCategory }) => {
-    const [selectedCategory, setSelectedCategory] = useState("");
-
-    const handleCategoryChange = (category) => {
-        setSelectedCategory(category);
-        onSelectCategory(category);
-    };
-
-    return (
-        <>
-            <div className="flex items-center justify-center">
-                <select
-                    value={selectedCategory}
-                    onChange={(e) => handleCategoryChange(e.target.value)}
-                    className=" appearance-none bg-dark block w-full py-2 px-4 border border-accent rounded-md shadow-sm focus:outline-none focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50"
-                >
-                    <option value="" disabled>
-                        Select Category
-                    </option>
-
-                    {categories.map((category) => (
-                        <option key={category} value={category}>
-                            {category}
-                        </option>
-                    ))}
-                </select>
-            </div>
-        </>
-    );
-};
-
-export function NotesPage() {
+export const NotesPage = () => {
     const { notes, getNotes, updateNote, createNote, getNote, deleteNote } =
         useNotes();
 
@@ -81,7 +51,7 @@ export function NotesPage() {
                     Add Note
                 </ButtonLink>
 
-                <ComboBox
+                <Dropdown
                     categories={categories}
                     onSelectCategory={handleCategoryChange}
                     selectedCategory={filteredCategory}
@@ -121,4 +91,4 @@ export function NotesPage() {
             <Footer />
         </>
     );
-}
+};
