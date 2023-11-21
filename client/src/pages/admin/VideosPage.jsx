@@ -16,6 +16,7 @@ export function VideosPage() {
     return (
         <>
             <Navbar />
+
             <div className="container mx-auto my-8 px-4 min-h-screen">
                 {videos.length === 0 ? (
                     <div className="flex flex-col items-center justify-center p-10 bg-dark text-white rounded-md">

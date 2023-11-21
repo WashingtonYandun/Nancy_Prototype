@@ -22,11 +22,7 @@ export const VideoCard = ({ video }) => {
                     {video.title}
                 </h1>
 
-                <p className="text-sm font-bold text-text">
-                    {video.description}
-                </p>
-
-                <span className="text-sm font-bold text-text"></span>
+                <h3>{video.classification.category}</h3>
             </header>
 
             <div className=" w-100 flex justify-center itemscenter">
