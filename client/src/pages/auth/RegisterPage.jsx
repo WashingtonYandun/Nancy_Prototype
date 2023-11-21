@@ -1,14 +1,15 @@
 import { useEffect } from "react";
-import { useAuth } from "../context/authContext";
+import { useAuth } from "../../context/authContext";
 import { Link, useNavigate } from "react-router-dom";
-import { Card, Message, Button, Input, Label } from "../components/ui";
+import { Card, Message, Button, Input, Label } from "../../components/ui";
 import { useForm } from "react-hook-form";
-import { registerSchema } from "../schemas/auth";
+import { registerSchema } from "../../schemas/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
-import Footer from "../components/Footer";
+import { Footer } from "../../components/Footer";
+import nancyLogo from "../../assets/nancy_logo.png";
 
-function Register() {
-    const { signup, errors: registerErrors, isAuthenticated } = useAuth();
+export const RegisterPage = () => {
+    const { signup, errors: registerErrors, isAuthenticated, user } = useAuth();
     const {
         register,
         handleSubmit,
@@ -18,18 +19,39 @@ function Register() {
     });
     const navigate = useNavigate();
 
-    const onSubmit = async (value) => {
-        await signup(value);
+    const onSubmit = async (data) => {
+        await signup(data);
     };
 
     useEffect(() => {
-        if (isAuthenticated) navigate("/notes");
+        if (isAuthenticated) {
+            console.log(user, user.role);
+
+            // Check if the user is authenticated
+            if (isAuthenticated) {
+                // If the user has the "admin" role, redirect to /admin/users
+                if (user && user.role === "admin") {
+                    navigate("/admin/users");
+                } else {
+                    // If the user doesn't have the "admin" role, redirect to /notes
+                    navigate("/notes");
+                }
+            }
+        }
     }, [isAuthenticated]);
 
     return (
         <>
-            <div className="flex justify-center items-center h-screen bg-bright">
-                <Card className="w-full max-w-md p-8">
+            <div className="min-h-screen flex flex-col md:flex-row p-8 justify-evenly items-center bg-bright min-h-screen ">
+                <section className="w-1/3 md:w-1/4 p-2">
+                    <img
+                        src={nancyLogo}
+                        alt="Nancy Logo"
+                        className="mx-auto rounded-full"
+                    />
+                </section>
+
+                <Card className="md:w-2/3 p-8 w-full max-w-md p-8">
                     {registerErrors.map((error, i) => (
                         <Message message={error} key={i} />
                     ))}
@@ -102,6 +124,37 @@ function Register() {
                             )}
                         </div>
 
+                        <div>
+                            <Label>Role</Label>
+                            <div>
+                                <input
+                                    type="radio"
+                                    id="user"
+                                    value="user"
+                                    {...register("role")}
+                                />
+                                <label htmlFor="user" className="ml-2">
+                                    User
+                                </label>
+                            </div>
+                            <div>
+                                <input
+                                    type="radio"
+                                    id="admin"
+                                    value="admin"
+                                    {...register("role")}
+                                />
+                                <label htmlFor="admin" className="ml-2">
+                                    Admin
+                                </label>
+                            </div>
+                            {errors.role?.message && (
+                                <p className="text-error text-xs">
+                                    {errors.role?.message}
+                                </p>
+                            )}
+                        </div>
+
                         <Button className="w-full">Submit</Button>
                     </form>
 
@@ -116,6 +169,4 @@ function Register() {
             <Footer />
         </>
     );
-}
-
-export default Register;
+};

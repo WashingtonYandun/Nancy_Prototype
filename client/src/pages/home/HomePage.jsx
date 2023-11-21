@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import nancyLogo from "../assets/nancy_logo.png";
-import Footer from "../components/Footer";
+import nancyLogo from "../../assets/nancy_logo.png";
+import { Footer } from "../../components/Footer";
 
-function HomePage() {
+export const HomePage = () => {
     return (
         <>
             <div className="flex flex-col md:flex-row justify-center items-center bg-bright min-h-screen">
@@ -32,6 +32,4 @@ function HomePage() {
             <Footer />
         </>
     );
-}
-
-export default HomePage;
+};

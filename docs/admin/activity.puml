@@ -1,0 +1,51 @@
+@startuml
+title Admin Activity Diagram
+
+caption
+Washington Yandun Morales
+end caption
+
+center header
+Nancy (LMS)
+endheader
+
+center footer Last Update: 2023/11/17
+
+|Admin|
+start
+:Log in;
+if (Valid Session?) then (No)
+  :Display error message;
+  stop
+else (Yes)
+  :Navigate to Admin Dashboard;
+  :View User Management Page;
+  if (Initiate Status Change for User) then (Yes)
+    :Send Change User Status Request;
+    if (Request Valid?) then (Yes)
+      :Validate and Update User Status in Database;
+      :Display Success Message;
+    else (No)
+      :Display Error Message;
+    endif
+  else (No)
+    stop
+  endif
+  stop
+
+  :Navigate to Admin Dashboard;
+  :Access Video Upload Page;
+  if (Complete Video Upload Form) then (Yes)
+    :Send Upload Video Request;
+    if (Request Valid?) then (Yes)
+      :Validate and Save Video Details in Database;
+      :Display Success Message;
+    else (No)
+      :Display Error Message;
+    endif
+  else (No)
+    stop
+  endif
+endif
+stop
+@enduml

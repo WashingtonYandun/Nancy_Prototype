@@ -5,13 +5,13 @@ import {
     getUser,
     updateUser,
     deleteUser,
+    makeAdmin,
 } from "../controllers/users.controller.js";
 
-const userManagmentRoutes = Router();
+export const userManagementRoutes = Router();
 
-userManagmentRoutes.get("/users", auth, getUsers);
-userManagmentRoutes.get("/users/:id", auth, getUser);
-userManagmentRoutes.put("/users/:id", auth, updateUser);
-userManagmentRoutes.delete("/users/:id", auth, deleteUser);
-
-export { userManagmentRoutes };
+userManagementRoutes.get("/users", auth, verifyRole, getUsers);
+userManagementRoutes.get("/users/:id", auth, verifyRole, getUser);
+userManagementRoutes.put("/users/:id", auth, verifyRole, updateUser);
+userManagementRoutes.delete("/users/:id", auth, verifyRole, deleteUser);
+userManagementRoutes.put("/users/:id/make-admin", auth, verifyRole, makeAdmin);

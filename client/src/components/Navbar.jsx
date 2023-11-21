@@ -3,7 +3,41 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../context/authContext";
 import { ButtonLink } from "./ui/ButtonLink";
 
-export function Navbar() {
+const AuthenticatedLinks = ({ user, logout }) => (
+    <>
+        <div className="text-bright">Hi! {user.username}</div>
+        {user.role === "admin" ? (
+            <>
+                <ButtonLink to="/admin/users">User Management</ButtonLink>
+                <ButtonLink to="/admin/add-video">Add Video</ButtonLink>
+            </>
+        ) : (
+            <>
+                <ButtonLink to="/notes">Notes</ButtonLink>
+                <ButtonLink to="/videos">Explore</ButtonLink>
+                <ButtonLink to="/dashboard">Dashboard</ButtonLink>
+            </>
+        )}
+        <Link
+            to="/"
+            onClick={() => {
+                logout();
+            }}
+            className="text-accent hover:underline"
+        >
+            Logout
+        </Link>
+    </>
+);
+
+const GuestLinks = () => (
+    <>
+        <ButtonLink to="/login">Login</ButtonLink>
+        <ButtonLink to="/register">Register</ButtonLink>
+    </>
+);
+
+export const Navbar = () => {
     const { isAuthenticated, logout, user } = useAuth();
     const [showMenu, setShowMenu] = useState(false);
     const menuRef = useRef(null);
@@ -37,35 +71,24 @@ export function Navbar() {
     return (
         <nav className="flex items-center justify-between bg-dark p-4">
             <h1 className="text-2xl text-bright">
-                <Link to={isAuthenticated ? "/notes" : "/"}>Nancy</Link>
+                <Link
+                    to={
+                        isAuthenticated
+                            ? user.role === "admin"
+                                ? "/admin/users"
+                                : "/notes"
+                            : "/"
+                    }
+                >
+                    Nancy
+                </Link>
             </h1>
 
             <div className="hidden md:flex items-center space-x-4">
                 {isAuthenticated ? (
-                    <>
-                        <div className="text-bright">Hi! {user.username}</div>
-                        <div>
-                            <ButtonLink to="/add-note">Add Session</ButtonLink>
-                        </div>
-                        <div>
-                            <Link
-                                to="/"
-                                onClick={() => logout()}
-                                className="text-accent hover:underline"
-                            >
-                                Logout
-                            </Link>
-                        </div>
-                    </>
+                    <AuthenticatedLinks user={user} logout={logout} />
                 ) : (
-                    <>
-                        <div>
-                            <ButtonLink to="/login">Login</ButtonLink>
-                        </div>
-                        <div>
-                            <ButtonLink to="/register">Register</ButtonLink>
-                        </div>
-                    </>
+                    <GuestLinks />
                 )}
             </div>
 
@@ -81,44 +104,12 @@ export function Navbar() {
                     className="md:hidden absolute right-0 top-16 bg-dark p-4 space-y-4"
                 >
                     {isAuthenticated ? (
-                        <>
-                            <div className="text-bright">
-                                Hi! {user.username}
-                            </div>
-                            <div>
-                                <ButtonLink to="/add-note" onClick={closeMenu}>
-                                    Add Session
-                                </ButtonLink>
-                            </div>
-                            <div>
-                                <Link
-                                    to="/"
-                                    onClick={() => {
-                                        logout();
-                                        closeMenu();
-                                    }}
-                                    className="text-accent hover:underline"
-                                >
-                                    Logout
-                                </Link>
-                            </div>
-                        </>
+                        <AuthenticatedLinks user={user} logout={logout} />
                     ) : (
-                        <>
-                            <div>
-                                <ButtonLink to="/login" onClick={closeMenu}>
-                                    Login
-                                </ButtonLink>
-                            </div>
-                            <div>
-                                <ButtonLink to="/register" onClick={closeMenu}>
-                                    Register
-                                </ButtonLink>
-                            </div>
-                        </>
+                        <GuestLinks />
                     )}
                 </div>
             )}
         </nav>
     );
-}
+};

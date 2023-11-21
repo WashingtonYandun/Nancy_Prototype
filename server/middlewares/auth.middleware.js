@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+import { User } from "../models/user.model.js";
 import { TOKEN_SECRET } from "../config.js";
 
 export const auth = (req, res, next) => {
@@ -33,7 +34,7 @@ export const verifyRole = async (req, res, next) => {
             const userFound = await User.findById(user.id);
             if (!userFound) return res.sendStatus(401);
 
-            if (userFound.role === "user") return next();
+            if (userFound.role === "admin") return next();
 
             return res.send(false);
         });

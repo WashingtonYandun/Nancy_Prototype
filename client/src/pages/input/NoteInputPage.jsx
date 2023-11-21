@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Button, Card, Input, Label } from "../components/ui";
-import { useNotes } from "../context/notesContext";
-import { Textarea } from "../components/ui/Textarea";
+import { Button, Card, Input, Label } from "../../components/ui";
+import { useNotes } from "../../context/notesContext";
+import { Textarea } from "../../components/ui/Textarea";
 import { useForm } from "react-hook-form";
-import { Navbar } from "../components/Navbar";
-import Footer from "../components/Footer";
+import { Navbar } from "../../components/Navbar";
+import { Footer } from "../../components/Footer";
 
 export function NoteInputPage() {
     const { createNote, getNote, updateNote } = useNotes();

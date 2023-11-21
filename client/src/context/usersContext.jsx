@@ -4,6 +4,7 @@ import {
     deleteUserRequest,
     getUserRequest,
     updateUserRequest,
+    makeAdminRequest,
 } from "../api/users";
 
 const UsersContext = createContext();
@@ -44,9 +45,17 @@ export function UsersProvider({ children }) {
         }
     };
 
-    const updateUser = async (id, note) => {
+    const updateUser = async (id, user) => {
         try {
-            await updateUserRequest(id, note);
+            await updateUserRequest(id, user);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    const makeAdmin = async (id) => {
+        try {
+            await makeAdminRequest(id);
         } catch (error) {
             console.error(error);
         }
@@ -60,6 +69,7 @@ export function UsersProvider({ children }) {
                 deleteUser: deleteUser,
                 getUser: getUser,
                 updateUser: updateUser,
+                makeAdmin: makeAdmin,
             }}
         >
             {children}

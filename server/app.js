@@ -3,13 +3,14 @@ import cors from "cors";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
 
+import { FRONTEND_URL } from "./config.js";
 import { authRoutes } from "./routes/auth.routes.js";
 import { notesRoutes } from "./routes/notes.routes.js";
-import { userManagmentRoutes } from "./routes/users.admin.routes.js";
-import { FRONTEND_URL } from "./config.js";
+import { userManagementRoutes } from "./routes/users.admin.routes.js";
+import { videosManagementRoutes } from "./routes/videos.admin.routes.js";
 
 // Create express app
-const app = express();
+export const app = express();
 
 // Enable CORS
 app.use(
@@ -30,9 +31,10 @@ app.use(express.json());
 app.use(morgan("dev"));
 app.use(cookieParser());
 
-// Routes
+// Routes user
 app.use("/api/auth", authRoutes);
 app.use("/api", notesRoutes);
-app.use("/api/admin", userManagmentRoutes);
 
-export { app };
+// Routes admin
+app.use("/api/admin", userManagementRoutes);
+app.use("/api", videosManagementRoutes);

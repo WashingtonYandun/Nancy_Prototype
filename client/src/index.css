@@ -2,15 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-    --primary-color: #4f772d; /* Bright Blue */
-    --secondary-color: #386641; /* Emerald Green */
-    --highlight-color: #e74c3c; /* Coral Red */
-    --background-color: #ecf0f1; /* Light Gray */
-    --main-text-color: #2c3e50; /* Dark Bluish Gray */
-    --secondary-text-color: #7f8c8d; /* Light Bluish Gray */
-}
-
 * {
     margin: 0;
     padding: 0;
