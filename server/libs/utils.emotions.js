@@ -96,3 +96,15 @@ export const getEmotionValues = (emotion, expressions) => {
     const emotionValues = expressions.map((expression) => expression[emotion]);
     return emotionValues;
 };
+
+
+export const normalizeEmotionsData = (emotionsData) => {
+    let getRidOfNeutral = Object.keys(emocionesConNeutral)
+        .filter(emocion => emocion !== 'neutral')
+        .map(emocion => emocionesConNeutral[emocion]);
+
+    let probSum = getRidOfNeutral.reduce((sum, prob) => sum + prob, 0);
+    let normalizedData = getRidOfNeutral.map(prob => prob / probSum);
+
+    return normalizedData;
+}

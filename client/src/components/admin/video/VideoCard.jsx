@@ -55,7 +55,10 @@ export const VideoCard = ({ video }) => {
                     </>
                 ) : (
                     <>
-                        <Button className="bg-error hover:bg-joy">
+                        <Button
+                            className="bg-error hover:bg-joy"
+                            to={`/note-form/${video._id}`}
+                        >
                             Go to Video
                         </Button>
                     </>
