@@ -21,8 +21,6 @@ export const VideoCard = ({ video }) => {
                 <h1 className="text-2xl font-bold text-text truncate">
                     {video.title}
                 </h1>
-
-                <h3>{video.classification.category}</h3>
             </header>
 
             <div className=" w-100 flex justify-center itemscenter">
