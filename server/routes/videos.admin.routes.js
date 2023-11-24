@@ -22,6 +22,7 @@ videosManagementRoutes.get(
     getVideoByCategory
 );
 videosManagementRoutes.get("/videos/:id", auth, getVideo);
+
 videosManagementRoutes.post("/admin/videos", auth, verifyRole, createVideo);
 videosManagementRoutes.put("/admin/videos/:id", auth, verifyRole, updateVideo);
 videosManagementRoutes.delete(

@@ -2,6 +2,13 @@ import jwt from "jsonwebtoken";
 import { User } from "../models/user.model.js";
 import { TOKEN_SECRET } from "../config.js";
 
+/**
+ * Middleware function to authenticate requests using a token.
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ * @param {Function} next - The next middleware function.
+ * @returns {Object} - The response object.
+ */
 export const auth = (req, res, next) => {
     try {
         const { token } = req.cookies;
@@ -23,6 +30,13 @@ export const auth = (req, res, next) => {
     }
 };
 
+/**
+ * Middleware function to verify the role of a user.
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ * @param {Function} next - The next middleware function.
+ * @returns {Promise<void>} - A Promise that resolves when the middleware is complete.
+ */
 export const verifyRole = async (req, res, next) => {
     try {
         const { token } = req.cookies;

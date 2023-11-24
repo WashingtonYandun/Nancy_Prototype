@@ -24,7 +24,6 @@ export const expressionSchema = new mongoose.Schema(
     { _id: false }
 );
 
-// need improvement (images, links, etc)
 export const noteSchema = new mongoose.Schema(
     {
         userId: {
@@ -67,6 +66,10 @@ export const noteSchema = new mongoose.Schema(
                 required: true,
             },
         ],
+        viedoId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Video",
+        },
     },
     { timestamps: true }
 );

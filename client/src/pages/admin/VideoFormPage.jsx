@@ -102,7 +102,9 @@ export const VideoFormPage = () => {
 
     return (
         <>
-            <div className="grid grid-cols-1 h-screen">
+            <div className="grid grid-cols-2 h-screen">
+                <div className="read-section bg-gray-200 h-[10vh]"></div>
+
                 {/* Video Form Section */}
                 <Card className="w-full max-w-xl p-6 bg-gray-800 text-white rounded-md shadow-md h-[10vh]">
                     <form

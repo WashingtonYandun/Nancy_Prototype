@@ -21,12 +21,6 @@ export const VideoCard = ({ video }) => {
                 <h1 className="text-2xl font-bold text-text truncate">
                     {video.title}
                 </h1>
-
-                <p className="text-sm font-bold text-text">
-                    {video.description}
-                </p>
-
-                <span className="text-sm font-bold text-text"></span>
             </header>
 
             <div className=" w-100 flex justify-center itemscenter">
@@ -59,7 +53,10 @@ export const VideoCard = ({ video }) => {
                     </>
                 ) : (
                     <>
-                        <Button className="bg-error hover:bg-joy">
+                        <Button
+                            className="bg-error hover:bg-joy"
+                            to={`/note-form/${video._id}`}
+                        >
                             Go to Video
                         </Button>
                     </>

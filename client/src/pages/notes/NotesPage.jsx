@@ -3,7 +3,6 @@ import { useNotes } from "../../context/notesContext";
 import { NoteCard } from "../../components/notes/NoteCard";
 import { Navbar } from "../../components/Navbar";
 import { Footer } from "../../components/Footer";
-import { getWyCategories } from "../../api/categories";
 import { ButtonLink } from "../../components/ui";
 import { Dropdown } from "../../components/Dropdown";
 
