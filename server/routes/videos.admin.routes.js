@@ -9,8 +9,6 @@ import {
     updateVideo,
     getVideos,
 } from "../controllers/videos.controller.js";
-import { validateSchema } from "../middlewares/validator.middleware.js";
-import { createVideoSchema } from "../schemas/video.schema.js";
 
 export const videosManagementRoutes = Router();
 
