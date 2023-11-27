@@ -24,14 +24,17 @@ export const VideoCard = ({ video }) => {
             </header>
 
             <div className=" w-100 flex justify-center itemscenter">
-                <YouTube
-                    className="px-2 py-2"
-                    videoId={getYouTubeVideoId(video.url)}
-                    opts={{
-                        width: "100%",
-                        height: "200px",
-                    }}
-                />
+                <iframe
+                    width="560"
+                    height="315"
+                    videoid={getYouTubeVideoId(video.url)}
+                    src={`https://www.youtube.com/embed/${getYouTubeVideoId(
+                        video.url
+                    )}`}
+                    title="YouTube video player"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                ></iframe>
             </div>
 
             <div className="flex items-center space-x-2">

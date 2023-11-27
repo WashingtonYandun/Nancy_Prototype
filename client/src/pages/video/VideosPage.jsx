@@ -43,11 +43,12 @@ export function VideosPage() {
         <>
             <Navbar />
             <div className="flex flex-row  px-20 py-5 justify-end items-center bg-dark text-white">
-                <Dropdown
+                {/* TODO: Solve category bug */}
+                {/* <Dropdown
                     categories={categories}
                     onSelectCategory={handleCategoryChange}
                     selectedCategory={filteredCategory}
-                ></Dropdown>
+                ></Dropdown> */}
             </div>
 
             <div className="container mx-auto my-8 px-4 min-h-screen">
