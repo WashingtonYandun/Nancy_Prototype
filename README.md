@@ -1,17 +1,12 @@
-# Nancy Prototype - Learning Management System
+# Nancy - Learning Management System
 
 <p align="center">
-  <img alt="Nancy Prototype Logo" src="/docs/images/Nancy_Logo.png"  width="300" height="300"/>
+  <img alt="Nancy Logo" src="/docs/images/Nancy_Logo.png"  width="300" height="300"/>
 </p>
-
-## More documentation
-
--   [Authentication](/docs/auth/README.md)
--   [Admin](/docs/admin/README.md)
 
 ## Overview
 
-Nancy Prototype is a robust Learning Management System (LMS) designed to enhance your learning experience through the integration of cutting-edge technologies. Leveraging Mediapipe, computer vision, and artificial intelligence powered by OpenAI, this system goes beyond traditional approaches to offer a more interactive and personalized learning journey.
+Nancy is a robust Learning Management System (LMS) designed to enhance your learning experience through the integration of cutting-edge technologies. Leveraging Mediapipe, computer vision, and artificial intelligence powered by OpenAI, this system goes beyond traditional approaches to offer a more interactive and personalized learning journey.
 
 ## Features (Now)
 
@@ -52,7 +47,7 @@ Express and Node make up the middle (application) tier. Express.js is a server-s
 
 ## Framework MVC Introduction
 
-Nancy Prototype is built on the Model-View-Controller (MVC) framework, a powerful architectural pattern that separates an application into three interconnected components. The **Model** (Mongo) represents the data and business logic, the **View** (React.js) handles the user interface, and the **Controller** (Express.js/Node.js) manages user input and interaction. This structure promotes modular development, making it easier to maintain and scale the application.
+Nancy is built on the Model-View-Controller (MVC) framework, a powerful architectural pattern that separates an application into three interconnected components. The **Model** (Mongo) represents the data and business logic, the **View** (React.js) handles the user interface, and the **Controller** (Express.js/Node.js) manages user input and interaction. This structure promotes modular development, making it easier to maintain and scale the application.
 
 <p align="center">
   <img alt="MVC Architecture MERN" src="/docs/images/mern-stack.png" width="328" height="221" />
@@ -72,12 +67,12 @@ Nancy Prototype is built on the Model-View-Controller (MVC) framework, a powerfu
 
 Before setting up and running Nancy Prototype, ensure that your system meets the following requirements:
 
--   **Node.js**: Nancy Prototype uses Node.js for `server-side scripting`. Ensure that you have Node.js installed.
--   **MongoDB**: MongoDB is used as the `database` for Nancy Prototype. Install MongoDB on your system.
+-   **Node.js**: Nancy uses Node.js for `server-side scripting`. Ensure that you have Node.js installed.
+-   **MongoDB**: MongoDB is used as the `database` for Nancy. Install MongoDB on your system.
 
 ## Getting Started
 
-Follow these steps to get started with Nancy Prototype:
+Follow these steps to get started with Nancy:
 
 1. **Clone the Repository and go to the destination folder:**
 
@@ -98,3 +93,8 @@ Follow these steps to get started with Nancy Prototype:
 ## License
 
 This project is licensed under the CC0 1.0 Universal (CC0 1.0) License
+
+## More documentation
+
+-   [Authentication](/docs/auth/README.md)
+-   [Admin](/docs/admin/README.md)
