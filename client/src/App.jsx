@@ -8,9 +8,9 @@ import { LoginPage } from "./pages/auth/LoginPage";
 import { NotesPage } from "./pages/notes/NotesPage";
 import { NoteProvider } from "./context/notesContext";
 import { VideoProvider } from "./context/videoContext";
-import { UsersPage } from "./pages/admin/UsersPage";
-import { VideosPage } from "./pages/admin/VideosPage";
-import { VideoFormPage } from "./pages/admin/VideoFormPage";
+import { UsersPage } from "./pages/users/UsersPage";
+import { VideosPage } from "./pages/video/VideosPage";
+import { VideoFormPage } from "./pages/video/VideoFormPage";
 import { UsersProvider } from "./context/usersContext";
 
 function App() {
