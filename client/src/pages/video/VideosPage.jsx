@@ -42,30 +42,37 @@ export function VideosPage() {
     return (
         <>
             <Navbar />
-
             <div className="flex flex-row  px-20 py-5 justify-end items-center bg-dark text-white">
-                <Dropdown
+                {/* TODO: Solve category bug */}
+                {/* <Dropdown
                     categories={categories}
                     onSelectCategory={handleCategoryChange}
                     selectedCategory={filteredCategory}
-                ></Dropdown>
+                ></Dropdown> */}
             </div>
 
             <div className="container mx-auto my-8 px-4 min-h-screen">
                 {videos.length === 0 ? (
                     <div className="flex flex-col items-center justify-center p-10 bg-dark text-white rounded-md">
-                        <h2 className="font-bold text-xl text-center mt-4">
-                            No videos yet, please start session
-                            <ButtonLink to="/admin/add-video">
-                                Upload new Video
-                            </ButtonLink>
+                        <h2 className="font-bold text-xl text-center mb-4">
+                            No videos yet
                         </h2>
                     </div>
                 ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                        {filteredVideos.map((video) => (
-                            <VideoCard video={video} key={video._id} />
-                        ))}
+                    <div className="">
+                        {filteredVideos.length === 0 ? (
+                            <div className="flex flex-col items-center justify-center p-10 bg-dark text-white rounded-md">
+                                <h2 className="font-bold text-xl text-center mb-4">
+                                    No videos yet
+                                </h2>
+                            </div>
+                        ) : (
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                                {filteredVideos.map((video) => (
+                                    <VideoCard video={video} key={video._id} />
+                                ))}
+                            </div>
+                        )}
                     </div>
                 )}
             </div>

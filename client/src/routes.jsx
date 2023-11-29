@@ -13,7 +13,7 @@ export const RoleProtectedRoute = () => {
     const { user, isAuthenticated, loading } = useAuth();
 
     if (loading) return <h1>Loading...</h1>;
-    if (isAuthenticated && !loading && user.role !== "admin")
-        return <Navigate to="/notes" replace />;
+    if (!isAuthenticated && !loading && user.role !== "admin")
+        return <Navigate to="/" replace />;
     return <Outlet />;
 };

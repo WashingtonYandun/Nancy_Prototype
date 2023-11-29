@@ -51,7 +51,7 @@ export const analysisSchema = new mongoose.Schema(
         status: {
             type: String,
             required: true,
-            enum: [-1, 0, 1],
+            enum: ["positive", "negative", "neutral"],
         },
     },
     { timestamps: true }
