@@ -5,7 +5,7 @@ import { Card, Message, Button, Input, Label } from "../../components/ui";
 import { useForm } from "react-hook-form";
 import { registerSchema } from "../../schemas/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Footer } from "../../components/Footer";
+import { Footer } from "../../components/general/Footer";
 import nancyLogo from "../../assets/nancy_logo.png";
 
 export const RegisterPage = () => {

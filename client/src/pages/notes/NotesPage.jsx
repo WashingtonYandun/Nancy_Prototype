@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { useNotes } from "../../context/notesContext";
 import { NoteCard } from "../../components/notes/NoteCard";
-import { Navbar } from "../../components/Navbar";
-import { Footer } from "../../components/Footer";
+import { Navbar } from "../../components/general/Navbar";
+import { Footer } from "../../components/general/Footer";
 import { ButtonLink } from "../../components/ui";
-import { Dropdown } from "../../components/Dropdown";
+import { Dropdown } from "../../components/general/Dropdown";
 
 export const NotesPage = () => {
     const { notes, getNotes, updateNote, createNote, getNote, deleteNote } =
