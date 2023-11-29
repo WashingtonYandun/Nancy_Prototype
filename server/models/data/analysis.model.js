@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { classificationSchema } from "./classification.model.js";
+import { classificationSchema } from "../classification/classification.model.js";
 
 export const analysisSchema = new mongoose.Schema(
     {

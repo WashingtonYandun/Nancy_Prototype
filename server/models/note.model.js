@@ -1,28 +1,6 @@
 import mongoose from "mongoose";
-
-export const classificationSchema = new mongoose.Schema({
-    category: String,
-    matches: [
-        {
-            category: String,
-            probability: Number,
-        },
-    ],
-    _id: false,
-});
-
-export const expressionSchema = new mongoose.Schema(
-    {
-        angry: Number,
-        disgusted: Number,
-        fearful: Number,
-        happy: Number,
-        neutral: Number,
-        sad: Number,
-        surprised: Number,
-    },
-    { _id: false }
-);
+import { classificationSchema } from "./classification/classification.model.js";
+import { expressionSchema } from "./classification/expression.model.js";
 
 export const noteSchema = new mongoose.Schema(
     {
@@ -66,10 +44,6 @@ export const noteSchema = new mongoose.Schema(
                 required: true,
             },
         ],
-        viedoId: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Video",
-        },
     },
     { timestamps: true }
 );

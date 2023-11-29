@@ -1,7 +1,6 @@
 import { Button, Card } from "../../ui";
 import { useVideo } from "../../../context/videoContext";
 import { useAuth } from "../../../context/authContext";
-import YouTube from "react-youtube";
 
 export const VideoCard = ({ video }) => {
     const { user, isAuthenticated } = useAuth();
