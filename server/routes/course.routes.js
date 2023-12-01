@@ -5,6 +5,7 @@ import { deleteCourse, getCourse, getCourses, updateCourse } from "../controller
 
 export const courseRoutes = Router();
 
+
 courseRoutes.get(
     "/courses",
     auth,
