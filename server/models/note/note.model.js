@@ -1,12 +1,17 @@
 import mongoose from "mongoose";
-import { classificationSchema } from "./classification/classification.model.js";
-import { expressionSchema } from "./classification/expression.model.js";
+import { classificationSchema } from "../classification/classification.model.js";
+import { expressionSchema } from "../classification/expression.model.js";
 
 export const noteSchema = new mongoose.Schema(
     {
         userId: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "User",
+            required: true,
+        },
+        videoId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Video",
             required: true,
         },
         title: {
