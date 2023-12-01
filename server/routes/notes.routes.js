@@ -8,7 +8,7 @@ import {
     deleteNote,
     updateNote,
     getNote,
-} from "../controllers/notes.controller.js";
+} from "../controllers/notes/notes.controller.js";
 
 export const notesRoutes = Router();
 

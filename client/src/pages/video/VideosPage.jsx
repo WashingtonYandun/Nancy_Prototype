@@ -2,11 +2,11 @@ import { useEffect } from "react";
 import { ButtonLink } from "../../components/ui/ButtonLink";
 import { useState } from "react";
 
-import { Navbar } from "../../components/Navbar";
-import { Footer } from "../../components/Footer";
+import { Navbar } from "../../components/general/Navbar";
+import { Footer } from "../../components/general/Footer";
 import { useVideo } from "../../context/videoContext";
-import { VideoCard } from "../../components/admin/video/VideoCard";
-import { Dropdown } from "../../components/Dropdown";
+import { VideoCard } from "../../components/video/VideoCard";
+import { Dropdown } from "../../components/general/Dropdown";
 
 export function VideosPage() {
     const { videos, getVideos } = useVideo();
@@ -42,14 +42,6 @@ export function VideosPage() {
     return (
         <>
             <Navbar />
-            <div className="flex flex-row  px-20 py-5 justify-end items-center bg-dark text-white">
-                {/* TODO: Solve category bug */}
-                {/* <Dropdown
-                    categories={categories}
-                    onSelectCategory={handleCategoryChange}
-                    selectedCategory={filteredCategory}
-                ></Dropdown> */}
-            </div>
 
             <div className="container mx-auto my-8 px-4 min-h-screen">
                 {videos.length === 0 ? (

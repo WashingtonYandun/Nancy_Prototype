@@ -5,7 +5,7 @@ const userSchema = new mongoose.Schema(
         username: {
             type: String,
             required: [true, "Name is required"],
-            minlength: [3, "Name must be at least 3 characters long"],
+            minlength: [6, "Name must be at least 3 characters long"],
             maxlength: [32, "Name must be at most 60 characters long"],
             trim: true,
         },
@@ -23,6 +23,7 @@ const userSchema = new mongoose.Schema(
             type: String,
             required: [true, "Password is required"],
             minlength: [6, "Password must be at least 6 characters long"],
+            maxlength: [64, "Password must be at most 32 characters long"],
         },
         role: {
             type: String,
@@ -30,6 +31,12 @@ const userSchema = new mongoose.Schema(
             enum: ["user", "instructor", "admin"],
             default: "user",
         },
+        location: {
+            type: String,
+            trim: true,
+            minlength: [3, "Location must be at least 3 characters long"],
+            maxlength: [32, "Location must be at most 32 characters long"],
+        }
     },
     { timestamps: true }
 );
