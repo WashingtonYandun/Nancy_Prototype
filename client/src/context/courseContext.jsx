@@ -5,7 +5,7 @@ import {
     createCourseRequest,
     getCourseRequest,
     updateCourseRequest,
-} from "../api/course";
+} from "../api/courses";
 
 const CourseContext = createContext();
 

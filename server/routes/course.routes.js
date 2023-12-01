@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { auth } from "../middlewares/auth.middleware.js";
-import { deleteCourse, getCourse, getCourses, updateCourse } from "../controllers/course/courses.controller.js";
+import { createCourse, deleteCourse, getCourse, getCourses, updateCourse } from "../controllers/course/courses.controller.js";
 
 
 export const courseRoutes = Router();
@@ -25,4 +25,9 @@ courseRoutes.delete(
     "/courses/:id",
     auth,
     deleteCourse
+);
+courseRoutes.post(
+    "/courses",
+    auth,
+    createCourse
 );

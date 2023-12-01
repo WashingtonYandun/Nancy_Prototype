@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button, Card, Input, Textarea } from "../../components/ui";
+import { Button, Card, Input } from "../../components/ui";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { useCourses } from "../../context/courseContext"; // Make sure to import the correct context
+import { useCourses } from "../../context/courseContext";
+import { Textarea } from "../../components/ui/Textarea";
 
 export const CourseFormPage = () => {
     const { createCourse } = useCourses();
@@ -30,7 +31,7 @@ export const CourseFormPage = () => {
             }
 
             createCourse(data);
-            navigate("/admin/courses");
+            navigate("/courses");
         } catch (error) {
             console.error("Error submitting", error, data);
         }

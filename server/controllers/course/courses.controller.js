@@ -11,24 +11,12 @@ export const createCourse = async (req, res) => {
     try {
         const {
             title,
-            description,
-            requirements,
-            thumbnail,
-            language,
-            category,
-            subcategory,
         } = req.body;
 
         const instructorId = req.user.id;
 
         const newCourse = new Course({
             title,
-            description,
-            requirements,
-            thumbnail,
-            language,
-            category,
-            subcategory,
             instructorId: instructorId,
         });
 
