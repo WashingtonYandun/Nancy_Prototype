@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { classificationSchema } from "../note/note.model.js";
+import { classificationSchema } from "../classification/classification.model.js";
 
 const courseSchema = new mongoose.Schema(
     {
@@ -14,7 +14,12 @@ const courseSchema = new mongoose.Schema(
             {
                 type: mongoose.Schema.Types.ObjectId,
                 ref: 'Video',
-                required: true
+            }
+        ],
+        students: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'User'
             }
         ],
         title: {
@@ -33,7 +38,14 @@ const courseSchema = new mongoose.Schema(
         thumbnail: {
             type: String,
             minlength: [6, "Thumbnail must be at least 6 characters long"],
+            maxlength: [100, "Thumbnail must be at most 100 characters long"],
             trim: true,
+        },
+        language: {
+            type: String,
+            required: true,
+            trim: true,
+            enum: ["English", "Spanish", "French", "German", "Italian"],
         },
         category: {
             type: classificationSchema,
@@ -68,7 +80,8 @@ const courseSchema = new mongoose.Schema(
                     type: String,
                     required: true,
                     trim: true,
-                    enum: ["angry",
+                    enum: [
+                        "angry",
                         "disgusted",
                         "fearful",
                         "happy",

@@ -32,10 +32,15 @@ const userSchema = new mongoose.Schema(
             default: "user",
         },
         location: {
-            type: String,
-            trim: true,
-            minlength: [3, "Location must be at least 3 characters long"],
-            maxlength: [32, "Location must be at most 32 characters long"],
+            latitude:{
+                type: Number,
+            },
+            longitude: {
+                type: Number,
+            },
+            country: {
+                type: String,
+            },
         }
     },
     { timestamps: true }

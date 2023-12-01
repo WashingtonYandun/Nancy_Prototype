@@ -2,12 +2,12 @@ import express from "express";
 import cors from "cors";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
-
 import { FRONTEND_URL } from "./config.js";
 import { authRoutes } from "./routes/auth.routes.js";
 import { notesRoutes } from "./routes/notes.routes.js";
 import { userManagementRoutes } from "./routes/users.admin.routes.js";
 import { videosManagementRoutes } from "./routes/videos.admin.routes.js";
+import { courseRoutes } from "./routes/course.routes.js";
 
 // Create express app
 export const app = express();
@@ -38,3 +38,4 @@ app.use("/api", notesRoutes);
 // Routes admin
 app.use("/api/admin", userManagementRoutes);
 app.use("/api", videosManagementRoutes);
+app.use("/api", courseRoutes);
