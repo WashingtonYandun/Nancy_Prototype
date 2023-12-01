@@ -1,47 +1,97 @@
 import mongoose from "mongoose";
-import { classificationSchema } from "../note.model";
+import { classificationSchema } from "../classification/classification.model.js";
 
 const courseSchema = new mongoose.Schema(
     {
         instructorId: [
             {
                 type: mongoose.Schema.Types.ObjectId,
-                ref: 'User'
+                ref: 'User',
+                required: true
             }
         ],
         videos: [
             {
                 type: mongoose.Schema.Types.ObjectId,
-                ref: 'Video'
+                ref: 'Video',
+            }
+        ],
+        students: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'User'
             }
         ],
         title: {
             type: String,
             required: true,
             trim: true,
-            minlength: [3, "Title must be at least 3 characters long"],
+            minlength: [6, "Title must be at least 6 characters long"],
             maxlength: [100, "Title must be at most 100 characters long"],
         },
-        classification: {
-            type: classificationSchema,
-            required: true,
-        },
-
-
         description: {
             type: String,
             required: true,
             trim: true,
-            minlength: [3, "Description must be at least 3 characters long"],
+            minlength: [6, "Description must be at least 6 characters long"],
         },
         thumbnail: {
             type: String,
-            minlength: [3, "Thumbnail must be at least 3 characters long"],
+            minlength: [6, "Thumbnail must be at least 6 characters long"],
+            maxlength: [100, "Thumbnail must be at most 100 characters long"],
             trim: true,
         },
-        subclassification: {
+        language: {
+            type: String,
+            required: true,
+            trim: true,
+            enum: ["English", "Spanish", "French", "German", "Italian"],
+        },
+        category: {
+            type: classificationSchema,
+            required: true,
+        },
+        subcategory: {
             type: classificationSchema,
         },
+        stars: [
+            {
+                userId: {
+                    type: mongoose.Schema.Types.ObjectId,
+                    ref: "User",
+                    required: true,
+                },
+                rating: {
+                    type: Number,
+                    required: true,
+                    min: 1,
+                    max: 5,
+                },
+            },
+        ],
+        reactions: [
+            {
+                userId: {
+                    type: mongoose.Schema.Types.ObjectId,
+                    ref: "User",
+                    required: true,
+                },
+                reaction: {
+                    type: String,
+                    required: true,
+                    trim: true,
+                    enum: [
+                        "angry",
+                        "disgusted",
+                        "fearful",
+                        "happy",
+                        "neutral",
+                        "sad",
+                        "surprised"
+                    ],
+                },
+            },
+        ],
 
     },
     { timestamps: true }

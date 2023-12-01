@@ -1,5 +1,5 @@
-import { useUsers } from "../../../context/usersContext";
-import { Button, Card } from "../../ui";
+import { useUsers } from "../../context/usersContext";
+import { Button, Card } from "../ui";
 
 export function UserCard({ user }) {
     const { deleteUser, makeAdmin } = useUsers();

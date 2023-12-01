@@ -1,8 +1,8 @@
-import { User } from "../models/user/user.model.js";
+import { User } from "../../models/user/user.model.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
-import { TOKEN_SECRET, NODE_ENV } from "../config.js";
-import { createAccessToken } from "../libs/jwt.js";
+import { TOKEN_SECRET, NODE_ENV } from "../../config.js";
+import { createAccessToken } from "../../libs/jwt.js";
 
 export const register = async (req, res) => {
     try {
