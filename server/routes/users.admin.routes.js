@@ -6,7 +6,7 @@ import {
     updateUser,
     deleteUser,
     makeAdmin,
-} from "../controllers/users.controller.js";
+} from "../controllers/users/users.controller.js";
 
 export const userManagementRoutes = Router();
 

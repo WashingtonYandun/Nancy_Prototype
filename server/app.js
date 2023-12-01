@@ -21,8 +21,8 @@ app.use(
 );
 
 // Error handler
-app.use((err, req, res, next) => {
-    console.error(err.stack);
+app.use((error, req, res, next) => {
+    console.error(error);
     res.status(500).send("Something went wrong!");
 });
 
