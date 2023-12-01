@@ -8,7 +8,7 @@ import {
     deleteVideo,
     updateVideo,
     getVideos,
-} from "../controllers/videos.controller.js";
+} from "../controllers/videos/videos.controller.js";
 
 export const videosManagementRoutes = Router();
 

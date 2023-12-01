@@ -7,13 +7,12 @@ async function init() {
         await connectDb();
         app.listen(PORT);
 
-        console.log("Init");
-        console.log(`Listening on port http://localhost:${PORT}`);
-        console.log(`Environment: ${NODE_ENV}`);
+        console.log(`<<Listening on port http://localhost:${PORT}>>`);
+        console.log(`<<Environment: ${NODE_ENV}>>`);
     } catch (error) {
         console.log("Error");
         console.error(error);
     }
 }
 
-init();
+init().then(r => console.log(">>Init done<<"));

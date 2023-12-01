@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Card, Button, Input, Label } from "../../components/ui";
 import { loginSchema } from "../../schemas/auth";
-import { Footer } from "../../components/Footer";
+import { Footer } from "../../components/general/Footer";
 import nancyLogo from "../../assets/nancy_logo.png";
 
 export function LoginPage() {

@@ -5,6 +5,7 @@ const initAi = async () => {
     const nn = new NeuralNetwork(2, 2, 1);
 
     // TODO: Change training data to match expressions
+    // TODO: Increase dataset
     const trainingData = [
         {
             inputs: [0.001, 0.0005, 0.0003, 0.8, 0.0002, 0.097],
@@ -54,4 +55,3 @@ console.log(
         0.000008941296982811764
     ])
 );
-

@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useUsers } from "../../context/usersContext";
-import { Navbar } from "../../components/Navbar";
-import { Footer } from "../../components/Footer";
-import { UserCard } from "../../components/admin/users/UserCard";
+import { Navbar } from "../../components/general/Navbar";
+import { Footer } from "../../components/general/Footer";
+import { UserCard } from "../../components/users/UserCard";
 
 export function UsersPage() {
     const { users, getUsers } = useUsers();
