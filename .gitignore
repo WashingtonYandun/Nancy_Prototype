@@ -1,2 +1,5 @@
 /node_modules
 /client/node_modules
+/.idea/Nancy_Prototype.iml
+/.idea/vcs.xml
+/.idea/workspace.xml
