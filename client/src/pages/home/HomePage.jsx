@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
-import nancyLogo from "../../assets/nancy_logo.png";
 import { Footer } from "../../components/general/Footer";
+import nancyLogo from "../../assets/nancy_logo.png";
+
 
 export const HomePage = () => {
     return (

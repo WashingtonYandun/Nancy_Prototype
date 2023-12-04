@@ -5,7 +5,6 @@ import { useNotes } from "../../context/notesContext";
 import { Textarea } from "../../components/ui/Textarea";
 import { useForm } from "react-hook-form";
 import { useVideo } from "../../context/videoContext";
-import * as faceapi from "face-api.js";
 
 export function NoteInputVideoPage() {
     const { getVideo } = useVideo();

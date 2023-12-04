@@ -1,9 +1,9 @@
 import { useAuth } from "../../context/authContext";
-import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Card, Button, Input, Label } from "../../components/ui";
+import { Link, useNavigate } from "react-router-dom";
 import { loginSchema } from "../../schemas/auth";
 import { Footer } from "../../components/general/Footer";
 import nancyLogo from "../../assets/nancy_logo.png";
@@ -36,7 +36,7 @@ export function LoginPage() {
 
     return (
         <>
-            <div className="min-h-screen flex flex-col md:flex-row p-8 justify-evenly items-center bg-bright min-h-screen ">
+            <div className="min-h-screen flex flex-col md:flex-row p-8 justify-evenly items-center bg-bright">
                 <section className="w-1/3 md:w-1/4 p-2">
                     <img
                         src={nancyLogo}
