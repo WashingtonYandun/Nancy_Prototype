@@ -12,11 +12,16 @@ import { UsersPage } from "./pages/users/UsersPage";
 import { VideosPage } from "./pages/video/VideosPage";
 import { VideoFormPage } from "./pages/video/VideoFormPage";
 import { UsersProvider } from "./context/usersContext";
+import {CoursesPage} from "./pages/course/CoursesPage.jsx";
+import {CourseFormPage} from "./pages/course/CourseFormPage.jsx";
+import {CourseView} from "./pages/course/CourseView.jsx";
+import {CourseProvider} from "./context/courseContext.jsx";
 
 function App() {
     return (
         <div className="mycontainer">
             <AuthProvider>
+                <CourseProvider>
                 <NoteProvider>
                     <VideoProvider>
                         <UsersProvider>
@@ -36,6 +41,18 @@ function App() {
                                         <Route
                                             path="/notes"
                                             element={<NotesPage />}
+                                        />
+                                        <Route
+                                            path="/courses"
+                                            element={<CoursesPage />}
+                                        />
+                                        <Route
+                                            path="/courses/add-course"
+                                            element={<CourseFormPage />}
+                                        />
+                                        <Route
+                                            path="/courses/:id"
+                                            element={<CourseView />}
                                         />
                                         <Route
                                             path="/add-note"
@@ -75,6 +92,7 @@ function App() {
                         </UsersProvider>
                     </VideoProvider>
                 </NoteProvider>
+                </CourseProvider>
             </AuthProvider>
         </div>
     );

@@ -19,20 +19,21 @@ videosManagementRoutes.get(
     auth,
     getAllVideos
 );
-
 videosManagementRoutes.get(
     "/videos/user/:id",
     auth,
     getVideos
 );
-
 videosManagementRoutes.get(
     "/videos/category/:category",
     auth,
     getVideoByCategory
 );
-
-videosManagementRoutes.get("/videos/:id", auth, getVideo);
+videosManagementRoutes.get(
+    "/videos/:id",
+    auth,
+    getVideo
+);
 
 videosManagementRoutes.post(
     "/admin/videos",

@@ -10,7 +10,9 @@ import {
     getNote,
 } from "../controllers/notes/notes.controller.js";
 
+
 export const notesRoutes = Router();
+
 
 notesRoutes.get(
     "/notes",

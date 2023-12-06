@@ -1,4 +1,5 @@
 import { Course } from "../../models/course/course.model.js";
+import { Video } from "../../models/video/video.model.js";
 
 /**
  * Create a new course.
@@ -12,11 +13,8 @@ export const createCourse = async (req, res) => {
         const {
             title,
             description,
-            requirements,
             thumbnail,
             language,
-            category,
-            subcategory,
         } = req.body;
 
         const instructorId = req.user.id;
@@ -24,11 +22,8 @@ export const createCourse = async (req, res) => {
         const newCourse = new Course({
             title,
             description,
-            requirements,
             thumbnail,
             language,
-            category,
-            subcategory,
             instructorId: instructorId,
         });
 
@@ -72,7 +67,6 @@ export const getCourses = async (req, res) => {
  * @param {Object} res - The response object.
  * @returns {Promise<void>} - A promise that resolves when the course is retrieved.
  */
-
 export const getCourse = async (req, res) => {
     try {
         const course = await Course.findById(req.params.id);
@@ -145,6 +139,107 @@ export const updateCourse = async (req, res) => {
                 language,
                 category,
                 subcategory,
+            },
+            { new: true }
+        );
+
+        if (!courseUpdated) {
+            return res.status(404).json(
+                {
+                    message: "Course not found"
+                }
+            );
+        }
+
+        res.json(courseUpdated);
+    } catch (error) {
+        return res.status(500).json(
+            {
+                message: error.message
+            }
+        );
+    }
+}
+
+/**
+ * Add a video to a course.
+ *
+ * This function receives a request and a response object. It extracts the video from the request body.
+ * It then updates the course with the provided id in the request parameters by pushing the new video into the videos array of the course.
+ * If the course is not found, it responds with a 404 status code and a message "Course not found".
+ * If the course is updated successfully, it responds with the updated course.
+ * If an error occurs during the process, it responds with a 500 status code and the error message.
+ *
+ * @param {Object} req - The request object. The request body should contain a 'video' property.
+ * @param {Object} res - The response object.
+ * @returns {Promise<void>} - A promise that resolves when the video is added to the course.
+ * @throws {Error} - An error.
+ */
+export const addExistingVideo = async (req, res) => {
+    try {
+        const { videoId } = req.body;
+
+        const video = Video.findById(videoId);
+
+        if (!video) {
+            return res.status(404).json(
+                {
+                    message: "Video not found"
+                }
+            );
+        }
+
+        const courseUpdated = await Course.findOneAndUpdate(
+            { _id: req.params.id },
+            {
+                $push: {
+                    videos: video
+                }
+            },
+            { new: true }
+        );
+
+        if (!courseUpdated) {
+            return res.status(404).json(
+                {
+                    message: "Course not found"
+                }
+            );
+        }
+
+        res.json(courseUpdated);
+    } catch (error) {
+        return res.status(500).json(
+            {
+                message: error.message
+            }
+        );
+    }
+}
+
+
+export const addNewVideo = async (req, res) => {
+    try {
+        const {
+            title,
+            description,
+            url,
+        } = req.body;
+
+        const newVideo = new Video({
+            title,
+            description,
+            url,
+        });
+
+        await newVideo.save();
+
+        const courseUpdated = await Course.findOneAndUpdate(
+            { _id: req.params.id },
+            {
+                $push: {
+                    videos: newVideo
+                }
             },
             { new: true }
         );

@@ -8,7 +8,9 @@ import {
     makeAdmin,
 } from "../controllers/users/users.controller.js";
 
+
 export const userManagementRoutes = Router();
+
 
 userManagementRoutes.get(
     "/users",

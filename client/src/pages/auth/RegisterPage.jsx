@@ -42,7 +42,7 @@ export const RegisterPage = () => {
 
     return (
         <>
-            <div className="min-h-screen flex flex-col md:flex-row p-8 justify-evenly items-center bg-bright min-h-screen ">
+            <div className="min-h-screen flex flex-col md:flex-row p-8 justify-evenly items-center bg-bright">
                 <section className="w-1/3 md:w-1/4 p-2">
                     <img
                         src={nancyLogo}
@@ -51,7 +51,7 @@ export const RegisterPage = () => {
                     />
                 </section>
 
-                <Card className="md:w-2/3 p-8 w-full max-w-md p-8">
+                <Card className="md:w-2/3 p-8 w-full max-w-md">
                     {registerErrors.map((error, i) => (
                         <Message message={error} key={i} />
                     ))}

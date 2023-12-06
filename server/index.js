@@ -15,4 +15,4 @@ async function init() {
     }
 }
 
-init().then(r => console.log(">>Init done<<"));
+await init().then(r => console.log(">>Init done<<"));
