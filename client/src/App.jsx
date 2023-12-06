@@ -12,88 +12,87 @@ import { UsersPage } from "./pages/users/UsersPage";
 import { VideosPage } from "./pages/video/VideosPage";
 import { VideoFormPage } from "./pages/video/VideoFormPage";
 import { UsersProvider } from "./context/usersContext";
-import { CoursesPage } from "./pages/course/CoursesPage";
-import { CourseProvider } from "./context/courseContext";
-import { CourseFormPage } from "./pages/course/CourseFormPage";
+import {CoursesPage} from "./pages/course/CoursesPage.jsx";
+import {CourseFormPage} from "./pages/course/CourseFormPage.jsx";
+import {CourseView} from "./pages/course/CourseView.jsx";
+import {CourseProvider} from "./context/courseContext.jsx";
 
 function App() {
     return (
         <div className="mycontainer">
             <AuthProvider>
+                <CourseProvider>
                 <NoteProvider>
-                    <CourseProvider>
-                        <VideoProvider>
-                            <UsersProvider>
-                                <BrowserRouter>
-                                    <Routes>
+                    <VideoProvider>
+                        <UsersProvider>
+                            <BrowserRouter>
+                                <Routes>
+                                    <Route path="/" element={<HomePage />} />
+                                    <Route
+                                        path="/login"
+                                        element={<LoginPage />}
+                                    />
+                                    <Route
+                                        path="/register"
+                                        element={<RegisterPage />}
+                                    />
+
+                                    <Route element={<ProtectedRoute />}>
                                         <Route
-                                            path="/"
-                                            element={<HomePage />}
+                                            path="/notes"
+                                            element={<NotesPage />}
                                         />
                                         <Route
-                                            path="/login"
-                                            element={<LoginPage />}
+                                            path="/courses"
+                                            element={<CoursesPage />}
                                         />
                                         <Route
-                                            path="/register"
-                                            element={<RegisterPage />}
+                                            path="/courses/add-course"
+                                            element={<CourseFormPage />}
+                                        />
+                                        <Route
+                                            path="/courses/:id"
+                                            element={<CourseView />}
+                                        />
+                                        <Route
+                                            path="/add-note"
+                                            element={<NoteFormPage />}
+                                        />
+                                        <Route
+                                            path="/notes/:id"
+                                            element={<NoteFormPage />}
                                         />
 
-                                        <Route element={<ProtectedRoute />}>
-                                            <Route
-                                                path="/notes"
-                                                element={<NotesPage />}
-                                            />
-                                            <Route
-                                                path="/add-note"
-                                                element={<NoteFormPage />}
-                                            />
-                                            <Route
-                                                path="/notes/:id"
-                                                element={<NoteFormPage />}
-                                            />
+                                        <Route
+                                            path="/videos"
+                                            element={<VideosPage />}
+                                        />
+                                    </Route>
 
-                                            <Route
-                                                path="/videos"
-                                                element={<VideosPage />}
-                                            />
-                                        </Route>
-
-                                        <Route element={<RoleProtectedRoute />}>
-                                            <Route
-                                                path="/admin/users"
-                                                element={<UsersPage />}
-                                            />
-                                            <Route
-                                                path="/admin/videos"
-                                                element={<VideosPage />}
-                                            />
-                                            <Route
-                                                path="/admin/add-video"
-                                                element={<VideoFormPage />}
-                                            />
-                                            <Route
-                                                path="/admin/videos/:id"
-                                                element={<VideoFormPage />}
-                                            />
-                                        </Route>
-
-                                        <Route element={<ProtectedRoute />}>
-                                            <Route
-                                                path="/courses"
-                                                element={<CoursesPage />}
-                                            />
-                                            <Route
-                                                path="/courses/add-course"
-                                                element={<CourseFormPage />}
-                                            />
-                                        </Route>
-                                    </Routes>
-                                </BrowserRouter>
-                            </UsersProvider>
-                        </VideoProvider>
-                    </CourseProvider>
+                                    <Route element={<RoleProtectedRoute />}>
+                                        <Route
+                                            path="/admin/users"
+                                            element={<UsersPage />}
+                                        />
+                                        <Route
+                                            path="/admin/videos"
+                                            element={<VideosPage />}
+                                        />
+                                        <Route
+                                            path="/admin/add-video"
+                                            element={<VideoFormPage />}
+                                        />
+                                        <Route
+                                            path="/admin/videos/:id"
+                                            element={<VideoFormPage />}
+                                        />
+                                    </Route>
+                                </Routes>
+                            </BrowserRouter>
+                        </UsersProvider>
+                    </VideoProvider>
                 </NoteProvider>
+                </CourseProvider>
             </AuthProvider>
         </div>
     );

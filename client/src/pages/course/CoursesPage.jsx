@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Navbar } from "../../components/general/Navbar";
 import { Footer } from "../../components/general/Footer";
 import { useCourses } from "../../context/courseContext";
+import {Link} from "react-router-dom";
 
 export function CoursesPage() {
     const { courses, getCourses } = useCourses();
@@ -43,7 +44,7 @@ export function CoursesPage() {
                 {courses.length === 0 ? (
                     <div className="flex flex-col items-center justify-center p-10 bg-dark text-white rounded-md">
                         <h2 className="font-bold text-xl text-center mb-4">
-                            No courses yet
+                            No courses yet, create one!
                         </h2>
                     </div>
                 ) : (
@@ -55,13 +56,32 @@ export function CoursesPage() {
                                 </h2>
                             </div>
                         ) : (
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4">
                                 {filteredCourses.map((course) => (
                                     <div
                                         key={course._id}
                                         className="col-span-1"
                                     >
-                                        a
+                                        <div className="bg-dark text-white rounded-md shadow-md p-6">
+                                            <h2 className="font-bold text-xl">
+                                                {course.title || "No title"}
+                                            </h2>
+                                            <p className="text-gray-400">
+                                                {course.description || "No description"}
+                                            </p>
+                                            <p className="text-gray-400">
+                                                {course.language || "No language"}
+                                            </p>
+                                            <p className="text-gray-400">
+                                                {course.thumbnail || "No thumbnail"}
+                                            </p>
+                                        </div>
+
+                                        <Link to={`/course/${course._id}`}>
+                                            <button className="bg-dark text-white rounded-md shadow-md p-2 mt-2">
+                                                View course
+                                            </button>
+                                        </Link>
                                     </div>
                                 ))}
                             </div>

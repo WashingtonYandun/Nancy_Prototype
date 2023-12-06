@@ -1,20 +1,20 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button, Card, Input } from "../../components/ui";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useCourses } from "../../context/courseContext";
-import { Textarea } from "../../components/ui/Textarea";
+
 
 export const CourseFormPage = () => {
     const { createCourse } = useCourses();
     const navigate = useNavigate();
-
     const [classification, setClassification] = useState(null);
+    const [subclassification, setSubclassification] = useState(null);
+    const [selectedLanguage, setSelectedLanguage] = useState("en");
+    const languages = ["en", "es", "fr", "it", "gr"];
 
     const {
         register,
-        setValue,
         handleSubmit,
         formState: { errors },
     } = useForm();
@@ -26,9 +26,11 @@ export const CourseFormPage = () => {
             }
 
             if (classification) {
-                data.category = classification.category;
-                data.subcategory = classification.matches;
+                data.classification = classification;
+                data.subclassification = subclassification;
             }
+
+            data.language = selectedLanguage;
 
             createCourse(data);
             navigate("/courses");
@@ -50,6 +52,7 @@ export const CourseFormPage = () => {
                         category: response.data.category,
                         matches: response.data.matches,
                     };
+                    setClassification(mydata);
                     setClassification(mydata);
                 } else {
                     console.error("Error using Classifier API", response);
@@ -82,49 +85,73 @@ export const CourseFormPage = () => {
 
     return (
         <>
-            <div className="grid grid-cols-2 h-screen">
-                <div className="read-section bg-gray-200 h-[10vh]"></div>
+            <div className="max-w-md mx-auto my-10 bg-white p-8 rounded-lg shadow-lg">
+                <div>
+                    <h1 className="text-2xl font-bold text-gray-700 mb-2">Course Form</h1>
+                    <p className="text-gray-600 mb-4">Fill the form to create a new course.</p>
 
-                {/* Course Form Section */}
-                <Card className="w-full max-w-xl p-6 bg-gray-800 text-white rounded-md shadow-md h-[10vh]">
-                    <form
-                        onSubmit={handleSubmit(onSubmit)}
-                        className="space-y-3"
-                    >
-                        <div className="flex flex-column">
-                            <Input
+                    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+                        <div>
+                            <input
                                 type="text"
                                 name="title"
                                 placeholder="Title"
+                                className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
                                 {...register("title")}
                                 autoFocus
-                                className="w-full bg-gray-700 text-white rounded border-none focus-outline-none py-2 px-3"
                                 onChange={handleTitleChange}
                             />
-                            {errors.title && (
-                                <p className="text-error">
-                                    Please enter a title.
-                                </p>
-                            )}
+                            {errors.title && <p className="text-red-500 text-xs italic">Please enter a title.</p>}
                         </div>
 
-                        <Textarea
+                        <textarea
                             name="description"
-                            id="description"
-                            rows="4"
                             placeholder="Description"
+                            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
                             {...register("description")}
-                            className="w-full bg-gray-700 text-white rounded border-none focus-outline-none py-2 px-3 h-[20vh]"
                         />
 
-                        <Button
-                            type="submit"
-                            className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-3 rounded focus-outline-none"
+                        <textarea
+                            name="thumbnail"
+                            placeholder="Thumbnail"
+                            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                            {...register("thumbnail")}
+                        />
+
+                        <input
+                            type="text"
+                            name="requirements"
+                            placeholder="requirements"
+                            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                            {...register("requirements")}
+                        />
+                        {/* TODO: Add a list of requirements */}
+
+                        <input
+                            type="text"
+                            name="tags"
+                            placeholder="tags"
+                            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                            {...register("tags")}
+                        />
+                        {/* TODO: Add a list of tags */}
+
+                        <select
+                            name="language"
+                            value={selectedLanguage}
+                            onChange={(e) => setSelectedLanguage(e.target.value)}
+                            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
                         >
-                            Save
-                        </Button>
+                            {languages.map((language) => (
+                                <option key={language} value={language}>
+                                    {language}
+                                </option>
+                            ))}
+                        </select>
+
+                        <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600">Save</button>
                     </form>
-                </Card>
+                </div>
             </div>
         </>
     );
