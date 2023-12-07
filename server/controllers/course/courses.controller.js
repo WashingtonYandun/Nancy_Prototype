@@ -15,6 +15,8 @@ export const createCourse = async (req, res) => {
             description,
             thumbnail,
             language,
+            classification,
+            subclassification,
         } = req.body;
 
         const instructorId = req.user.id;
@@ -24,6 +26,8 @@ export const createCourse = async (req, res) => {
             description,
             thumbnail,
             language,
+            classification,
+            subclassification,
             instructorId: instructorId,
         });
 
