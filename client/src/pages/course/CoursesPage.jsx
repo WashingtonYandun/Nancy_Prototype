@@ -40,56 +40,49 @@ export function CoursesPage() {
         <>
             <Navbar />
 
-            <div className="container mx-auto my-8 px-4 min-h-screen">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
                 {courses.length === 0 ? (
-                    <div className="flex flex-col items-center justify-center p-10 bg-dark text-white rounded-md">
-                        <h2 className="font-bold text-xl text-center mb-4">
+                    <div className="text-center py-10">
+                        <h2 className="text-xl font-semibold text-gray-800">
                             No courses yet, create one!
                         </h2>
                     </div>
                 ) : (
-                    <div className="">
+                    <div>
                         {filteredCourses.length === 0 ? (
-                            <div className="flex flex-col items-center justify-center p-10 bg-dark text-white rounded-md">
-                                <h2 className="font-bold text-xl text-center mb-4">
+                            <div className="text-center py-10">
+                                <h2 className="text-xl font-semibold text-gray-800">
                                     No courses in the selected category
                                 </h2>
                             </div>
                         ) : (
-                            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4">
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                                 {filteredCourses.map((course) => (
-                                    <div
-                                        key={course._id}
-                                        className="col-span-1"
-                                    >
-                                        <div className="bg-dark text-white rounded-md shadow-md p-6">
-                                            <h2 className="font-bold text-xl">
+                                    <Link to={`/courses/${course._id}`} key={course._id} className="bg-white rounded-lg shadow overflow-hidden">
+                                        <div className="p-6">
+                                            <h2 className="text-lg font-semibold text-gray-800 mb-2">
                                                 {course.title || "No title"}
                                             </h2>
-                                            <p className="text-gray-400">
+                                            <p className="text-sm text-gray-600 mb-4">
                                                 {course.description || "No description"}
                                             </p>
-                                            <p className="text-gray-400">
-                                                {course.language || "No language"}
-                                            </p>
-                                            <p className="text-gray-400">
-                                                {course.thumbnail || "No thumbnail"}
-                                            </p>
+                                            <div className="text-sm text-gray-500">
+                                                <p>{course.language || "No language"}</p>
+                                                <p>{course.thumbnail || "No thumbnail"}</p>
+                                                <p>{course.classification.category || "No category"}</p>
+                                                <p>{course.subclassification.category || "No subcategory"}</p>
+                                            </div>
+                                                <button className="mt-4 bg-accent hover:bg-accent hover:rounded-2xl text-black font-bold py-2 px-4 rounded">
+                                                    View course
+                                                </button>
                                         </div>
-
-                                        <Link to={`/course/${course._id}`}>
-                                            <button className="bg-dark text-white rounded-md shadow-md p-2 mt-2">
-                                                View course
-                                            </button>
-                                        </Link>
-                                    </div>
+                                    </Link>
                                 ))}
                             </div>
                         )}
                     </div>
                 )}
             </div>
-            <Footer />
         </>
     );
 }

@@ -5,35 +5,36 @@ import { ButtonLink } from "../ui/ButtonLink";
 
 const AuthenticatedLinks = ({ user, logout }) => (
     <>
-        <div className="text-bright">Hi! {user.username}</div>
-        {user.role === "admin" ? (
-            <>
-                <ButtonLink to="/admin/users">User Management</ButtonLink>
-                <ButtonLink to="/admin/add-video">Add Video</ButtonLink>
-            </>
-        ) : (
-            <>
-                <ButtonLink to="/notes">Notes</ButtonLink>
-                <ButtonLink to="/videos">Explore</ButtonLink>
-                <ButtonLink to="/dashboard">Dashboard</ButtonLink>
-            </>
-        )}
-        <Link
-            to="/"
-            onClick={() => {
-                logout();
-            }}
-            className="text-accent hover:underline"
-        >
-            Logout
-        </Link>
+        <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4 items-center">
+            {user.role === "admin" ? (
+                <>
+                    <Link to="/admin/users" className="btn-primary">User Management</Link>
+                    <Link to="/admin/add-video" className="btn-primary">Add Video</Link>
+                </>
+            ) : (
+                <>
+                    <Link to="/notes" className="btn-primary">Notes</Link>
+                    <Link to="/videos" className="btn-primary">Explore</Link>
+                    <Link to="/courses" className="btn-primary">Courses</Link>
+                </>
+            )}
+            <Link
+                to="/"
+                onClick={() => { logout(); }}
+                className="btn-secondary"
+            >
+                Logout
+            </Link>
+        </div>
     </>
 );
 
 const GuestLinks = () => (
     <>
-        <ButtonLink to="/login">Login</ButtonLink>
-        <ButtonLink to="/register">Register</ButtonLink>
+        <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4">
+            <Link to="/login" className="btn-primary">Login</Link>
+            <Link to="/register" className="btn-primary">Register</Link>
+        </div>
     </>
 );
 
@@ -69,45 +70,24 @@ export const Navbar = () => {
     }, [showMenu]);
 
     return (
-        <nav className="flex items-center justify-between bg-dark p-4">
-            <h1 className="text-2xl text-bright">
-                <Link
-                    to={
-                        isAuthenticated
-                            ? user.role === "admin"
-                                ? "/admin/users"
-                                : "/notes"
-                            : "/"
-                    }
-                >
-                    Nancy
-                </Link>
-            </h1>
+        <nav className="bg-teal-50 text-black p-4">
+            <div className="container mx-auto flex justify-between items-center">
+                <h1 className="text-xl font-bold">
+                    <Link to={isAuthenticated ? (user.role === "admin" ? "/admin/users" : "/notes") : "/"}>Nancy</Link>
+                </h1>
 
-            <div className="hidden md:flex items-center space-x-4">
-                {isAuthenticated ? (
-                    <AuthenticatedLinks user={user} logout={logout} />
-                ) : (
-                    <GuestLinks />
-                )}
-            </div>
+                <div className="hidden md:block">
+                    {isAuthenticated ? <AuthenticatedLinks user={user} logout={logout} /> : <GuestLinks />}
+                </div>
 
-            <div className="md:hidden">
-                <button onClick={toggleMenu} className="text-bright">
-                    ☰
-                </button>
+                <div className="md:hidden">
+                    <button onClick={toggleMenu} className="text-xl">☰</button>
+                </div>
             </div>
 
             {showMenu && (
-                <div
-                    ref={menuRef}
-                    className="md:hidden absolute right-0 top-16 bg-dark p-4 space-y-4"
-                >
-                    {isAuthenticated ? (
-                        <AuthenticatedLinks user={user} logout={logout} />
-                    ) : (
-                        <GuestLinks />
-                    )}
+                <div ref={menuRef} className="absolute right-0 mt-2 py-2 w-48 bg-white rounded-lg shadow-xl">
+                    {isAuthenticated ? <AuthenticatedLinks user={user} logout={logout} /> : <GuestLinks />}
                 </div>
             )}
         </nav>

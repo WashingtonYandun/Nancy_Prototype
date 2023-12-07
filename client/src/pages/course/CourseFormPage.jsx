@@ -21,15 +21,12 @@ export const CourseFormPage = () => {
 
     const onSubmit = async (data) => {
         try {
-            if (!data.title || !data.description) {
+            if (!data.title || !data.description || !data.thumbnail ) {
                 return alert("Please fill all the required fields");
             }
 
-            if (classification) {
-                data.classification = classification;
-                data.subclassification = subclassification;
-            }
-
+            data.classification = classification;
+            data.subclassification = subclassification;
             data.language = selectedLanguage;
 
             createCourse(data);
@@ -53,7 +50,7 @@ export const CourseFormPage = () => {
                         matches: response.data.matches,
                     };
                     setClassification(mydata);
-                    setClassification(mydata);
+                    setSubclassification(mydata);
                 } else {
                     console.error("Error using Classifier API", response);
                 }
