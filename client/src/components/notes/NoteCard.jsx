@@ -1,5 +1,5 @@
 import { useNotes } from "../../context/notesContext";
-import { Button, ButtonLink, Card } from "../ui";
+import {Link} from "react-router-dom";
 
 export function NoteCard({ note }) {
     const { deleteNote } = useNotes();
@@ -20,18 +20,19 @@ export function NoteCard({ note }) {
             </div>
 
             <div className="flex items-center space-x-2">
-                <Button
+                <button
                     onClick={() => deleteNote(note._id)}
                     className="bg-error hover:bg-joy"
                 >
                     Delete
-                </Button>
-                <ButtonLink
+                </button>
+
+                <Link
                     to={`/notes/${note._id}`}
                     className="bg-accent hover:bg-joy"
                 >
                     Edit
-                </ButtonLink>
+                </Link>
             </div>
         </Card>
     );

@@ -2,7 +2,7 @@ import { useAuth } from "../../context/authContext";
 import { useForm } from "react-hook-form";
 import { useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Card, Button, Input, Label } from "../../components/ui";
+import { Card, Input, Label } from "../../components/ui";
 import { Link, useNavigate } from "react-router-dom";
 import { loginSchema } from "../../schemas/auth";
 import { Footer } from "../../components/general/Footer";
@@ -92,9 +92,9 @@ export function LoginPage() {
                             </p>
                         </div>
 
-                        <Button className="w-full bg-darkAccent hover:bg-darkAccentHover text-white hover:text-darkAccent">
+                        <button type="submit" className="w-full bg-darkAccent hover:bg-darkAccentHover text-white hover:text-darkAccent">
                             Login
-                        </Button>
+                        </button>
                     </form>
 
                     <p className="text-center mt-4">

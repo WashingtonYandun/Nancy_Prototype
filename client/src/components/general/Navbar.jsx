@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/authContext";
-import { ButtonLink } from "../ui/ButtonLink";
 
 const AuthenticatedLinks = ({ user, logout }) => (
     <>
@@ -70,7 +69,7 @@ export const Navbar = () => {
     }, [showMenu]);
 
     return (
-        <nav className="bg-teal-50 text-black p-4">
+        <nav className="bg-teal-50 border-b-2 text-black p-4">
             <div className="container mx-auto flex justify-between items-center">
                 <h1 className="text-xl font-bold">
                     <Link to={isAuthenticated ? (user.role === "admin" ? "/admin/users" : "/notes") : "/"}>Nancy</Link>

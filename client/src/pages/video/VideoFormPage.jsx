@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Button, Card, Input } from "../../components/ui";
+import { Card, Input } from "../../components/ui";
 import { Textarea } from "../../components/ui/Textarea";
 import { useForm } from "react-hook-form";
 import axios from "axios";
@@ -152,12 +152,12 @@ export const VideoFormPage = () => {
                             )}
                         </div>
 
-                        <Button
+                        <button
                             type="submit"
                             className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-3 rounded focus-outline-none"
                         >
                             Save
-                        </Button>
+                        </button>
                     </form>
                 </Card>
             </div>

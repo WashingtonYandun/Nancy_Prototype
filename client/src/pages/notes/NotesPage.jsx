@@ -42,10 +42,10 @@ export const NotesPage = () => {
         <>
             <Navbar />
 
-            <div className="flex flex-row bg-teal-50 px-20 py-5 justify-between items-center text-white">
+            <div className="flex flex-row border-b-2 bg-teal-50 justify-between items-center text-white py-2 px-4">
                 <Link
                     to="/add-note"
-                    className="bg-accent hover:bg-joy text-white py-2 px-4 mt-4 rounded-md"
+                    className="bg-accent hover:bg-joy text-white py-2 px-4 flex items-center justify-center rounded-md"
                 >
                     Add Note
                 </Link>
