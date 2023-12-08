@@ -1,9 +1,6 @@
-import {useNotes} from "../../context/notesContext.jsx";
 import {useNavigate, useParams} from "react-router-dom";
 import {useEffect, useRef, useState} from "react";
-import {useForm} from "react-hook-form";
 import * as faceapi from "face-api.js";
-import axios from "axios";
 
 export const VideoInteractionPage = () => {
     const navigate = useNavigate();

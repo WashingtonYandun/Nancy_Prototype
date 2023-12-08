@@ -3,8 +3,8 @@ import { useNotes } from "../../context/notesContext";
 import { NoteCard } from "../../components/notes/NoteCard";
 import { Navbar } from "../../components/general/Navbar";
 import { Footer } from "../../components/general/Footer";
-import { ButtonLink } from "../../components/ui";
 import { Dropdown } from "../../components/general/Dropdown";
+import {Link} from "react-router-dom";
 
 export const NotesPage = () => {
     const { notes, getNotes, updateNote, createNote, getNote, deleteNote } =
@@ -42,13 +42,13 @@ export const NotesPage = () => {
         <>
             <Navbar />
 
-            <div className="flex flex-row  px-20 py-5 justify-between items-center bg-dark text-white">
-                <ButtonLink
+            <div className="flex flex-row border-b-2 bg-teal-50 justify-between items-center text-white py-2 px-4">
+                <Link
                     to="/add-note"
-                    className="bg-accent hover:bg-joy text-white py-2 px-4 mt-4 rounded-md"
+                    className="bg-accent hover:bg-joy text-white py-2 px-4 flex items-center justify-center rounded-md"
                 >
                     Add Note
-                </ButtonLink>
+                </Link>
 
                 <Dropdown
                     categories={categories}

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useAuth } from "../../context/authContext";
 import { Link, useNavigate } from "react-router-dom";
-import { Card, Message, Button, Input, Label } from "../../components/ui";
+import { Card, Message, Input, Label } from "../../components/ui";
 import { useForm } from "react-hook-form";
 import { registerSchema } from "../../schemas/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -155,7 +155,7 @@ export const RegisterPage = () => {
                             )}
                         </div>
 
-                        <Button className="w-full">Submit</Button>
+                        <button type="submit" className="w-full">Submit</button>
                     </form>
 
                     <p className="text-center mt-4">

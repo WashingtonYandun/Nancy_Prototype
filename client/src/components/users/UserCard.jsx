@@ -1,5 +1,5 @@
 import { useUsers } from "../../context/usersContext";
-import { Button, Card } from "../ui";
+import { Card } from "../ui";
 
 export function UserCard({ user }) {
     const { deleteUser, makeAdmin } = useUsers();
@@ -18,19 +18,19 @@ export function UserCard({ user }) {
             </div>
 
             <div className="flex items-center space-x-2">
-                <Button
+                <button
                     onClick={() => deleteUser(user._id)}
                     className="bg-error hover:bg-joy"
                 >
                     Delete
-                </Button>
+                </button>
 
-                <Button
+                <button
                     onClick={() => makeAdmin(user._id)}
                     className="bg-error hover:bg-joy"
                 >
                     Make Admin
-                </Button>
+                </button>
             </div>
         </Card>
     );

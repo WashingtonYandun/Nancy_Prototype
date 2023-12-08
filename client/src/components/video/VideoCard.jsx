@@ -1,6 +1,7 @@
-import { Button, Card } from "../ui";
+import {  Card } from "../ui";
 import { useVideo } from "../../context/videoContext";
 import { useAuth } from "../../context/authContext";
+import {Link} from "react-router-dom";
 
 export const VideoCard = ({ video }) => {
     const { user, isAuthenticated } = useAuth();
@@ -39,28 +40,28 @@ export const VideoCard = ({ video }) => {
             <div className="flex items-center space-x-2">
                 {isAuthenticated && user.role === "admin" ? (
                     <>
-                        <Button
+                        <Link
                             to="/admin/edit-video"
                             className="bg-error hover:bg-joy"
                         >
                             Edit
-                        </Button>
+                        </Link>
 
-                        <Button
+                        <button
                             onClick={() => deleteVideo(video._id)}
                             className="bg-error hover:bg-joy"
                         >
                             Delete
-                        </Button>
+                        </button>
                     </>
                 ) : (
                     <>
-                        <Button
+                        <Link
                             className="bg-error hover:bg-joy"
                             to={`/note-form/${video._id}`}
                         >
                             Go to Video
-                        </Button>
+                        </Link>
                     </>
                 )}
             </div>

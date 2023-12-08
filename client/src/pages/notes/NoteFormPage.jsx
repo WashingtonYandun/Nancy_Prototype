@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Button, Card, Input } from "../../components/ui";
+import { Card, Input } from "../../components/ui";
 import { useNotes } from "../../context/notesContext";
 import { Textarea } from "../../components/ui/Textarea";
 import { useForm } from "react-hook-form";
@@ -210,12 +210,12 @@ export function NoteFormPage() {
                     style={{ display: "none" }}
                 ></video>
             </div>
-            <Button
+            <button
                 className="bg-blue-500 hover-bg-blue-600 text-white py-2 px-4 focus-outline-none"
                 onClick={handleStartRecognition}
             >
                 Click this to start recognition
-            </Button>
+            </button>
 
             <div className="grid grid-cols-2 h-screen">
                 {/* Read section */}
