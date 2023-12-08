@@ -68,7 +68,8 @@ const courseSchema = new mongoose.Schema(
                     type: String,
                     required: true,
                     trim: true,
-                    enum: ["angry",
+                    enum: [
+                        "angry",
                         "disgusted",
                         "fearful",
                         "happy",
