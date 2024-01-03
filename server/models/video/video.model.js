@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { classificationSchema } from "../classification/classification.model.js";
 
 export const videoSchema = new mongoose.Schema(
     {
@@ -41,13 +40,11 @@ export const videoSchema = new mongoose.Schema(
         },
         language: {
             type: String,
-            required: true,
             trim: true,
-            enum: ["English", "Spanish", "French", "German", "Italian"],
+            enum: ["en", "es", "fr", "it", "gr"],
         },
         duration: {
             type: Number,
-            required: true,
         },
         views: {
             type: Number,
@@ -77,6 +74,4 @@ export const videoSchema = new mongoose.Schema(
     { timestamps: true }
 );
 
-const Video = mongoose.model("Video", videoSchema);
-
-export { Video };
+export const Video = mongoose.model("Video", videoSchema);
