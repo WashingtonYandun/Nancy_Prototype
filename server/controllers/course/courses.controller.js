@@ -17,6 +17,9 @@ export const createCourse = async (req, res) => {
             language,
             classification,
             subclassification,
+            tags,
+            videos,
+            requirements,
         } = req.body;
 
         const instructorId = req.user.id;
@@ -28,6 +31,9 @@ export const createCourse = async (req, res) => {
             language,
             classification,
             subclassification,
+            tags,
+            videos,
+            requirements,
             instructorId: instructorId,
         });
 
@@ -128,6 +134,8 @@ export const updateCourse = async (req, res) => {
             description,
             requirements,
             thumbnail,
+            tags,
+            videos,
             language,
             category,
             subcategory,
@@ -140,6 +148,8 @@ export const updateCourse = async (req, res) => {
                 description,
                 requirements,
                 thumbnail,
+                tags,
+                videos,
                 language,
                 category,
                 subcategory,
@@ -257,6 +267,30 @@ export const addNewVideo = async (req, res) => {
         }
 
         res.json(courseUpdated);
+    } catch (error) {
+        return res.status(500).json(
+            {
+                message: error.message
+            }
+        );
+    }
+}
+
+export const getVideosByCourseId = async (req, res) => {
+    try {
+        const course = await Course.findById(req.params.id);
+
+        if (!course) {
+            return res.status(404).json(
+                {
+                    message: "Course not found"
+                }
+            );
+        }
+
+        const videos = await Video.find({ _id: { $in: course.videos } });
+
+        res.json(videos);
     } catch (error) {
         return res.status(500).json(
             {

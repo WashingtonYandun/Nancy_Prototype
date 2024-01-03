@@ -1,7 +1,7 @@
 /**
  * Calculates the expression status based on the given expression object.
  * @param {object} expression - The expression object containing emotion values.
- * @returns {number} - The status value indicating the expression status.
+ * @returns {string} - The status value indicating the expression status.
  */
 export const getExpressionsStatus = (expression) => {
     let possibleStatus = {
@@ -55,7 +55,7 @@ export const getMaxExpression = (expressions) => {
 
 /**
  * Calculates the percentage of each expression in the given data.
- * @param {Object} data - The data containing expressions.
+ * @param {Object} expressions - The data containing expressions.
  * @returns {Object} - An object containing the percentage of each expression.
  */
 export const getExpressionPercentage = (expressions) => {
@@ -98,28 +98,6 @@ export const joinAllNotesExpressions = (notes) => {
 };
 
 /**
- * Calculates the emotion analysis of a note.
- * @param {Object} data - The data object containing the note expressions.
- * @returns {Object} - The analysis object containing the expressions list, expressions percentage, main expression, and status.
- */
-export const getNoteEmotionAnalysis = (data) => {
-    // get the emotion analysis of a note
-    let analysis = {};
-
-    const expressions_percentage = getExpressionPercentage(data);
-    const main_expression = getMaxExpression(expressions);
-
-    analysis = {
-        expressions_list: data.expressions,
-        expressions_percentage: expressions_percentage,
-        main_expression: main_expression,
-        status: getExpressionsStatus(expressions_percentage),
-    };
-
-    return analysis;
-};
-
-/**
  * Returns an array of emotion values for a given emotion.
  *
  * @param {string} emotion - The emotion to retrieve values for.
@@ -128,10 +106,12 @@ export const getNoteEmotionAnalysis = (data) => {
  */
 export const getEmotionValues = (emotion, expressions) => {
     // join all notes expressions of one emotion into one array
-    const emotionValues = expressions.map((expression) => expression[emotion]);
-    return emotionValues;
+    try{
+        return expressions.map((expression) => expression[emotion]);
+    }catch (error) {
+        console.log(error);
+    }
 };
-
 
 /**
  * Normalizes the emotions data by removing the 'neutral' emotion and calculating the normalized probabilities.
@@ -139,14 +119,18 @@ export const getEmotionValues = (emotion, expressions) => {
  * @returns {Array} - The normalized emotions data array.
  */
 export const normalizeEmotionsData = (emotionsData) => {
-    let getRidOfNeutral = Object.keys(emotionsData)
-        .filter(emocion => emocion !== 'neutral')
-        .map(emocion => emotionsData[emocion]);
+    try {
 
-    let probSum = getRidOfNeutral.reduce((sum, prob) => sum + prob, 0);
-    let normalizedData = getRidOfNeutral.map(prob => prob / probSum);
+        let getRidOfNeutral = Object.keys(emotionsData)
+            .filter(emotion => emotion !== 'neutral')
+            .map(emotion => emotionsData[emotion]);
 
-    return normalizedData;
+        let probSum = getRidOfNeutral.reduce((sum, prob) => sum + prob, 0);
+        return getRidOfNeutral.map(prob => prob / probSum);
+
+    }catch (error) {
+        console.log(error);
+    }
 }
 
 /**
@@ -155,12 +139,43 @@ export const normalizeEmotionsData = (emotionsData) => {
  * @returns {number} - The emotions entropy.
  */
 export const calculateEmotionsEntropy = (emotionsData) => {
-    let entropy = 0;
+    try {
+        let entropy = 0;
 
-    emotionsData.forEach(prob => {
-        entropy -= prob * Math.log2(prob);
-    });
+        emotionsData.forEach(prob => {
+            entropy -= prob * Math.log2(prob);
+        });
 
-    return entropy;
+        return entropy;
+    }catch (error) {
+        console.log(error);
+    }
 }
 
+/**
+ * Calculates the emotion analysis of a note.
+ * @param {Object} data - The data object containing the note expressions.
+ * @returns {Object} - The analysis object containing the expressions list, expressions percentage, main expression, and status.
+ */
+export const getNoteEmotionAnalysis = (data) => {
+
+    try {
+
+        // get the emotion analysis of a note
+        let analysis = {};
+
+        const expressions_percentage = getExpressionPercentage(data);
+        const main_expression = getMaxExpression(expressions);
+
+        analysis = {
+            expressions_list: data.expressions,
+            expressions_percentage: expressions_percentage,
+            main_expression: main_expression,
+            status: getExpressionsStatus(expressions_percentage),
+        };
+
+        return analysis;
+    }catch (error) {
+        console.log(error);
+    }
+};

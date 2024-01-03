@@ -35,11 +35,14 @@ export const getVideoByCategory = async (req, res) => {
 export const createVideo = async (req, res) => {
     try {
         const requester = await User.findById(req.user.id);
+
         if (requester.role !== "admin") {
             return res.status(401).json({ message: "Unauthorized" });
         }
 
         const { title, description, url, classification } = req.body;
+
+        console.log(title, description, url, classification);
 
         const uploaderId = req.user.id;
         const newVideo = new Video({
@@ -49,6 +52,8 @@ export const createVideo = async (req, res) => {
             uploaderId,
             classification,
         });
+
+        console.log(newVideo);
 
         await newVideo.save();
         res.json(newVideo);
