@@ -38,7 +38,6 @@ videosManagementRoutes.get(
 videosManagementRoutes.post(
     "/admin/videos",
     auth,
-    verifyRole,
     createVideo
 );
 

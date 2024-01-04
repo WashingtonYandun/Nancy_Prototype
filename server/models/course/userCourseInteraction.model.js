@@ -17,13 +17,14 @@ const userCourseInteractionSchema = new mongoose.Schema(
                 required: true
             }
         ],
-        expressions: [
-            {
-                type: expressionSchema,
-                required: true,
-            },
-        ],
-
+        score: {
+            type: Number,
+            required: true,
+        },
+        category: {
+            type: String,
+            required: true,
+        },
     },
     { timestamps: true }
 );
