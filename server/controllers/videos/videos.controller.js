@@ -36,10 +36,6 @@ export const createVideo = async (req, res) => {
     try {
         const requester = await User.findById(req.user.id);
 
-        if (requester.role !== "admin") {
-            return res.status(401).json({ message: "Unauthorized" });
-        }
-
         const { title, description, url, classification } = req.body;
 
         console.log(title, description, url, classification);

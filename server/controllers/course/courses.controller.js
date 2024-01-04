@@ -120,13 +120,6 @@ export const deleteCourse = async (req, res) => {
     }
 }
 
-/**
- * Update a course by id.
- * 
- * @param {Object} req - The request object.
- * @param {Object} res - The response object.
- * @returns {Promise<void>} - A promise that resolves when the course is updated.
- */
 export const updateCourse = async (req, res) => {
     try {
         const {
@@ -149,10 +142,10 @@ export const updateCourse = async (req, res) => {
                 requirements,
                 thumbnail,
                 tags,
-                videos,
                 language,
                 category,
                 subcategory,
+                videos,
             },
             { new: true }
         );
@@ -248,15 +241,6 @@ export const addNewVideo = async (req, res) => {
 
         await newVideo.save();
 
-        const courseUpdated = await Course.findOneAndUpdate(
-            { _id: req.params.id },
-            {
-                $push: {
-                    videos: newVideo
-                }
-            },
-            { new: true }
-        );
 
         if (!courseUpdated) {
             return res.status(404).json(
