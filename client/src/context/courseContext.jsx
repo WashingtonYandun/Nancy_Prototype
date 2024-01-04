@@ -5,6 +5,7 @@ import {
     createCourseRequest,
     getCourseRequest,
     updateCourseRequest,
+    getVideosByCourseIdRequest,
 } from "../api/courses";
 
 const CourseContext = createContext();
@@ -58,7 +59,17 @@ export function CourseProvider({ children }) {
 
     const updateCourse = async (id, course) => {
         try {
-            await updateCourseRequest(id, course);
+            const res = await updateCourseRequest(id, course);
+            console.log(res.data);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    const getVideosByCourseId = async (id) => {
+        try {
+            const res = await getVideosByCourseIdRequest(id);
+            return res.data;
         } catch (error) {
             console.error(error);
         }
@@ -73,6 +84,7 @@ export function CourseProvider({ children }) {
                 createCourse: createCourse,
                 getCourse: getCourse,
                 updateCourse: updateCourse,
+                getVideosByCourseId: getVideosByCourseId,
             }}
         >
             {children}

@@ -72,9 +72,9 @@ export function CoursesPage() {
                                                 <p>{course.classification.category || "No category"}</p>
                                                 <p>{course.subclassification.category || "No subcategory"}</p>
                                             </div>
-                                                <button className="mt-4 bg-accent hover:bg-accent hover:rounded-2xl text-black font-bold py-2 px-4 rounded">
-                                                    View course
-                                                </button>
+                                                <Link className="mt-4 bg-accent hover:bg-accent hover:rounded-2xl text-black font-bold py-2 px-4 rounded" to={`/courses/edit-course/${course._id}`}>
+                                                    Edit Course
+                                                </Link>
                                         </div>
                                     </Link>
                                 ))}

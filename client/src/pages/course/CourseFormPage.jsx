@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useCourses } from "../../context/courseContext";
 
-
 export const CourseFormPage = () => {
     const { createCourse } = useCourses();
     const navigate = useNavigate();
@@ -12,6 +11,8 @@ export const CourseFormPage = () => {
     const [subclassification, setSubclassification] = useState(null);
     const [selectedLanguage, setSelectedLanguage] = useState("en");
     const languages = ["en", "es", "fr", "it", "gr"];
+    const [tags, setTags] = useState([]);
+    const [requirements, setRequirements] = useState([]);
 
     const {
         register,
@@ -19,15 +20,27 @@ export const CourseFormPage = () => {
         formState: { errors },
     } = useForm();
 
+    const handleTags = (value) => {
+        const tagsArray = value.split(",");
+        setTags(tagsArray);
+    };
+
+    const handleRequirements = (value) => {
+        const requirementsArray = value.split(",");
+        setRequirements(requirementsArray);
+    };
+
     const onSubmit = async (data) => {
         try {
-            if (!data.title || !data.description || !data.thumbnail ) {
+            if (!data.title || !data.description || !data.thumbnail) {
                 return alert("Please fill all the required fields");
             }
 
             data.classification = classification;
             data.subclassification = subclassification;
             data.language = selectedLanguage;
+            data.tags = tags;
+            data.requirements = requirements;
 
             createCourse(data);
             navigate("/courses");
@@ -84,10 +97,17 @@ export const CourseFormPage = () => {
         <>
             <div className="max-w-md mx-auto my-10 bg-white p-8 rounded-lg shadow-lg">
                 <div>
-                    <h1 className="text-2xl font-bold text-gray-700 mb-2">Course Form</h1>
-                    <p className="text-gray-600 mb-4">Fill the form to create a new course.</p>
+                    <h1 className="text-2xl font-bold text-gray-700 mb-2">
+                        Course Form
+                    </h1>
+                    <p className="text-gray-600 mb-4">
+                        Fill the form to create a new course.
+                    </p>
 
-                    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+                    <form
+                        onSubmit={handleSubmit(onSubmit)}
+                        className="space-y-4"
+                    >
                         <div>
                             <input
                                 type="text"
@@ -98,7 +118,11 @@ export const CourseFormPage = () => {
                                 autoFocus
                                 onChange={handleTitleChange}
                             />
-                            {errors.title && <p className="text-red-500 text-xs italic">Please enter a title.</p>}
+                            {errors.title && (
+                                <p className="text-red-500 text-xs italic">
+                                    Please enter a title.
+                                </p>
+                            )}
                         </div>
 
                         <textarea
@@ -121,6 +145,7 @@ export const CourseFormPage = () => {
                             placeholder="requirements"
                             className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
                             {...register("requirements")}
+                            onChange={(e) => handleRequirements(e.target.value)}
                         />
                         {/* TODO: Add a list of requirements */}
 
@@ -130,13 +155,16 @@ export const CourseFormPage = () => {
                             placeholder="tags"
                             className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
                             {...register("tags")}
+                            onChange={(e) => handleTags(e.target.value)}
                         />
                         {/* TODO: Add a list of tags */}
 
                         <select
                             name="language"
                             value={selectedLanguage}
-                            onChange={(e) => setSelectedLanguage(e.target.value)}
+                            onChange={(e) =>
+                                setSelectedLanguage(e.target.value)
+                            }
                             className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
                         >
                             {languages.map((language) => (
@@ -146,7 +174,12 @@ export const CourseFormPage = () => {
                             ))}
                         </select>
 
-                        <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600">Save</button>
+                        <button
+                            type="submit"
+                            className="w-full bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600"
+                        >
+                            Save
+                        </button>
                     </form>
                 </div>
             </div>
