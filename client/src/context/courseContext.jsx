@@ -59,7 +59,8 @@ export function CourseProvider({ children }) {
 
     const updateCourse = async (id, course) => {
         try {
-            await updateCourseRequest(id, course);
+            const res = await updateCourseRequest(id, course);
+            console.log(res.data);
         } catch (error) {
             console.error(error);
         }

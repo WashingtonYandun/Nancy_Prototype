@@ -70,6 +70,11 @@ function App() {
                                                 path="/notes/:id"
                                                 element={<NoteFormPage />}
                                             />
+
+                                            <Route
+                                                path="/videos"
+                                                element={<VideosPage />}
+                                            />
                                         </Route>
 
                                         <Route element={<RoleProtectedRoute />}>
@@ -82,7 +87,7 @@ function App() {
                                                 element={<VideosPage />}
                                             />
                                             <Route
-                                                path="/admin/add-video"
+                                                path="/admin/videos/add-video"
                                                 element={<VideoFormPage />}
                                             />
                                             <Route
