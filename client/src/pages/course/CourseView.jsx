@@ -196,14 +196,17 @@ export const CourseView = () => {
         <>
             <Navbar></Navbar>
             <button
-                className="bg-blue-500 hover-bg-blue-600 text-white focus-outline-none"
+                className="bg-blue-500 text-white p-2 rounded-md"
                 onClick={handleStartRecognition}
             >
                 Click this to start recognition
             </button>
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
-                <button>SEND DATA</button>
+                <button className="bg-green-500 text-white p-2 rounded-md">
+                    SEND DATA
+                </button>
+
                 <div id="recognition">
                     <video
                         crossOrigin="anonymous"

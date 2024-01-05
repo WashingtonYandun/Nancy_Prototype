@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { Navbar } from "../../components/general/Navbar";
-import { Footer } from "../../components/general/Footer";
 import { useCourses } from "../../context/courseContext";
 import { useAuth } from "../../context/authContext";
 import { Link } from "react-router-dom";

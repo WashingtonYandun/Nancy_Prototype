@@ -2,18 +2,18 @@ import mongoose from "mongoose";
 
 const userCourseInteractionSchema = new mongoose.Schema(
     {
-        userId: [
-            {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'User',
-            }
-        ],
-        courseId: [
-            {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'Course',
-            }
-        ],
+        userId:
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User',
+        }
+        ,
+        courseId:
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Course',
+        }
+        ,
         score: {
             type: Number,
         },
