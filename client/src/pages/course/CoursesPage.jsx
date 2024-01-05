@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { Navbar } from "../../components/general/Navbar";
-import { Footer } from "../../components/general/Footer";
 import { useCourses } from "../../context/courseContext";
-import {Link} from "react-router-dom";
+import { useAuth } from "../../context/authContext";
+import { Link } from "react-router-dom";
 
 export function CoursesPage() {
     const { courses, getCourses } = useCourses();
+    const { user } = useAuth();
 
     const categories = [
         "Technology",
@@ -58,23 +59,45 @@ export function CoursesPage() {
                         ) : (
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                                 {filteredCourses.map((course) => (
-                                    <Link to={`/courses/${course._id}`} key={course._id} className="bg-white rounded-lg shadow overflow-hidden">
+                                    <Link
+                                        to={`/courses/${course._id}`}
+                                        key={course._id}
+                                        className="bg-white rounded-lg shadow overflow-hidden"
+                                    >
                                         <div className="p-6">
                                             <h2 className="text-lg font-semibold text-gray-800 mb-2">
                                                 {course.title || "No title"}
                                             </h2>
                                             <p className="text-sm text-gray-600 mb-4">
-                                                {course.description || "No description"}
+                                                {course.description ||
+                                                    "No description"}
                                             </p>
                                             <div className="text-sm text-gray-500">
-                                                <p>{course.language || "No language"}</p>
-                                                <p>{course.thumbnail || "No thumbnail"}</p>
-                                                <p>{course.classification.category || "No category"}</p>
-                                                <p>{course.subclassification.category || "No subcategory"}</p>
+                                                <p>
+                                                    {course.language ||
+                                                        "No language"}
+                                                </p>
+                                                <p>
+                                                    {course.thumbnail ||
+                                                        "No thumbnail"}
+                                                </p>
+                                                <p>
+                                                    {course.classification
+                                                        .category ||
+                                                        "No category"}
+                                                </p>
+                                                <p>
+                                                    {course.subclassification
+                                                        .category ||
+                                                        "No subcategory"}
+                                                </p>
                                             </div>
-                                                <Link className="mt-4 bg-accent hover:bg-accent hover:rounded-2xl text-black font-bold py-2 px-4 rounded" to={`/courses/edit-course/${course._id}`}>
-                                                    Edit Course
-                                                </Link>
+                                            <Link
+                                                className="mt-4 bg-accent hover:bg-accent hover:rounded-2xl text-black font-bold py-2 px-4 rounded"
+                                                to={`/courses/edit-course/${course._id}`}
+                                            >
+                                                Edit Course
+                                            </Link>
                                         </div>
                                     </Link>
                                 ))}

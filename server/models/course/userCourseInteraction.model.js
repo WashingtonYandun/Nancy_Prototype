@@ -1,29 +1,24 @@
 import mongoose from "mongoose";
-import { expressionSchema } from "../expression/expression.model.js";
 
 const userCourseInteractionSchema = new mongoose.Schema(
     {
-        userId: [
-            {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'User',
-                required: true
-            }
-        ],
-        courseId: [
-            {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'Course',
-                required: true
-            }
-        ],
+        userId:
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User',
+        }
+        ,
+        courseId:
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Course',
+        }
+        ,
         score: {
             type: Number,
-            required: true,
         },
         category: {
             type: String,
-            required: true,
         },
     },
     { timestamps: true }

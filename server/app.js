@@ -8,6 +8,7 @@ import { notesRoutes } from "./routes/notes.routes.js";
 import { userManagementRoutes } from "./routes/users.admin.routes.js";
 import { videosManagementRoutes } from "./routes/videos.admin.routes.js";
 import { courseRoutes } from "./routes/course.routes.js";
+import {intercationRoutes} from "./routes/intercation.routes.js";
 
 // Create express app
 export const app = express();
@@ -39,3 +40,4 @@ app.use("/api", notesRoutes);
 app.use("/api/admin", userManagementRoutes);
 app.use("/api", videosManagementRoutes);
 app.use("/api", courseRoutes);
+app.use("/api", intercationRoutes);
