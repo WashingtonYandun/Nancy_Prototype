@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { expressionSchema } from "../expression/expression.model.js";
 
 const userCourseInteractionSchema = new mongoose.Schema(
     {

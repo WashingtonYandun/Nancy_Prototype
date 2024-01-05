@@ -43,7 +43,7 @@ export const CourseEditFormPage = () => {
 
     useEffect(() => {
         getVideos();
-    }, [getVideos]);
+    }, []);
 
     return (
         <>

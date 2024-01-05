@@ -1,5 +1,5 @@
-import {UserCourseInteraction} from "../../models/course/userCourseInteraction.model.js";
-import {getExpressionPercentage, normalizeEmotionsData} from "../../libs/utils.emotions.js";
+import { UserCourseInteraction } from "../../models/course/userCourseInteraction.model.js";
+import { getExpressionPercentage, normalizeEmotionsData } from "../../libs/utils.emotions.js";
 
 export const createUserCourse = async (req, res) => {
     try {
@@ -16,10 +16,10 @@ export const createUserCourse = async (req, res) => {
         let course = await Course.findById(courseId);
 
         const userCourse = new UserCourseInteraction({
-            userId,
+            userId: req.params.id,
             courseId,
             expressions,
-            score : nn_score,
+            score: nn_score,
             category: course.classification.category,
         });
 

@@ -1,15 +1,28 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { useCourses } from "../../context/courseContext";
 import { useVideo } from "../../context/videoContext";
+import { Navbar } from "../../components/general/Navbar.jsx";
+import { useForm } from "react-hook-form";
+import * as faceapi from "face-api.js";
+import { updateCourseRequest } from "../../api/courses.js";
 
 export const CourseView = () => {
-    const { id } = useParams(); // Obtains the ID of the course from the URL
-    const { getCourse } = useCourses();
+    const { id } = useParams();
+    const { getCourse, updateCourse } = useCourses();
     const { getVideo } = useVideo();
+    const navigate = useNavigate();
+
     const [videos, setVideos] = useState([]);
     const [selectedVideo, setSelectedVideo] = useState(null);
     const [courseDetails, setCourseDetails] = useState(null);
+
+    const {
+        register,
+        setValue,
+        handleSubmit,
+        formState: { errors },
+    } = useForm();
 
     const getYouTubeVideoId = (url) => {
         const youtubeRegex =
@@ -33,6 +46,7 @@ export const CourseView = () => {
                 courseDetails.videos.map((video) => getVideo(video))
             );
             setVideos(videos);
+            setSelectedVideo(videos[0]);
         };
         if (courseDetails) {
             loadVideos();
@@ -44,60 +58,86 @@ export const CourseView = () => {
     };
 
     return (
-        <div className="bg-amber-500 p-8">
-            {courseDetails ? (
-                <div className="flex flex-wrap">
-                    <div className="w-full md:w-1/2 lg:w-2/3">
-                        <h1 className="text-3xl font-bold mb-4">
-                            {courseDetails.title}
-                        </h1>
-                        <p className="text-gray-700 mb-2">
-                            {courseDetails.description}
-                        </p>
-                        <p className="text-gray-700 mb-2">
-                            {courseDetails.language}
-                        </p>
-                        <p className="text-gray-700 mb-2">
-                            {courseDetails.category}
-                        </p>
-                        <p className="text-gray-700 mb-2">
-                            {courseDetails.subcategory}
-                        </p>
+        <>
+            <Navbar></Navbar>
+            <button className="bg-blue-500 hover-bg-blue-600 text-white focus-outline-none">
+                Click this to start recognition
+            </button>
+
+            <form className="space-y-3">
+                <button>SEND DATA</button>
+            </form>
+            {/* <div id="recognition">
+                <video
+                    crossOrigin="anonymous"
+                    ref={videoRef}
+                    autoPlay
+                    style={{ display: "none" }}
+                ></video>
+            </div> */}
+            <div className="mx-auto p-4 bg-gray-100 flex">
+                {courseDetails ? (
+                    <div className="flex-1">
+                        <div>
+                            <h1 className="text-3xl font-bold text-blue-700">
+                                {courseDetails.title}
+                            </h1>
+                            <p className="text-gray-600">
+                                {courseDetails.description}
+                            </p>
+                            <p className="text-gray-600">
+                                {courseDetails.language}
+                            </p>
+                            <p className="text-gray-600">
+                                {courseDetails.category}
+                            </p>
+                            <p className="text-gray-600">
+                                {courseDetails.subcategory}
+                            </p>
+                        </div>
+                        <div className="mt-4">
+                            {selectedVideo && (
+                                <div>
+                                    <iframe
+                                        width="80%"
+                                        height="400px"
+                                        videoid={getYouTubeVideoId(
+                                            selectedVideo.url
+                                        )}
+                                        src={`https://www.youtube.com/embed/${getYouTubeVideoId(
+                                            selectedVideo.url
+                                        )}`}
+                                        title="YouTube video player"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                        allowFullScreen
+                                        className="shadow-lg rounded"
+                                    ></iframe>
+                                </div>
+                            )}
+                        </div>
                     </div>
-                    <div className="w-full md:w-1/2 lg:w-1/3">
-                        {selectedVideo && (
-                            <div className="flex justify-center items-center">
-                                <iframe
-                                    width="100%"
-                                    height="315"
-                                    videoid={getYouTubeVideoId(
-                                        selectedVideo.url
-                                    )}
-                                    src={`https://www.youtube.com/embed/${getYouTubeVideoId(
-                                        selectedVideo.url
-                                    )}`}
-                                    title="YouTube video player"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                    allowFullScreen
-                                ></iframe>
-                            </div>
-                        )}
-                    </div>
-                    <div className="w-full mt-4">
-                        {videos.map((video) => (
-                            <div
-                                key={video._id}
-                                className="cursor-pointer mb-2 p-2 bg-gray-200 hover:bg-gray-300"
-                                onClick={() => handleVideoSelection(video)}
-                            >
-                                <p className="text-blue-500">{video.url}</p>
-                            </div>
-                        ))}
-                    </div>
+                ) : (
+                    <p>Loading...</p>
+                )}
+                <div className="flex flex-col ml-4">
+                    {videos.map((video) => (
+                        <div
+                            key={video._id}
+                            onClick={() => handleVideoSelection(video)}
+                            className={`p-4 border rounded cursor-pointer hover:bg-gray-200 ${
+                                selectedVideo && selectedVideo._id === video._id
+                                    ? "bg-gray-200"
+                                    : ""
+                            }`}
+                        >
+                            <p className="font-semibold">{video.title}</p>
+                        </div>
+                    ))}
                 </div>
-            ) : (
-                <p>Loading...</p>
-            )}
-        </div>
+            </div>
+
+            <div className="comments"></div>
+            <div className="interactions"></div>
+        </>
     );
 };

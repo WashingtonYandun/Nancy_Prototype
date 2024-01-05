@@ -8,13 +8,13 @@ export const intercationRoutes = Router();
 
 intercationRoutes.post(
     "/user-video/",
-    auth,
+    // auth,
     createUserVideo
 );
 
 intercationRoutes.post(
     "/user-course/",
-    auth,
+    // auth,
     createUserCourse
 );
 
