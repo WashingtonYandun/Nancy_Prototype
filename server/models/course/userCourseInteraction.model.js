@@ -6,23 +6,19 @@ const userCourseInteractionSchema = new mongoose.Schema(
             {
                 type: mongoose.Schema.Types.ObjectId,
                 ref: 'User',
-                required: true
             }
         ],
         courseId: [
             {
                 type: mongoose.Schema.Types.ObjectId,
                 ref: 'Course',
-                required: true
             }
         ],
         score: {
             type: Number,
-            required: true,
         },
         category: {
             type: String,
-            required: true,
         },
     },
     { timestamps: true }
