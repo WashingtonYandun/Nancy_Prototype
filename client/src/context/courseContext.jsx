@@ -6,6 +6,7 @@ import {
     getCourseRequest,
     updateCourseRequest,
     getVideosByCourseIdRequest,
+    recommendedCoursesRequest,
 } from "../api/courses";
 
 const CourseContext = createContext();
@@ -19,6 +20,7 @@ export const useCourses = () => {
 
 export function CourseProvider({ children }) {
     const [courses, setCourses] = useState([]);
+    const [recommendations, setRecommendations] = useState([]);
 
     const getCourses = async () => {
         try {
@@ -75,6 +77,15 @@ export function CourseProvider({ children }) {
         }
     };
 
+    const getRecommendations = async (id) => {
+        try {
+            const res = await recommendedCoursesRequest(id);
+            setRecommendations(res.data);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     return (
         <CourseContext.Provider
             value={{
@@ -85,6 +96,8 @@ export function CourseProvider({ children }) {
                 getCourse: getCourse,
                 updateCourse: updateCourse,
                 getVideosByCourseId: getVideosByCourseId,
+                recommendations: recommendations,
+                getRecommendations: getRecommendations,
             }}
         >
             {children}

@@ -5,8 +5,9 @@ import { useCourses } from "../../context/courseContext";
 import { useAuth } from "../../context/authContext";
 import { Link } from "react-router-dom";
 
-export function CoursesPage() {
-    const { courses, getCourses } = useCourses();
+export function CourseRecommendation() {
+    const { recommendations, getRecommendations, setRecommendation } =
+        useCourses();
     const { user } = useAuth();
 
     const categories = [
@@ -28,21 +29,21 @@ export function CoursesPage() {
     };
 
     const filteredCourses = filteredCategory
-        ? courses.filter(
+        ? recommendations.filter(
               (course) => course.category.category === filteredCategory
           )
-        : courses;
+        : recommendations;
 
     useEffect(() => {
-        getCourses();
-    }, []);
+        getRecommendations();
+    }, [recommendations]);
 
     return (
         <>
             <Navbar />
 
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                {courses.length === 0 ? (
+                {recommendations.length === 0 ? (
                     <div className="text-center py-10">
                         <h2 className="text-xl font-semibold text-gray-800">
                             No courses yet, create one!

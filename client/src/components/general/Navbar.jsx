@@ -25,7 +25,7 @@ const AuthenticatedLinks = ({ user, logout }) => (
                     <Link to="/courses" className="btn-primary">
                         Courses
                     </Link>
-                    <Link to="/recomendations" className="btn-primary">
+                    <Link to="/courses/recommendations/" className="btn-primary">
                         Explore
                     </Link>
                 </>
