@@ -7,7 +7,8 @@ import {
     getCourses,
     updateCourse,
     getVideosByCourseId,
-    courseRecommendation
+    courseRecommendation,
+    mostRecommendedCourses
 } from "../controllers/course/courses.controller.js";
 
 
@@ -52,3 +53,8 @@ courseRoutes.get(
     courseRecommendation
 )
 
+courseRoutes.get(
+    "/courses/most",
+    auth,
+    mostRecommendedCourses
+)
