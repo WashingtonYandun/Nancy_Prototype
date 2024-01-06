@@ -1,27 +1,88 @@
-import { UserCourseInteraction } from "../models/course/userCourseInteraction.model"
+import { UserCourseInteraction } from "../models/course/userCourseInteraction.model.js";
+import { connectDb } from "../db.js";
+import { Course } from "../models/course/course.model.js";
 
-let id = "659495489667382f7f18688c"
+let userId = "65956d228c623f3fd5421464"
+await connectDb();
 
-export const getUserCourseData = (userId) => {
-    let courses = UserCourseInteraction.find({ userId: userId });
+export const getUserCourseData = async (userId) => {
+    try {
+        // get all the courses the user has viewed
+        const viewedCourses = await UserCourseInteraction.find({ userId: userId })
 
-    let categories = ["Technology", "Science", "Software Development", "Business", "Art & Design", "Teaching & Academics", "Personal Development", "Health & Fitness", "Lifestyle"]
+        const categories = [
+            "Technology",
+            "Science",
+            "Software Development",
+            "Business",
+            "Art & Design",
+            "Teaching & Academics",
+            "Personal Development",
+            "Health & Fitness",
+            "Lifestyle"
+        ]
+        const userCoursesMatrix = [];
+        const rows = viewedCourses.length;
+        const cols = categories.length;
 
-    let userCoursesMatrix = Array.from({ length: categories.length }, (_, index) => index + 1);
+        for (let i = 0; i < rows; i++) {
+            userCoursesMatrix[i] = [];
+            for (let j = 0; j < cols; j++) {
+                userCoursesMatrix[i][j] = viewedCourses[i].category === categories[j] ? viewedCourses[i].score : 0;
+            }
+        }
+        console.log(userCoursesMatrix);
 
-    console.log(userCoursesMatrix);
+        // get the sum of each column
+        const columnSums = [];
+        for (let i = 0; i < cols; i++) {
+            columnSums[i] = 0;
+            for (let j = 0; j < rows; j++) {
+                columnSums[i] += userCoursesMatrix[j][i];
+            }
+        }
 
-    // for (let i = 0; i < categories.length; i++) {
-    //     let userCoursesData = [];
+        // get all the courses the user has not viewed
+        const notViewedCourses = await Course.find({ _id: { $nin: viewedCourses.map((course) => course.courseId) } });
 
-    //     for (let j = 0; j < userCourses.length; j++) {
-    //         userCoursesData.push(userCourses[j].score);
-    //     }
+        // get the average score for each category
+        const categoryAverageScores = [];
+        for (let i = 0; i < cols; i++) {
+            categoryAverageScores[i] = columnSums[i] / rows;
+        }
 
-    //     userCoursesMatrix.push(userCoursesData);
-    // }
+        // get the score for each course
+        const coursesScores = [];
+        for (let i = 0; i < notViewedCourses.length; i++) {
+            coursesScores[i] = 0;
+            for (let j = 0; j < cols; j++) {
+                coursesScores[i] += notViewedCourses[i].classification.category === categories[j] ? categoryAverageScores[j] : 0;
+            }
+        }
+
+        // get the top 3 courses with the highest score without repetition 
+        const topCourses = [];
+        let maxScore = 0;
+        let maxScoreIndex = 0;
+        for (let i = 0; i < 3; i++) {
+            for (let j = 0; j < coursesScores.length; j++) {
+                if (coursesScores[j] > maxScore) {
+                    maxScore = coursesScores[j];
+                    maxScoreIndex = j;
+                }
+            }
+            topCourses.push(notViewedCourses[maxScoreIndex]);
+            coursesScores[maxScoreIndex] = 0;
+            maxScore = 0;
+        }
+        console.log(topCourses);
 
 
+
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
 }
 
-get
+getUserCourseData(userId);
