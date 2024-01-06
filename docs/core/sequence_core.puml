@@ -1,0 +1,65 @@
+@startuml
+actor User
+participant FrontEnd as FE
+participant BackEnd as BE
+database Database
+
+activate FE
+activate BE
+activate Database
+
+User -> FE: Navigate to Course View
+
+FE -> Database: Load Course Details
+
+activate Database
+Database --> BE: Course Details
+deactivate Database
+
+BE --> FE: Course Details
+
+FE -> Database: Load Videos
+
+activate Database
+Database --> BE: Videos
+deactivate Database
+
+BE --> FE: Videos
+
+User -> FE: Select Video
+
+FE -> BE: Start Video and Load Models
+
+activate BE
+BE --> FE: Video Streaming Started
+deactivate BE
+
+loop Face Detection Loop
+  FE -> BE: Face Detection
+  activate BE
+  BE --> FE: Facial Expressions
+  deactivate BE
+end
+
+User -> FE: End Session
+
+FE -> BE: Submit Data
+
+activate BE
+BE -> Database: Save User Course Data
+activate Database
+Database --> BE: Data Saved
+deactivate Database
+BE --> FE: User Course Data Saved
+deactivate BE
+
+FE -> BE: Optional - Request Course Recommendation
+
+activate BE
+BE --> FE: Recommended Courses
+deactivate BE
+
+User -> FE: Optional - View Recommended Courses
+
+deactivate FE
+@enduml

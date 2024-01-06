@@ -1,0 +1,48 @@
+@startuml
+start
+:Fetch viewed courses for user;
+if (Error fetching courses?) then (Yes)
+  :Throw an error;
+  stop
+else (No)
+  :Define course categories;
+  :Initialize user courses matrix;
+  :Fetch not viewed courses;
+  :Initialize column sums array;
+  :Initialize category average scores array;
+  :Initialize courses scores array;
+  :Initialize top courses array;
+  :Initialize maxScore and maxScoreIndex;
+  
+  while (Loop over viewed courses) is (true)
+    :Fill user courses matrix;
+  endwhile
+
+  while (Loop over columns) is (true)
+    :Calculate column sums;
+  endwhile
+
+  while (Loop over columns) is (true)
+    :Calculate category average scores;
+  endwhile
+
+  while (Loop over not viewed courses) is (true)
+    :Calculate courses scores;
+  endwhile
+
+  while (Loop 100 times) is (true)
+    while (Loop over courses scores) is (true)
+      if (Current score > maxScore) then (Yes)
+        :Update maxScore and maxScoreIndex;
+      endif
+    endwhile
+    :Add course with maxScore to topCourses array;
+    :Reset maxScore;
+  endwhile
+
+  :Remove duplicate courses from topCourses array;
+  :Print uniqueCourses;
+  :Return uniqueCourses;
+endif
+stop
+@enduml

@@ -63,7 +63,7 @@ export const recommendCourses = async (userId) => {
             }
         }
 
-        // get the top 5 courses with the highest score without repetition 
+        // get the top 100 courses with the highest score without repetition 
         const topCourses = [];
         let maxScore = 0;
         let maxScoreIndex = 0;
@@ -83,7 +83,6 @@ export const recommendCourses = async (userId) => {
         const uniqueCourses = Array.from(new Set(topCourses.map(course => course._id.toString())))
             .map(courseId => topCourses.find(course => course._id.toString() === courseId));
 
-        console.log(uniqueCourses);
 
         return uniqueCourses;
     } catch (error) {
