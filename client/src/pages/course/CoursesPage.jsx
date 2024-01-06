@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 export function CoursesPage() {
     const { courses, getCourses } = useCourses();
-    const { user } = useAuth();
+    const { user, isAuthenticated } = useAuth();
 
     const categories = [
         "Technology",
@@ -87,12 +87,14 @@ export function CoursesPage() {
                                                         "No category"}
                                                 </p>
                                             </div>
-                                            <Link
-                                                className="my-2 mt-4 bg-accent hover:bg-accent hover:rounded-2xl text-black font-bold py-2 px-4 rounded"
-                                                to={`/courses/edit-course/${course._id}`}
-                                            >
-                                                Edit Course
-                                            </Link>
+                                            {user.role === "admin" && (
+                                                <Link
+                                                    className="my-2 mt-4 bg-accent hover:bg-accent hover:rounded-2xl text-black font-bold py-2 px-4 rounded"
+                                                    to={`/courses/edit-course/${course._id}`}
+                                                >
+                                                    Edit Course
+                                                </Link>
+                                            )}
                                         </div>
                                     </Link>
                                 ))}

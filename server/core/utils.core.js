@@ -21,6 +21,7 @@ export const getUserCourseData = async (userId) => {
             "Health & Fitness",
             "Lifestyle"
         ]
+
         const userCoursesMatrix = [];
         const rows = viewedCourses.length;
         const cols = categories.length;
@@ -31,6 +32,7 @@ export const getUserCourseData = async (userId) => {
                 userCoursesMatrix[i][j] = viewedCourses[i].category === categories[j] ? viewedCourses[i].score : 0;
             }
         }
+
         console.log(userCoursesMatrix);
 
         // get the sum of each column
@@ -60,11 +62,11 @@ export const getUserCourseData = async (userId) => {
             }
         }
 
-        // get the top 3 courses with the highest score without repetition 
+        // get the top 5 courses with the highest score without repetition 
         const topCourses = [];
         let maxScore = 0;
         let maxScoreIndex = 0;
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < 5; i++) {
             for (let j = 0; j < coursesScores.length; j++) {
                 if (coursesScores[j] > maxScore) {
                     maxScore = coursesScores[j];
@@ -75,8 +77,12 @@ export const getUserCourseData = async (userId) => {
             coursesScores[maxScoreIndex] = 0;
             maxScore = 0;
         }
-        console.log(topCourses);
 
+        // Corregir el problema de ObjectId duplicados
+        const uniqueCourses = Array.from(new Set(topCourses.map(course => course._id.toString())))
+            .map(courseId => topCourses.find(course => course._id.toString() === courseId));
+
+        console.log(uniqueCourses);
 
 
     } catch (error) {
