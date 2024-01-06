@@ -18,7 +18,7 @@ import { CourseView } from "./pages/course/CourseView.jsx";
 import { CourseProvider } from "./context/courseContext.jsx";
 import { CourseEditFormPage } from "./pages/course/CourseEditFormPage.jsx";
 import { UserCourseProvider } from "./context/userCourseContext.jsx";
-import {CourseRecommendation} from "./pages/course/CourseRecommendation.jsx";
+import { CourseRecommendation } from "./pages/course/CourseRecommendation.jsx";
 
 function App() {
     return (
@@ -46,10 +46,6 @@ function App() {
 
                                             <Route element={<ProtectedRoute />}>
                                                 <Route
-                                                    path="/notes"
-                                                    element={<NotesPage />}
-                                                />
-                                                <Route
                                                     path="/courses"
                                                     element={<CoursesPage />}
                                                 />
@@ -57,16 +53,6 @@ function App() {
                                                     path="/courses/recommendations/"
                                                     element={
                                                         <CourseRecommendation />
-                                                    }
-                                                />
-                                                <Route
-                                                    path="/courses/add-course"
-                                                    element={<CourseFormPage />}
-                                                />
-                                                <Route
-                                                    path="/courses/edit-course/:id"
-                                                    element={
-                                                        <CourseEditFormPage />
                                                     }
                                                 />
                                                 <Route
@@ -106,6 +92,16 @@ function App() {
                                                 <Route
                                                     path="/admin/videos/:id"
                                                     element={<VideoFormPage />}
+                                                />
+                                                <Route
+                                                    path="/courses/edit-course/:id"
+                                                    element={
+                                                        <CourseEditFormPage />
+                                                    }
+                                                />
+                                                <Route
+                                                    path="/courses/add-course"
+                                                    element={<CourseFormPage />}
                                                 />
                                             </Route>
                                         </Routes>
