@@ -1,5 +1,6 @@
 import { Course } from "../../models/course/course.model.js";
 import { Video } from "../../models/video/video.model.js";
+import {recommendCourses} from "../../core/utils.core.js";
 
 /**
  * Create a new course.
@@ -275,6 +276,28 @@ export const getVideosByCourseId = async (req, res) => {
         const videos = await Video.find({ _id: { $in: course.videos } });
 
         res.json(videos);
+    } catch (error) {
+        return res.status(500).json(
+            {
+                message: error.message
+            }
+        );
+    }
+}
+
+
+/**
+ * Handles the course recommendation request.
+ *
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ * @returns {Promise<void>} - A promise that resolves when the recommendation is sent.
+ */
+export const courseRecommendation = async (req, res) => {
+    try {
+        const userId = req.user.id;
+        let recommendedCourses = recommendCourses(userId);
+        return res.json(recommendedCourses);
     } catch (error) {
         return res.status(500).json(
             {

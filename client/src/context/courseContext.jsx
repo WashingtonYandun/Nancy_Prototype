@@ -6,6 +6,7 @@ import {
     getCourseRequest,
     updateCourseRequest,
     getVideosByCourseIdRequest,
+    recommendedCoursesRequest,
 } from "../api/courses";
 
 const CourseContext = createContext();
@@ -75,6 +76,15 @@ export function CourseProvider({ children }) {
         }
     };
 
+    const recommendedCourses = async (id) => {
+        try {
+            const res = await recommendedCoursesRequest(id);
+            return res.data;
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     return (
         <CourseContext.Provider
             value={{
@@ -85,6 +95,7 @@ export function CourseProvider({ children }) {
                 getCourse: getCourse,
                 updateCourse: updateCourse,
                 getVideosByCourseId: getVideosByCourseId,
+                recommendedCourses: recommendedCourses,
             }}
         >
             {children}

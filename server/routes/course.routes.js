@@ -1,6 +1,15 @@
 import { Router } from "express";
 import { auth } from "../middlewares/auth.middleware.js";
-import { createCourse, deleteCourse, getCourse, getCourses, updateCourse, getVideosByCourseId } from "../controllers/course/courses.controller.js";
+import {
+    createCourse,
+    deleteCourse,
+    getCourse,
+    getCourses,
+    updateCourse,
+    getVideosByCourseId,
+    courseRecommendation
+} from "../controllers/course/courses.controller.js";
+
 
 
 export const courseRoutes = Router();
@@ -36,3 +45,10 @@ courseRoutes.get(
     auth,
     getVideosByCourseId
 )
+
+courseRoutes.get(
+    "/courses/recommendation/:id",
+    auth,
+    courseRecommendation
+)
+

@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 export function CoursesPage() {
     const { courses, getCourses } = useCourses();
-    const { user, isAuthenticated } = useAuth();
+    const { user } = useAuth();
 
     const categories = [
         "Technology",

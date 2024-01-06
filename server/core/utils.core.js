@@ -1,14 +1,21 @@
 import { UserCourseInteraction } from "../models/course/userCourseInteraction.model.js";
-import { connectDb } from "../db.js";
 import { Course } from "../models/course/course.model.js";
 
-let userId = "65956d228c623f3fd5421464"
-await connectDb();
-
-export const getUserCourseData = async (userId) => {
+/**
+ * Recommends courses based on the user's viewing history and category scores.
+ * 
+ * @param {string} userId - The ID of the user.
+ * @returns {Promise<Array>} - A promise that resolves to an array of recommended courses.
+ * @throws {Error} - If an error occurs while fetching or processing the data.
+ */
+export const recommendCourses = async (userId) => {
     try {
         // get all the courses the user has viewed
         const viewedCourses = await UserCourseInteraction.find({ userId: userId })
+
+        if (viewedCourses.length === 0) {
+            return [];
+        }
 
         const categories = [
             "Technology",
@@ -21,10 +28,16 @@ export const getUserCourseData = async (userId) => {
             "Health & Fitness",
             "Lifestyle"
         ]
-
         const userCoursesMatrix = [];
         const rows = viewedCourses.length;
         const cols = categories.length;
+
+        // get all the courses the user has not viewed
+        const notViewedCourses = await Course.find({ _id: { $nin: viewedCourses.map((course) => course.courseId) } });
+
+        if (notViewedCourses.length === 0) {
+            return [];
+        }
 
         for (let i = 0; i < rows; i++) {
             userCoursesMatrix[i] = [];
@@ -32,8 +45,6 @@ export const getUserCourseData = async (userId) => {
                 userCoursesMatrix[i][j] = viewedCourses[i].category === categories[j] ? viewedCourses[i].score : 0;
             }
         }
-
-        console.log(userCoursesMatrix);
 
         // get the sum of each column
         const columnSums = [];
@@ -43,9 +54,6 @@ export const getUserCourseData = async (userId) => {
                 columnSums[i] += userCoursesMatrix[j][i];
             }
         }
-
-        // get all the courses the user has not viewed
-        const notViewedCourses = await Course.find({ _id: { $nin: viewedCourses.map((course) => course.courseId) } });
 
         // get the average score for each category
         const categoryAverageScores = [];
@@ -66,7 +74,7 @@ export const getUserCourseData = async (userId) => {
         const topCourses = [];
         let maxScore = 0;
         let maxScoreIndex = 0;
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < 10; i++) {
             for (let j = 0; j < coursesScores.length; j++) {
                 if (coursesScores[j] > maxScore) {
                     maxScore = coursesScores[j];
@@ -78,17 +86,46 @@ export const getUserCourseData = async (userId) => {
             maxScore = 0;
         }
 
-        // Corregir el problema de ObjectId duplicados
+        // remove duplicate courses
         const uniqueCourses = Array.from(new Set(topCourses.map(course => course._id.toString())))
             .map(courseId => topCourses.find(course => course._id.toString() === courseId));
 
         console.log(uniqueCourses);
 
-
+        return uniqueCourses;
     } catch (error) {
         console.error(error);
         throw error;
     }
 }
 
-getUserCourseData(userId);
+/**
+ * Calculates the analysis of recommendations based on the provided recommended courses.
+ * @param {Array} recommendedCourses - The array of recommended courses.
+ * @returns {Object} - The analysis data containing the category with the highest affinity percentage.
+ * @throws {Error} - If an error occurs during the analysis.
+ */
+export const analysisOfRecomendations = (recommendedCourses) => {
+    try {
+        const categoryWithMoreAffinity = recommendedCourses[0].classification.category;
+        let percentageOfAffinity = 0;
+
+        recommendedCourses.forEach((course) => {
+            if (course.classification.category === categoryWithMoreAffinity) {
+                percentageOfAffinity += 1;
+            }
+        });
+
+        percentageOfAffinity = (percentageOfAffinity / recommendedCourses.length);
+
+        let data = {
+            categoryWithMoreAffinity: percentageOfAffinity
+        }
+
+        return data
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+}
+
