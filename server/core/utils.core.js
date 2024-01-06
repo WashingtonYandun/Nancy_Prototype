@@ -67,7 +67,7 @@ export const recommendCourses = async (userId) => {
         const topCourses = [];
         let maxScore = 0;
         let maxScoreIndex = 0;
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < 100; i++) {
             for (let j = 0; j < coursesScores.length; j++) {
                 if (coursesScores[j] > maxScore) {
                     maxScore = coursesScores[j];

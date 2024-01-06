@@ -4,6 +4,8 @@ import { Navbar } from "../../components/general/Navbar";
 import { useCourses } from "../../context/courseContext";
 import { useAuth } from "../../context/authContext";
 import { Link } from "react-router-dom";
+import { Dropdown } from "../../components/general/Dropdown.jsx";
+import {Footer} from "../../components/general/Footer.jsx";
 
 export function CourseRecommendation() {
     const { recommendations, getRecommendations, setRecommendation } =
@@ -30,7 +32,7 @@ export function CourseRecommendation() {
 
     const filteredCourses = filteredCategory
         ? recommendations.filter(
-              (course) => course.category.category === filteredCategory
+              (course) => course.classification.category === filteredCategory
           )
         : recommendations;
 
@@ -41,6 +43,14 @@ export function CourseRecommendation() {
     return (
         <>
             <Navbar />
+
+            <div className="flex flex-row border-b-2 bg-teal-50 justify-between items-center text-white py-2 px-4">
+                <Dropdown
+                    categories={categories}
+                    onSelectCategory={handleCategoryChange}
+                    selectedCategory={filteredCategory}
+                />
+            </div>
 
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
                 {recommendations.length === 0 ? (
@@ -63,9 +73,9 @@ export function CourseRecommendation() {
                                     <Link
                                         to={`/courses/${course._id}`}
                                         key={course._id}
-                                        className="bg-white rounded-lg shadow overflow-hidden"
+                                        className="bg-white rounded-lg shadow overflow-hidden flex"
                                     >
-                                        <div className="p-6">
+                                        <div className="flex-1 p-6">
                                             <h2 className="text-lg font-semibold text-gray-800 mb-2">
                                                 {course.title || "No title"}
                                             </h2>
@@ -97,6 +107,21 @@ export function CourseRecommendation() {
                                                 </Link>
                                             )}
                                         </div>
+
+                                        {course.videos &&
+                                            course.videos.length > 0 && (
+                                                <div className="flex-1">
+                                                    <iframe
+                                                        src={
+                                                            course.videos[0].url
+                                                        }
+                                                        width="100%"
+                                                        height="100%"
+                                                        title="Course Video"
+                                                        className="rounded-r-lg"
+                                                    ></iframe>
+                                                </div>
+                                            )}
                                     </Link>
                                 ))}
                             </div>
@@ -104,6 +129,8 @@ export function CourseRecommendation() {
                     </div>
                 )}
             </div>
+
+            <Footer></Footer>
         </>
     );
 }

@@ -196,15 +196,15 @@ export const CourseView = () => {
         <>
             <Navbar></Navbar>
             <button
-                className="bg-blue-500 text-white p-2 rounded-md"
+                className="bg-darkAccent text-white p-2  w-full"
                 onClick={handleStartRecognition}
             >
-                Click this to start recognition
+                Start Recognition
             </button>
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
-                <button className="bg-green-500 text-white p-2 rounded-md">
-                    SEND DATA
+                <button className="bg-accent text-white p-2  w-full">
+                    End Session
                 </button>
 
                 <div id="recognition">
@@ -215,29 +215,23 @@ export const CourseView = () => {
                         style={{ display: "none" }}
                     ></video>
                 </div>
-                <div className="mx-auto p-4 bg-gray-100 flex">
+                <div className=" mx-auto flex">
                     {courseDetails ? (
                         <div className="flex-1">
-                            <div>
-                                <h1 className="text-3xl font-bold text-blue-700">
+                            <div className="px-10">
+                                <h1 className="text-dark text-3xl font-bold">
                                     {courseDetails.title}
                                 </h1>
                                 <p className="text-gray-600">
-                                    {courseDetails.description}
+                                    {courseDetails.classification.category}
                                 </p>
                                 <p className="text-gray-600">
                                     {courseDetails.language}
                                 </p>
-                                <p className="text-gray-600">
-                                    {courseDetails.category}
-                                </p>
-                                <p className="text-gray-600">
-                                    {courseDetails.subcategory}
-                                </p>
                             </div>
                             <div className="mt-4">
                                 {selectedVideo && (
-                                    <div>
+                                    <div className="px-10">
                                         <iframe
                                             width="80%"
                                             height="400px"
@@ -259,7 +253,8 @@ export const CourseView = () => {
                     ) : (
                         <p>Loading...</p>
                     )}
-                    <div className="flex flex-col ml-4">
+                    <div className="flex flex-col ml-4 px-5">
+                        <h2> Videos </h2>
                         {videos.map((video) => (
                             <div
                                 key={video._id}

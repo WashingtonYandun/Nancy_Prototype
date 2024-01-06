@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { loginSchema } from "../../schemas/auth";
 import { Footer } from "../../components/general/Footer";
 import nancyLogo from "../../assets/nancy_logo.png";
+import { Navbar } from "../../components/general/Navbar.jsx";
 
 export function LoginPage() {
     const {
@@ -29,13 +30,15 @@ export function LoginPage() {
             if (user && user.role === "admin") {
                 navigate("/admin/users");
             } else {
-                navigate("/notes");
+                navigate("/courses");
             }
         }
     }, [isAuthenticated, user, navigate]);
 
     return (
         <>
+            <Navbar></Navbar>
+
             <div className="min-h-screen flex flex-col md:flex-row p-8 justify-evenly items-center bg-bright">
                 <section className="w-1/3 md:w-1/4 p-2">
                     <img
@@ -45,7 +48,7 @@ export function LoginPage() {
                     />
                 </section>
 
-                <Card className="w-full max-w-md p-8 rounded-lg shadow-lg bg-white">
+                <Card className="bg-white w-full max-w-md p-8 rounded-lg shadow-lg bg-white">
                     <h1 className="text-3xl font-semibold text-center mb-6 text-darkAccent">
                         Login
                     </h1>
@@ -92,16 +95,22 @@ export function LoginPage() {
                             </p>
                         </div>
 
-                        <button type="submit" className="w-full bg-darkAccent hover:bg-darkAccentHover text-white hover:text-darkAccent">
+                        <button
+                            type="submit"
+                            className="my-2 w-full bg-accent text-white p-1 rounded-lg hover:bg-accent my-2"
+                        >
                             Login
                         </button>
                     </form>
 
-                    <p className="text-center mt-4">
+                    <p className="text-center my-2">
                         <span className="block text-darkAccent">
                             Don't have an account?{" "}
                         </span>
-                        <Link to="/register" className="text-darkAccent">
+                        <Link
+                            to="/register"
+                            className="my-2 w-full bg-accent text-white p-1 rounded-lg hover:bg-accent my-2"
+                        >
                             Sign up
                         </Link>
                     </p>
