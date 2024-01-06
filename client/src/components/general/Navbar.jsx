@@ -13,17 +13,20 @@ const AuthenticatedLinks = ({ user, logout }) => (
                     <Link to="/admin/videos/add-video" className="btn-primary">
                         Add Video
                     </Link>
+                    <Link to="/courses/add-course" className="btn-primary">
+                        Add Course
+                    </Link>
+                    <Link to="/courses/" className="btn-primary">
+                        Courses
+                    </Link>
                 </>
             ) : (
                 <>
-                    <Link to="/notes" className="btn-primary">
-                        Notes
-                    </Link>
-                    <Link to="/videos" className="btn-primary">
-                        Explore
-                    </Link>
                     <Link to="/courses" className="btn-primary">
                         Courses
+                    </Link>
+                    <Link to="/recomendations" className="btn-primary">
+                        Explore
                     </Link>
                 </>
             )}

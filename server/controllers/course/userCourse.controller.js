@@ -11,6 +11,17 @@ export const createUserCourse = async (req, res) => {
             expressions,
         } = req.body;
 
+        const userCourseFound = await UserCourseInteraction.findOne({ userId: userId, courseId: courseId });
+
+        if (userCourseFound) {
+            // if found update the score
+            let normalizedExpressions = normalizeEmotionsData(expressions);
+            userCourseFound.score = nn.feedforward(normalizeEmotionsData(normalizedExpressions))[0];
+            await userCourseFound.save();
+
+            return res.status(201).json(userCourseFound);
+        }
+
         let normalizedExpressions = normalizeEmotionsData(expressions);
         let nn_score = nn.feedforward(normalizedExpressions)[0]
         let course = await Course.findById(courseId);
@@ -24,7 +35,7 @@ export const createUserCourse = async (req, res) => {
 
         await userCourse.save();
 
-        res.status(201).json(userCourse);
+        return res.status(201).json(userCourse);
     } catch (error) {
         return res.status(500).json(
             {
