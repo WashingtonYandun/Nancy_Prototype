@@ -12,7 +12,7 @@ Nancy is a robust Learning Management System (LMS) designed to enhance your lear
 
 -   **Computer Vision:** Utilize advanced computer vision techniques to create a visually immersive learning environment, making complex concepts more accessible.
 
--   **Personalized Learning:** Benefit from AI algorithms that analyze user interactions and adapt content delivery, ensuring a customized learning path for each user.
+-   **Personalized Learning:** Benefit from AI algorithms that analyze user interactions and adapt content delivery, ensuring a customized learning path for each user based on his or her emotional interaction with the content.
 
 # Technologies:
 
@@ -95,3 +95,4 @@ This project is licensed under the CC0 1.0 Universal (CC0 1.0) License
 
 -   [Authentication](/docs/auth/README.md)
 -   [Admin](/docs/admin/README.md)
+-   [Core](/docs/core/README.md)
