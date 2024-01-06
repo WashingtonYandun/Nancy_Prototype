@@ -48,7 +48,7 @@ export function LoginPage() {
                     />
                 </section>
 
-                <Card className="bg-white w-full max-w-md p-8 rounded-lg shadow-lg bg-white">
+                <Card className="bg-white w-full max-w-md p-8 rounded-lg shadow-lg">
                     <h1 className="text-3xl font-semibold text-center mb-6 text-darkAccent">
                         Login
                     </h1>
@@ -97,7 +97,7 @@ export function LoginPage() {
 
                         <button
                             type="submit"
-                            className="my-2 w-full bg-accent text-white p-1 rounded-lg hover:bg-accent my-2"
+                            className="my-2 w-full bg-accent text-white p-1 rounded-lg hover:bg-accent"
                         >
                             Login
                         </button>
@@ -109,7 +109,7 @@ export function LoginPage() {
                         </span>
                         <Link
                             to="/register"
-                            className="my-2 w-full bg-accent text-white p-1 rounded-lg hover:bg-accent my-2"
+                            className="my-2 w-full text-darkAccent p-1 rounded-lg"
                         >
                             Sign up
                         </Link>

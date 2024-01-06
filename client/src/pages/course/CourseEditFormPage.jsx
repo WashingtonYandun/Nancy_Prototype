@@ -5,8 +5,7 @@ import { useVideo } from "../../context/videoContext.jsx";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
-import {Footer} from "../../components/general/Footer.jsx";
+import {Navbar} from "../../components/general/Navbar.jsx";
 
 export const CourseEditFormPage = () => {
     const { id } = useParams();
@@ -48,6 +47,8 @@ export const CourseEditFormPage = () => {
 
     return (
         <>
+            <Navbar></Navbar>
+
             <div className="max-w-md mx-auto my-10 bg-white p-8 rounded-lg shadow-lg">
                 <div>
                     <h1 className="text-2xl font-bold text-gray-700 mb-2">
@@ -72,7 +73,7 @@ export const CourseEditFormPage = () => {
 
                         <button
                             type="submit"
-                            className="w-full bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600"
+                            className="w-full bg-accent text-white p-2 rounded-lg hover:bg-accent"
                         >
                             Save
                         </button>
@@ -85,7 +86,7 @@ export const CourseEditFormPage = () => {
                     <select
                         name="videos"
                         id="videos"
-                        className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                        className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-accent"
                         {...register("videos")}
                     >
                         {videos.map((video) => (
@@ -97,7 +98,6 @@ export const CourseEditFormPage = () => {
                 </div>
             </div>
 
-            <Footer></Footer>
         </>
     );
 };
