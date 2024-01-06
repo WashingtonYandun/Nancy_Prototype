@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useCourses } from "../../context/courseContext";
+import { Navbar } from "../../components/general/Navbar.jsx";
 
 export const CourseFormPage = () => {
     const { createCourse } = useCourses();
@@ -95,6 +96,8 @@ export const CourseFormPage = () => {
 
     return (
         <>
+            <Navbar></Navbar>
+
             <div className="max-w-md mx-auto my-10 bg-white p-8 rounded-lg shadow-lg">
                 <div>
                     <h1 className="text-2xl font-bold text-gray-700 mb-2">
@@ -113,7 +116,7 @@ export const CourseFormPage = () => {
                                 type="text"
                                 name="title"
                                 placeholder="Title"
-                                className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                                className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-accent"
                                 {...register("title")}
                                 autoFocus
                                 onChange={handleTitleChange}
@@ -128,14 +131,14 @@ export const CourseFormPage = () => {
                         <textarea
                             name="description"
                             placeholder="Description"
-                            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-accent"
                             {...register("description")}
                         />
 
                         <textarea
                             name="thumbnail"
                             placeholder="Thumbnail"
-                            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-accent"
                             {...register("thumbnail")}
                         />
 
@@ -143,7 +146,7 @@ export const CourseFormPage = () => {
                             type="text"
                             name="requirements"
                             placeholder="requirements"
-                            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-accent"
                             {...register("requirements")}
                             onChange={(e) => handleRequirements(e.target.value)}
                         />
@@ -153,7 +156,7 @@ export const CourseFormPage = () => {
                             type="text"
                             name="tags"
                             placeholder="tags"
-                            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-accent"
                             {...register("tags")}
                             onChange={(e) => handleTags(e.target.value)}
                         />
@@ -165,7 +168,7 @@ export const CourseFormPage = () => {
                             onChange={(e) =>
                                 setSelectedLanguage(e.target.value)
                             }
-                            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-accent"
                         >
                             {languages.map((language) => (
                                 <option key={language} value={language}>
@@ -176,7 +179,7 @@ export const CourseFormPage = () => {
 
                         <button
                             type="submit"
-                            className="w-full bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600"
+                            className="w-full bg-accent text-white p-2 rounded-lg hover:bg-accent"
                         >
                             Save
                         </button>

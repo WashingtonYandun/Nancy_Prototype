@@ -7,6 +7,7 @@ import { registerSchema } from "../../schemas/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Footer } from "../../components/general/Footer";
 import nancyLogo from "../../assets/nancy_logo.png";
+import { Navbar } from "../../components/general/Navbar.jsx";
 
 export const RegisterPage = () => {
     const { signup, errors: registerErrors, isAuthenticated, user } = useAuth();
@@ -42,6 +43,7 @@ export const RegisterPage = () => {
 
     return (
         <>
+            <Navbar></Navbar>
             <div className="min-h-screen flex flex-col md:flex-row p-8 justify-evenly items-center bg-bright">
                 <section className="w-1/3 md:w-1/4 p-2">
                     <img
@@ -125,29 +127,6 @@ export const RegisterPage = () => {
                         </div>
 
                         <div>
-                            <Label>Role</Label>
-                            <div>
-                                <input
-                                    type="radio"
-                                    id="user"
-                                    value="user"
-                                    {...register("role")}
-                                />
-                                <label htmlFor="user" className="ml-2">
-                                    User
-                                </label>
-                            </div>
-                            <div>
-                                <input
-                                    type="radio"
-                                    id="admin"
-                                    value="admin"
-                                    {...register("role")}
-                                />
-                                <label htmlFor="admin" className="ml-2">
-                                    Admin
-                                </label>
-                            </div>
                             {errors.role?.message && (
                                 <p className="text-error text-xs">
                                     {errors.role?.message}
@@ -155,12 +134,20 @@ export const RegisterPage = () => {
                             )}
                         </div>
 
-                        <button type="submit" className="w-full">Submit</button>
+                        <button
+                            className="my-2 w-full bg-accent text-white p-1 rounded-lg hover:bg-accent"
+                            type="submit"
+                        >
+                            Submit
+                        </button>
                     </form>
 
-                    <p className="text-center mt-4">
+                    <p className="text-center my-2 ">
                         <span className="block">Do you have an Account?</span>
-                        <Link className="text-darkAccent" to="/login">
+                        <Link
+                            className=" w-full bg-accent text-white p-1 rounded-lg hover:bg-accent"
+                            to="/login"
+                        >
                             Login
                         </Link>
                     </p>

@@ -20,14 +20,14 @@ export function UserCard({ user }) {
             <div className="flex items-center space-x-2">
                 <button
                     onClick={() => deleteUser(user._id)}
-                    className="bg-error hover:bg-joy"
+                    className="flex-1 my-2 mt-4 bg-accent hover:bg-accent hover:rounded-2xl text-black font-bold py-2 px-4 rounded"
                 >
                     Delete
                 </button>
 
                 <button
                     onClick={() => makeAdmin(user._id)}
-                    className="bg-error hover:bg-joy"
+                    className="flex-1 my-2 mt-4 bg-accent hover:bg-accent hover:rounded-2xl text-black font-bold py-2 px-4 rounded"
                 >
                     Make Admin
                 </button>

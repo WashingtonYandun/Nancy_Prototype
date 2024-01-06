@@ -5,6 +5,7 @@ import { Textarea } from "../../components/ui/Textarea";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useVideo } from "../../context/videoContext";
+import { Navbar } from "../../components/general/Navbar.jsx";
 
 export const VideoFormPage = () => {
     const { videos, createVideo, getVideo, updateVideo } = useVideo();
@@ -102,11 +103,18 @@ export const VideoFormPage = () => {
 
     return (
         <>
-            <div className="grid grid-cols-2 h-screen">
-                <div className="read-section bg-gray-200 h-[10vh]"></div>
+            <Navbar></Navbar>
+
+            <div className="max-w-md mx-auto my-10 bg-white p-8 rounded-lg shadow-lg">
+                <h1 className="text-2xl font-bold text-gray-700 mb-2">
+                    Video Form
+                </h1>
+                <p className="text-gray-600 mb-4">
+                    Fill the form to create a new video.
+                </p>
 
                 {/* Video Form Section */}
-                <Card className="w-full max-w-xl p-6 bg-gray-800 text-white rounded-md shadow-md h-[10vh]">
+                <Card className="h-full w-full max-w-xl p-6 bg-gray-800 text-white rounded-md shadow-md h-[10vh]">
                     <form
                         onSubmit={handleSubmit(onSubmit)}
                         className="space-y-3"
@@ -154,7 +162,7 @@ export const VideoFormPage = () => {
 
                         <button
                             type="submit"
-                            className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-3 rounded focus-outline-none"
+                            className=" w-full bg-accent text-white p-2 rounded-lg hover:bg-accent"
                         >
                             Save
                         </button>

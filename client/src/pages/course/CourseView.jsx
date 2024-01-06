@@ -215,7 +215,7 @@ export const CourseView = () => {
                         style={{ display: "none" }}
                     ></video>
                 </div>
-                <div className="mx-auto flex">
+                <div className=" mx-auto flex">
                     {courseDetails ? (
                         <div className="flex-1">
                             <div className="px-10">

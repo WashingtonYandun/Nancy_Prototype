@@ -65,6 +65,7 @@ export function VideosPage() {
                     </div>
                 )}
             </div>
+
             <Footer />
         </>
     );

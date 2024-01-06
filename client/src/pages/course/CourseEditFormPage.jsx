@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import {Footer} from "../../components/general/Footer.jsx";
 
 export const CourseEditFormPage = () => {
     const { id } = useParams();
@@ -95,6 +96,8 @@ export const CourseEditFormPage = () => {
                     </select>
                 </div>
             </div>
+
+            <Footer></Footer>
         </>
     );
 };

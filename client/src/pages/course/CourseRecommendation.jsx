@@ -5,6 +5,7 @@ import { useCourses } from "../../context/courseContext";
 import { useAuth } from "../../context/authContext";
 import { Link } from "react-router-dom";
 import { Dropdown } from "../../components/general/Dropdown.jsx";
+import {Footer} from "../../components/general/Footer.jsx";
 
 export function CourseRecommendation() {
     const { recommendations, getRecommendations, setRecommendation } =
@@ -128,6 +129,8 @@ export function CourseRecommendation() {
                     </div>
                 )}
             </div>
+
+            <Footer></Footer>
         </>
     );
 }
