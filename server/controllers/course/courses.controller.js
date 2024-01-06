@@ -1,6 +1,6 @@
 import { Course } from "../../models/course/course.model.js";
 import { Video } from "../../models/video/video.model.js";
-import {recommendCourses} from "../../core/utils.core.js";
+import { recommendCourses } from "../../core/utils.core.js";
 
 /**
  * Create a new course.
@@ -296,8 +296,8 @@ export const getVideosByCourseId = async (req, res) => {
 export const courseRecommendation = async (req, res) => {
     try {
         const userId = req.user.id;
-        let recommendedCourses = recommendCourses(userId);
-        return res.json(recommendedCourses);
+        let recommendedCourses = await recommendCourses(userId);
+        res.json(recommendedCourses);
     } catch (error) {
         return res.status(500).json(
             {

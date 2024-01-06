@@ -13,10 +13,6 @@ export const recommendCourses = async (userId) => {
         // get all the courses the user has viewed
         const viewedCourses = await UserCourseInteraction.find({ userId: userId })
 
-        if (viewedCourses.length === 0) {
-            return [];
-        }
-
         const categories = [
             "Technology",
             "Science",
@@ -35,9 +31,6 @@ export const recommendCourses = async (userId) => {
         // get all the courses the user has not viewed
         const notViewedCourses = await Course.find({ _id: { $nin: viewedCourses.map((course) => course.courseId) } });
 
-        if (notViewedCourses.length === 0) {
-            return [];
-        }
 
         for (let i = 0; i < rows; i++) {
             userCoursesMatrix[i] = [];

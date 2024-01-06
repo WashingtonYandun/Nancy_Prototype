@@ -20,6 +20,7 @@ export const useCourses = () => {
 
 export function CourseProvider({ children }) {
     const [courses, setCourses] = useState([]);
+    const [recommendations, setRecommendations] = useState([]);
 
     const getCourses = async () => {
         try {
@@ -76,14 +77,14 @@ export function CourseProvider({ children }) {
         }
     };
 
-    const recommendedCourses = async (id) => {
+    const getRecommendations = async (id) => {
         try {
             const res = await recommendedCoursesRequest(id);
-            return res.data;
+            setRecommendations(res.data);
         } catch (error) {
             console.error(error);
         }
-    }
+    };
 
     return (
         <CourseContext.Provider
@@ -95,7 +96,8 @@ export function CourseProvider({ children }) {
                 getCourse: getCourse,
                 updateCourse: updateCourse,
                 getVideosByCourseId: getVideosByCourseId,
-                recommendedCourses: recommendedCourses,
+                recommendations: recommendations,
+                getRecommendations: getRecommendations,
             }}
         >
             {children}
