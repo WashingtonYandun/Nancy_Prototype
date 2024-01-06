@@ -25,7 +25,10 @@ const AuthenticatedLinks = ({ user, logout }) => (
                     <Link to="/courses" className="btn-primary">
                         Courses
                     </Link>
-                    <Link to="/courses/recommendations/" className="btn-primary">
+                    <Link
+                        to="/courses/recommendations/"
+                        className="btn-primary"
+                    >
                         Explore
                     </Link>
                 </>
@@ -96,7 +99,7 @@ export const Navbar = () => {
                             isAuthenticated
                                 ? user.role === "admin"
                                     ? "/admin/users"
-                                    : "/notes"
+                                    : "/courses"
                                 : "/"
                         }
                     >

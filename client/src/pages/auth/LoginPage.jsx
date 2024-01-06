@@ -29,7 +29,7 @@ export function LoginPage() {
             if (user && user.role === "admin") {
                 navigate("/admin/users");
             } else {
-                navigate("/notes");
+                navigate("/courses");
             }
         }
     }, [isAuthenticated, user, navigate]);
@@ -92,7 +92,10 @@ export function LoginPage() {
                             </p>
                         </div>
 
-                        <button type="submit" className="w-full bg-darkAccent hover:bg-darkAccentHover text-white hover:text-darkAccent">
+                        <button
+                            type="submit"
+                            className="w-full bg-darkAccent hover:bg-darkAccentHover text-white hover:text-darkAccent"
+                        >
                             Login
                         </button>
                     </form>
