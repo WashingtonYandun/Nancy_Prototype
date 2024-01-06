@@ -13,6 +13,9 @@ const AuthenticatedLinks = ({ user, logout }) => (
                     <Link to="/admin/videos/add-video" className="btn-primary">
                         Add Video
                     </Link>
+                    <Link to="/courses/add-course" className="btn-primary">
+                        Add Course
+                    </Link>
                 </>
             ) : (
                 <>
@@ -24,6 +27,9 @@ const AuthenticatedLinks = ({ user, logout }) => (
                     </Link>
                     <Link to="/courses" className="btn-primary">
                         Courses
+                    </Link>
+                    <Link to="/courses/add-course" className="btn-primary">
+                        Add Course
                     </Link>
                 </>
             )}
