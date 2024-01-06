@@ -13,6 +13,10 @@ export const recommendCourses = async (userId) => {
         // get all the courses the user has viewed
         const viewedCourses = await UserCourseInteraction.find({ userId: userId })
 
+        if (viewedCourses.length === 0) {
+            return [];
+        }
+
         const categories = [
             "Technology",
             "Science",

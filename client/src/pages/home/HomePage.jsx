@@ -1,11 +1,14 @@
 import { Link } from "react-router-dom";
 import { Footer } from "../../components/general/Footer";
 import nancyLogo from "../../assets/nancy_logo.png";
+import {Navbar} from "../../components/general/Navbar.jsx";
 
 
 export const HomePage = () => {
     return (
         <>
+            <Navbar></Navbar>
+            
             <div className="flex flex-col md:flex-row justify-center items-center bg-bright min-h-screen">
                 <section className="text-center md:text-left md:w-1/2 p-8">
                     <h1 className="text-4xl font-bold text-text mb-4">Nancy</h1>

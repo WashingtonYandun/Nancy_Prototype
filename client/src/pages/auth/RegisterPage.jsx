@@ -35,7 +35,7 @@ export const RegisterPage = () => {
                     navigate("/admin/users");
                 } else {
                     // If the user doesn't have the "admin" role, redirect to /notes
-                    navigate("/notes");
+                    navigate("/courses");
                 }
             }
         }
@@ -145,7 +145,7 @@ export const RegisterPage = () => {
                     <p className="text-center my-2 ">
                         <span className="block">Do you have an Account?</span>
                         <Link
-                            className=" w-full bg-accent text-white p-1 rounded-lg hover:bg-accent"
+                            className=" w-full text-darkAccent p-1 rounded-lg"
                             to="/login"
                         >
                             Login
@@ -153,6 +153,7 @@ export const RegisterPage = () => {
                     </p>
                 </Card>
             </div>
+
             <Footer />
         </>
     );
