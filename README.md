@@ -96,3 +96,4 @@ This project is licensed under the CC0 1.0 Universal (CC0 1.0) License
 -   [Authentication](/docs/auth/README.md)
 -   [Admin](/docs/admin/README.md)
 -   [Core](/docs/core/README.md)
+-   [Def](/docs//new_feat/README.md)

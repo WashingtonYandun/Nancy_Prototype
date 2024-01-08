@@ -19,6 +19,7 @@ import { CourseProvider } from "./context/courseContext.jsx";
 import { CourseEditFormPage } from "./pages/course/CourseEditFormPage.jsx";
 import { UserCourseProvider } from "./context/userCourseContext.jsx";
 import { CourseRecommendation } from "./pages/course/CourseRecommendation.jsx";
+import { CoursesMost } from "./pages/course/CoursesMost.jsx";
 
 function App() {
     return (
@@ -42,6 +43,10 @@ function App() {
                                             <Route
                                                 path="/register"
                                                 element={<RegisterPage />}
+                                            />
+                                            <Route
+                                                path="/courses/most"
+                                                element={<CoursesMost />}
                                             />
 
                                             <Route element={<ProtectedRoute />}>

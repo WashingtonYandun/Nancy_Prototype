@@ -106,9 +106,9 @@ export const joinAllNotesExpressions = (notes) => {
  */
 export const getEmotionValues = (emotion, expressions) => {
     // join all notes expressions of one emotion into one array
-    try{
+    try {
         return expressions.map((expression) => expression[emotion]);
-    }catch (error) {
+    } catch (error) {
         console.log(error);
     }
 };
@@ -120,7 +120,6 @@ export const getEmotionValues = (emotion, expressions) => {
  */
 export const normalizeEmotionsData = (emotionsData) => {
     try {
-
         let getRidOfNeutral = Object.keys(emotionsData)
             .filter(emotion => emotion !== 'neutral')
             .map(emotion => emotionsData[emotion]);
@@ -128,7 +127,7 @@ export const normalizeEmotionsData = (emotionsData) => {
         let probSum = getRidOfNeutral.reduce((sum, prob) => sum + prob, 0);
         return getRidOfNeutral.map(prob => prob / probSum);
 
-    }catch (error) {
+    } catch (error) {
         console.log(error);
     }
 }
@@ -147,7 +146,7 @@ export const calculateEmotionsEntropy = (emotionsData) => {
         });
 
         return entropy;
-    }catch (error) {
+    } catch (error) {
         console.log(error);
     }
 }
@@ -175,7 +174,7 @@ export const getNoteEmotionAnalysis = (data) => {
         };
 
         return analysis;
-    }catch (error) {
+    } catch (error) {
         console.log(error);
     }
 };

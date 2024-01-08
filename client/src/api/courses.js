@@ -13,3 +13,5 @@ export const getCourseRequest = async (id) => axios.get(`/courses/${id}`);
 export const getVideosByCourseIdRequest = async (id) => axios.get(`/courses/videos/${id}`);
 
 export const recommendedCoursesRequest = async (id) => axios.get(`/courses/recommendation/${id}`);
+
+export const mostRecommendedCoursesRequest = async () => axios.get(`/courses/most`);

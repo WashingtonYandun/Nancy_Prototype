@@ -7,6 +7,7 @@ import {
     updateCourseRequest,
     getVideosByCourseIdRequest,
     recommendedCoursesRequest,
+    mostRecommendedCoursesRequest,
 } from "../api/courses";
 
 const CourseContext = createContext();
@@ -21,6 +22,7 @@ export const useCourses = () => {
 export function CourseProvider({ children }) {
     const [courses, setCourses] = useState([]);
     const [recommendations, setRecommendations] = useState([]);
+    const [mostRecommended, setMostRecommended] = useState([]);
 
     const getCourses = async () => {
         try {
@@ -86,6 +88,17 @@ export function CourseProvider({ children }) {
         }
     };
 
+    const getMostRecommended = async () => {
+        try {
+            console.log("getMostRecommended context");
+            const res = await mostRecommendedCoursesRequest();
+            setMostRecommended(res.data);
+            console.log(res.data);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     return (
         <CourseContext.Provider
             value={{
@@ -98,6 +111,8 @@ export function CourseProvider({ children }) {
                 getVideosByCourseId: getVideosByCourseId,
                 recommendations: recommendations,
                 getRecommendations: getRecommendations,
+                mostRecommended: mostRecommended,
+                getMostRecommended: getMostRecommended,
             }}
         >
             {children}

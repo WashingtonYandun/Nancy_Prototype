@@ -37,6 +37,12 @@ const AuthenticatedLinks = ({ user, logout }) => (
                     >
                         Videos
                     </Link>
+                    <Link
+                        to="/courses/most"
+                        className="btn-primary hover:text-accent"
+                    >
+                        Most recommended
+                    </Link>
                 </>
             ) : (
                 <>

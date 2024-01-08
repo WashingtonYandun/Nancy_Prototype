@@ -17,6 +17,7 @@ export const recommendCourses = async (userId) => {
             return [];
         }
 
+
         const categories = [
             "Technology",
             "Science",
@@ -87,7 +88,6 @@ export const recommendCourses = async (userId) => {
         const uniqueCourses = Array.from(new Set(topCourses.map(course => course._id.toString())))
             .map(courseId => topCourses.find(course => course._id.toString() === courseId));
 
-
         return uniqueCourses;
     } catch (error) {
         console.error(error);
@@ -124,4 +124,3 @@ export const analysisOfRecomendations = (recommendedCourses) => {
         throw error;
     }
 }
-

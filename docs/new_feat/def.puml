@@ -1,0 +1,29 @@
+@startuml
+!define RECTANGLE class
+
+title MVC Sequence: Request Recommended Courses
+
+actor User as User
+boundary Frontend as UI
+control Controller
+entity Server
+database Database as DB
+
+User -> UI: Request recommended courses
+UI -> Controller: Send request to controller
+activate Controller
+
+Controller -> Server: Query recommended courses
+activate Server
+Server -> DB: Query the database
+activate DB
+DB --> Server: Database response
+deactivate DB
+Server --> Controller: List of recommended courses
+deactivate Server
+
+Controller -> UI: Send course list to frontend
+UI --> User: Display recommended courses
+
+deactivate Controller
+@enduml

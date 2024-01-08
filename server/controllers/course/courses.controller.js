@@ -297,7 +297,39 @@ export const courseRecommendation = async (req, res) => {
     try {
         const userId = req.user.id;
         let recommendedCourses = await recommendCourses(userId);
+
+        if (recommendedCourses.length === 0) {
+            return res.status(404).json(
+                []
+            );
+        }
+
+        recommendedCourses.forEach((course) => {
+            course.recommendation_count += 1;
+            console.log(course.recommendation_count)
+            course.save();
+        });
+
         res.json(recommendedCourses);
+    } catch (error) {
+        return res.status(500).json(
+            {
+                message: error.message
+            }
+        );
+    }
+}
+
+export const mostRecommendedCourses = async (req, res) => {
+    try {
+        const courses = await Course.find().sort({ recommendation_count: -1 }).limit(5);
+
+        if (!courses) {
+            return res.status(404).json(
+                []
+            );
+        }
+        res.json(courses);
     } catch (error) {
         return res.status(500).json(
             {

@@ -98,7 +98,11 @@ const courseSchema = new mongoose.Schema(
                 trim: true,
             },
         ],
-
+        recommendation_count: {
+            type: Number,
+            default: 1,
+            max: 100,
+        },
     },
     { timestamps: true }
 );
